@@ -7,6 +7,7 @@ function CartItem ({item, dispatch, cart}){
         <div>
             <Head>
                 <title>Cart Item</title>
+               
             </Head>
             <tr >
               

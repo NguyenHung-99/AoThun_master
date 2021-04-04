@@ -29,6 +29,7 @@ function NavBar(){
 
     const loggedRouter = () => {
         return (
+            
             <li className="nav-item dropdown">
                 <a className="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <img src={auth.user.avata} alt={auth.user.avata} 
@@ -51,15 +52,31 @@ function NavBar(){
     }
 
     return (
-        <nav className="navbar navbar-expand-lg navbar-light bg-light">
-            <Link  href="/">
-                <a className="navbar-brand">HungRau</a>
-            </Link>
+        
+        
+        <div className="nav_bar">
+           
+        <nav className="navbar navbar-expand-lg navbar-light">
+            
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span className="navbar-toggler-icon"></span>
             </button>
             <div className="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
                 <ul className="navbar-nav p-1">
+                        <li className="nav-item active">
+                            <Link href="/">
+                                <a className="nav-link " >
+                                    <i className="fas fa-user" aria-hidden="true"></i> Product
+                                </a>
+                            </Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link href="/">
+                                <a className="nav-link">
+                                    <i className="fas fa-user" aria-hidden="true"></i> What's New
+                                </a>
+                            </Link>
+                        </li>
                     <li className="nav-item">
                         <Link href="/cart">
                             <a className={"nav-link" + isActive('/cart')}>
@@ -94,6 +111,7 @@ function NavBar(){
                 </ul>
             </div>
         </nav>
+        </div>
     )
 }
 export default NavBar

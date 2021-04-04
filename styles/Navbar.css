@@ -1,0 +1,52 @@
+.nav_bar{
+    position: fixed;
+    left:50%;
+    z-index: 99999;
+    padding: 50px 0;
+    
+}
+
+.logo h1{
+    margin :0;
+    padding : 0;
+    color : #E6E6E6;
+    text-transform: uppercase;
+    line-height: 70px;
+    float: left;
+    margin-left: 80px;
+}
+.logo span{
+    color:#F68E13;
+}
+.logo nav{
+    float:right;
+    margin-right: 80px;
+}
+.nav_bar ul{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav_bar li{
+    display: inline-block;
+    padding-left: 50px;
+    
+}
+.nav_bar .nav-link{
+    color:#F68E13;
+
+}
+
+.nav_bar  a{
+    line-height: 90px;
+    text-transform: uppercase;
+    padding: 0 100px;
+    display: block;
+    text-decoration: none;
+    color: #000;
+   
+}
+.nav_bar  a:hover{
+    color: #F68E13;
+}

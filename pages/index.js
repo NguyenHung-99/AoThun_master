@@ -3,17 +3,21 @@ import {useState} from 'react'
 
 import Head from 'next/head'
 import ProductItem from '../components/product/ProductItem'
+import Link from 'next/link'
 
 
-const Home = (props) => {
+const Store = (props) => {
   const [products, setProducts] = useState(props.products)
 
 
   return (
     <div className="products">
-      <Head>
+   
+       <Head>
         <title>Home Page</title>
+       
       </Head>
+ 
 
       {
         products.length === 0
@@ -37,4 +41,4 @@ export async function getServerSideProps() {
     }, // will be passed to the page component as props
   }
 }
-export default Home
+export default Store

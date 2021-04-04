@@ -31,7 +31,8 @@ const DetailProduct = (props) =>{
 
 
     return (
-        <div className="row detail_page">
+      
+        <div className="row detail_page" >
             <Head>
                 <title>Detail Product</title>
             </Head>
