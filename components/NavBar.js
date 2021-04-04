@@ -56,8 +56,14 @@ function NavBar(){
         
         <div className="nav_bar">
            
-        <nav className="navbar navbar-expand-lg navbar-light">
-            
+        <nav className=" navbar navbar-expand-lg navbar-light bg-dark">
+            <Link href="/home">
+                <a className="logo"><h1> LOGO
+                    <span style={{fontSize:'30px',color:'red',margin:'-',padding:'0'}}></span>
+                </h1></a>
+                
+            </Link>
+           
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span className="navbar-toggler-icon"></span>
             </button>

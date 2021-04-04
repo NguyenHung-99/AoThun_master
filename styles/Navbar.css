@@ -1,4 +1,14 @@
-.nav_bar{
+.nav_bar .logo{
+    line-height: 90px;
+    text-transform: uppercase;
+    padding: 0 100px;
+    display: block;
+    text-decoration: none;
+    color: sandybrown;
+}
+
+
+/* .nav_bar{
     position: fixed;
     left:50%;
     z-index: 99999;
@@ -49,4 +59,4 @@
 }
 .nav_bar  a:hover{
     color: #F68E13;
-}
+} */

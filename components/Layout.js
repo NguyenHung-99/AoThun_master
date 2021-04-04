@@ -12,7 +12,10 @@ function Layout({children}){
             <NavBar />
             <Notify/>
             <Modal/>
+            <div>
             {children}
+            </div>
+           
             
         </div>
     )

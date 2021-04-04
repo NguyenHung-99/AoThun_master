@@ -33,7 +33,7 @@ const ProductItem = ({product}) => {
     
     return (
         <div >
-            <div className="card" style={{ width: '18rem',marginTop:"80px" }}>
+            <div className="card" style={{ width: '18rem'}}>
             
             <img className="card-img-top" src={product.images[0].url} alt={product.images[0].url} />
                 <div className="card-body">
