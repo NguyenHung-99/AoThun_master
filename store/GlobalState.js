@@ -6,7 +6,7 @@ export const DataContext = createContext()
 
 export const DataProvider = ({children}) => {
 
-    const initialState =  { notify: {}, auth: {}, cart: [], modal: {},orders: [], users: []}
+    const initialState =  { notify: {}, auth: {}, cart: [], modal: {}, orders: [], users: [], categories: []}
     const [state, dispatch] = useReducer(reducers, initialState)
     const {cart, auth} = state
 
@@ -23,6 +23,10 @@ export const DataProvider = ({children}) => {
                         user: res.user
                     }
                 })
+            })
+            getData('categories', auth.token).then(res =>{
+                if(res.err) return dispatch({type: 'NOTIFY' , payload: {err: res.err}})
+                dispatch({type: 'ADD_CATEGORIES' , payload: res.categories})
             })
         }
     }, []);
@@ -47,6 +51,7 @@ export const DataProvider = ({children}) => {
                     if(res.err) return dispatch({type: 'NOTIFY' , payload: {err: res.err}})
                     dispatch({type: 'ADD_USERS' , payload: res.users})
                 })
+                
             }
             
         }else{
