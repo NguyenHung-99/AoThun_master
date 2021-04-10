@@ -50,6 +50,7 @@ const Register = () => {
 
     return (
         <div className="signup">
+            <div className="body">
             <div className="container">
                 <div className="row">
                 <div className="col-lg-10 col-xl-9 mx-auto">
@@ -113,6 +114,7 @@ const Register = () => {
                     </div>
                 </div>
                 </div>
+            </div>
             </div>
         </div>
 

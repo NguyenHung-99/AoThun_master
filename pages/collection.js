@@ -10,6 +10,7 @@ const Home = (props) => {
 
   return (
     <div className="products"style={{marginLeft:'10%', marginRight:'10%'}}>
+     
       
       <Head>
         <title>Home Page</title>
@@ -24,8 +25,8 @@ const Home = (props) => {
         ))
         
       }
-      
-    </div>
+      </div>
+   
   )
 }
 
