@@ -27,6 +27,7 @@ export default async (req, res) => {
                 name: user.ten,
                 email: user.email,
                 role: account.phanQuyen,
+                root: account.root,
                 avata: user.anhDaiDien,
                 phone: user.sdt,
                 address: address

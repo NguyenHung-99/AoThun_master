@@ -10,10 +10,14 @@ const accountSchema = new mongoose.Schema({
     password: {
         type: String,
     },
+    root: {
+        type: Boolean,
+        default: false
+    },
     trangThai: {
-        type: String,
+        type: Boolean,
 
-        default: 'false',
+        default: true,
     }
 }, {
 

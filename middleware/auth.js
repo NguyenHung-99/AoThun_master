@@ -13,7 +13,7 @@ const auth = async (req, res) => {
     const user = await Users.findOne({_id: decoded.id})
     const account = await Accounts.findById(user.account)
 
-    return {id: user._id, role: account.phanQuyen};
+    return {id: user._id, role: account.phanQuyen, root: account.root};
 }
 
 

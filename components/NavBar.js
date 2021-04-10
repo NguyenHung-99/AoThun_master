@@ -25,6 +25,7 @@ function NavBar(){
         //refresh auth
         dispath({type: 'AUTH', payload: {}})
         dispath({type: 'NOTIFY', payload: {success: 'Logged out'}})
+        return router.push('/')
     }
     const adminRouter = () => {
         return(

@@ -11,7 +11,25 @@ export default async (req, res) => {
         case "PATCH":
             await uploadInfor(req, res)
             break;
+        case "GET":
+            await getUsers(req, res)
+            break;
     }
+}
+
+const getUsers = async(req, res) => {
+    try {
+        const result = await auth(req,res)
+        if(result.role !== 'admin') return res.status(400, {error: 'Tài khoản không hợp lệ.'})
+
+        const users = await Users.find().populate('account', '-password')
+        
+        res.json({users})
+        
+    } catch (error) {
+        return res.status(500).json({err: error.message})
+    }
+    
 }
 const uploadInfor = async(req, res) => {
     try {
