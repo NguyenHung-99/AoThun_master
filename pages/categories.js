@@ -1,13 +1,15 @@
 import Head from 'next/head'
 import {useContext, useState} from 'react'
+import { updateItem } from '../store/Actions'
 import {DataContext} from '../store/GlobalState'
-import { postData } from '../utils/fetchData'
+import { postData, putData } from '../utils/fetchData'
 
 const Categories = () => {
     const [state, dispatch] = useContext(DataContext)
     const {auth, categories} = state
     const [categoryName, setCategoryName] = useState('')
     const [categoryDescription, setCategoryDescription] = useState('')
+    const [id, setId] = useState('')
 
     const createCategory = async() => {
         if(auth.user.role !== 'admin')
@@ -18,12 +20,30 @@ const Categories = () => {
 
         dispatch({type: 'NOTIFY', payload: {loading: true}})
 
-        const res = await postData('categories', {categoryName,categoryDescription}, auth.token)
-        if(res.err) return dispatch({type: 'NOTIFY', payload: {error: res.err}})
-        dispatch({type: "ADD_CATEGORIES", payload: [...categories, res.newCategory]})
+        let res;
+        if(id){
+            res = await putData(`categories/${id}`, {categoryName, categoryDescription}, auth.token)
+            if(res.err) return dispatch({type: 'NOTIFY', payload: {error: res.err}})
+            dispatch(updateItem(categories, id, res.category, 'ADD_CATEGORIES'))
+            
+
+        }else{
+            res = await postData('categories', {categoryName,categoryDescription}, auth.token)
+            if(res.err) return dispatch({type: 'NOTIFY', payload: {error: res.err}})
+            dispatch({type: "ADD_CATEGORIES", payload: [...categories, res.newCategory]}) 
+        }
+        setCategoryName('')
+        setCategoryDescription('')
+        setId('')
         return dispatch({type: 'NOTIFY', payload: {success: res.msg}})
-        
     }
+
+    const handleEditCategory = (category) => {
+        setId(category._id)
+        setCategoryName(category.categoryName)
+        setCategoryDescription(category.categoryDescription)
+    }
+
     return (
         <div className="col-md-6 mx-auto my-3" style={{marginLeft: '10%', marginRight:'10%'}}>
             <Head>
@@ -40,7 +60,7 @@ const Categories = () => {
                 <label htmlFor="inputEmail">Mô Tả</label>
             </div>
             <div className="input-group mb-3">
-            <button className="btn btn-lg btn-primary btn-block text-uppercase" type="submit" onClick={createCategory}>ADD</button>
+            <button className="btn btn-lg btn-primary btn-block text-uppercase" type="submit" onClick={createCategory}>{id ? "Update" : "Create"}</button>
                 
             </div>
 
@@ -58,10 +78,9 @@ const Categories = () => {
                                 data-toggle="modal" data-target="#exampleModal"
                                 onClick={() => dispatch({
                                     type: 'ADD_MODAL',
-                                    payload: [{ 
-                                        data: categories, id: catogory._id, 
-                                        title: catogory.categoryName, type: 'ADD_CATEGORIES' 
-                                    }]
+                                    payload: { 
+                                        data: categories, id: catogory._id, title: catogory.categoryName, type: 'ADD_CATEGORIES' 
+                                    }
                                 })} ></i>
                             </div>
 
