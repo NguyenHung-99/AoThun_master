@@ -131,7 +131,7 @@ textarea {
     padding: 0;
     /* -webkit-appearance: none; */
     -webkit-font-smoothing: inherit;
-    border: none;
+    /* border: none; */
     background: transparent;
     line-height: normal;
 }

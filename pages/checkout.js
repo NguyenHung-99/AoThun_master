@@ -148,14 +148,14 @@ const Checkout = () => {
                             </div>
 
                             <div className="order-summary-section order-summary-section-discount" data-order-summary-section="discount">
-                                <form id="form_discount_add" acceptCharset="UTF-8" method="post">
-                                    <input name="utf8" type="hidden" defaultValue="✓"/>
-                                    <div className="fieldset">
+                                <form id="form_discount_add" acceptCharset="UTF-8" method="post" >
+                                
+                                    <div className="fieldset" >
                                         <div className="field  ">
                                             <div className="field-input-btn-wrapper">
                                                 <div className="field-input-wrapper">
-                                                    <label className="field-label" htmlFor="discount.code">Mã giảm giá</label>
-                                                    <input placeholder="Mã giảm giá" className="field-input" data-discount-field="true" autoComplete="off" autoCapitalize="off" spellCheck="false" size="30" type="text" id="discount.code" name="discount.code" defaultValue=""/>
+                                                    <label className="field-label" htmlFor="discount.code" >Mã giảm giá</label>
+                                                    <input placeholder="Mã giảm giá"  style={{border:'none'}} className="field-input" data-discount-field="true" autoComplete="off" autoCapitalize="off" spellCheck="false" size="30" type="text" id="discount.code" name="discount.code" defaultValue=""/>
                                                 </div>
                                                 <button type="submit" className="field-input-btn btn btn-default btn-disabled">
                                                         <span className="btn-content">Sử dụng</span>
@@ -260,7 +260,7 @@ const Checkout = () => {
                                     <div className="field field-required  ">
                                             <div className="field-input-wrapper">
                                                 <label className="field-label" htmlFor="billing_address_full_name">Họ và tên</label>
-                                                <input placeholder="Họ và tên" autoCapitalize="off" spellCheck="false" className="field-input" size="30" type="text" id="billing_address_full_name" name="name" value={name} onChange={handleChangeInput}/>
+                                                <input placeholder="Họ và tên"  style={{border:'none'}} autoCapitalize="off" spellCheck="false" className="field-input" size="30" type="text" id="billing_address_full_name" name="name" value={name} onChange={handleChangeInput}/>
                                             </div>
 
                                         </div>
@@ -270,7 +270,7 @@ const Checkout = () => {
                                         <div className="field field-required field-two-thirds  ">
                                             <div className="field-input-wrapper">
                                                 <label className="field-label" htmlFor="checkout_user_email">Email</label>
-                                                <input placeholder="Email" autoCapitalize="off" spellCheck="false" className="field-input" size="30" type="email" id="checkout_user_email" name="email" value={email} onChange={handleChangeInput}/>
+                                                <input placeholder="Email"  style={{border:'none'}} autoCapitalize="off" spellCheck="false" className="field-input" size="30" type="email" id="checkout_user_email" name="email" value={email} onChange={handleChangeInput}/>
                                             </div>
 
                                         </div>
@@ -280,7 +280,7 @@ const Checkout = () => {
                                         <div className="field field-required field-third  ">
                                             <div className="field-input-wrapper">
                                                 <label className="field-label" htmlFor="billing_address_phone">Số điện thoại</label>
-                                                <input placeholder="Số điện thoại" autoCapitalize="off" spellCheck="false" className="field-input" size="30" maxLength="15" type="tel" id="billing_address_phone" name="sdt" value={sdt} onChange={handleChangeInput}/>
+                                                <input placeholder="Số điện thoại"  style={{border:'none'}} autoCapitalize="off" spellCheck="false" className="field-input" size="30" maxLength="15" type="tel" id="billing_address_phone" name="sdt" value={sdt} onChange={handleChangeInput}/>
                                             </div>
 
                                         </div>
@@ -289,7 +289,7 @@ const Checkout = () => {
                                         <div className="field field-required  ">
                                             <div className="field-input-wrapper">
                                                 <label className="field-label" htmlFor="billing_address_address1">Địa chỉ</label>
-                                                <input placeholder="Địa chỉ" autoCapitalize="off" spellCheck="false" className="field-input" size="30" type="text" id="billing_address_address1" name="diachi" value={diachi} onChange={handleChangeInput}/>
+                                                <input placeholder="Địa chỉ"  style={{border:'none'}} autoCapitalize="off" spellCheck="false" className="field-input" size="30" type="text" id="billing_address_address1" name="diachi" value={diachi} onChange={handleChangeInput}/>
                                             </div>
 
                                         </div>
@@ -311,7 +311,7 @@ const Checkout = () => {
                                             <div className="field field-show-floating-label field-required field-third ">
                                                 <div className="field-input-wrapper">
                                                     <label className="field-label" htmlFor="customer_shipping_province"> Tỉnh / thành  </label>
-                                                    <input type='text' value={tinhtp} className="field-input" id="customer_shipping_province" name="tinhtp" onChange={handleChangeInput} />
+                                                    <input type='text' value={tinhtp}  style={{border:'none'}} className="field-input" id="customer_shipping_province" name="tinhtp" onChange={handleChangeInput} />
                                                                 
                                                 </div>
 
@@ -321,7 +321,7 @@ const Checkout = () => {
                                             <div className="field field-show-floating-label field-required field-third ">
                                                 <div className="field-input-wrapper">
                                                     <label className="field-label" htmlFor="customer_shipping_district">Quận / huyện</label>
-                                                    <input type='text' value={quanhuyen} className="field-input" id="customer_shipping_district" name="quanhuyen" onChange={handleChangeInput}/>
+                                                    <input type='text' value={quanhuyen}  style={{border:'none'}} className="field-input" id="customer_shipping_district" name="quanhuyen" onChange={handleChangeInput}/>
                                                 </div>
 
                                             </div>
@@ -329,7 +329,7 @@ const Checkout = () => {
                                             <div className="field field-show-floating-label field-required  field-third  ">
                                                 <div className="field-input-wrapper">
                                                     <label className="field-label" htmlFor="customer_shipping_ward">Phường / xã</label>
-                                                    <input type='text' value={phuongxa} className="field-input" id="customer_shipping_ward" name="phuongxa" onChange={handleChangeInput}/>
+                                                    <input type='text' value={phuongxa}  style={{border:'none'}} className="field-input" id="customer_shipping_ward" name="phuongxa" onChange={handleChangeInput}/>
                                                 </div>
 
                                             </div>
