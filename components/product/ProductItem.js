@@ -4,10 +4,11 @@ import {DataContext} from '../../store/GlobalState'
 import {addToCart} from '../../store/Actions'
 import {Notified} from '../../store/Actions'
 
-const ProductItem = ({product}) => {
+const ProductItem = ({product, handleCheck}) => {
 
     const [state, dispatch] = useContext(DataContext)
     const {cart, auth} = state
+
     const handleSubmit = () => {
         dispatch(Notified())
         dispatch(addToCart(product, cart))
@@ -15,10 +16,10 @@ const ProductItem = ({product}) => {
     const userLink = () => {
         return(
             <>
-                <Link href={`product/${product._id}`}>
+               <Link href={`product/${product._id}`}>
                     <a className="btn btn-info"
                     style={{marginRight: '5px', flex: 1}}>View</a>
-                </Link>
+                </Link>                
                 <button className="btn btn-success"
                 style={{marginLeft: '5px', flex: 1}}
                 disabled={product.inStock === 0 ? true : false} 
@@ -50,10 +51,17 @@ const ProductItem = ({product}) => {
             </>
         )
     }
-    if(!auth.user) return null
+   
     return (
         
         <div className="card" style={{ width: '18rem' }}>
+            {
+                auth.user && auth.user.role === 'admin' &&
+                <input type="checkbox" checked={product.checked}
+                className="position-absolute"
+                style={{height: '20px', width: '20px'}}
+                onChange={() => handleCheck(product._id)} /> 
+            }
         
         <img className="card-img-top" src={product.images[0].url} alt={product.images[0].url} />
         <div className="card-body">
@@ -75,7 +83,7 @@ const ProductItem = ({product}) => {
             </p>
                 
             <div className="row justify-content-between mx-0">
-                {!auth.user || auth.user.role !== 'admin'? userLink() : adminLink()}
+                 {!auth.user || auth.user.role !== "admin" ? userLink() : adminLink()}
             </div>
         </div>
     </div>
