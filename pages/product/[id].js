@@ -4,12 +4,15 @@ import {getData} from '../../utils/fetchData'
 import {DataContext} from '../../store/GlobalState'
 import {addToCart} from '../../store/Actions'
 
+
 const DetailProduct = (props) =>{
     const [product] = useState(props.product)
     const [tab, setTab] = useState(0)
 
     const [state, dispatch] = useContext(DataContext)
     const {cart} = state
+
+    const [sizeSelection, setSizeSelection] = useState('S')
 
     const imgRef = useRef()
     
@@ -27,9 +30,11 @@ const DetailProduct = (props) =>{
     //     //hiển thị background img click
     //     images[tab].className = 'img-thumbnail rounded active';
     // },[tab])
-
-
-
+    
+    //get Size được chọn
+    const handleSize = e => {
+        setSizeSelection(e.target.value)
+    }
     return (
         <div className="row detail_page" style={{marginLeft:'10%', marginRight:'10%', marginBottom: '20px'}}>
             <Head>
@@ -51,7 +56,7 @@ const DetailProduct = (props) =>{
                 </div>
             </div>
 
-            <div className="col-md-6 mt-3">
+            <div className="col-md-6 mt-4">
                 <h2 className="text-uppercase">{product.title}</h2>
                 <h5 className="text-danger">${product.price}</h5>
 
@@ -64,14 +69,32 @@ const DetailProduct = (props) =>{
 
                     <h6 className="text-danger">Sold: {product.sold}</h6>
                 </div>
+                <div className="my-2">
+                
+                    <div className="form-check">
+                    <input type="radio" className="form-check-input" id="materialGroupExample1" name="groupOfMaterialRadios" value='S' checked={sizeSelection === 'S'} onChange={handleSize}/>
+                    <label className="form-check-label small text-uppercase card-link-secondary" htmlFor="materialGroupExample1">Size S</label>
+                    </div>
 
+
+                    <div className="form-check">
+                    <input type="radio" className="form-check-input" id="materialGroupExample2" name="groupOfMaterialRadios" value='M' checked={sizeSelection === 'M'} onChange={handleSize}/>
+                    <label className="form-check-label small text-uppercase card-link-secondary" htmlFor="materialGroupExample2">Size M</label>
+                    </div>
+
+                    <div className="form-check">
+                    <input type="radio" className="form-check-input" id="materialGroupExample3" name="groupOfMaterialRadios" value='L' checked={sizeSelection === 'L'} onChange={handleSize}/>
+                    <label className="form-check-label small text-uppercase card-link-secondary" htmlFor="materialGroupExample3">Size L</label>
+                    </div>
+                </div>
+                
                 <div className="my-2">{product.description}</div>
                 <div className="my-2">
                     {product.content}
                 </div>
-
+               
                 <button type="button" className="btn btn-dark d-block my-3 px-5"
-                onClick={() => dispatch(addToCart(product, cart))} >
+                onClick={() => dispatch(addToCart(product, cart, sizeSelection))} >
                     Buy
                 </button>
                   

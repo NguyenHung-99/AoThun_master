@@ -11,7 +11,7 @@ const ProductItem = ({product, handleCheck}) => {
 
     const handleSubmit = () => {
         dispatch(Notified())
-        dispatch(addToCart(product, cart))
+        dispatch(addToCart(product, cart, 'S'))
     }
     const userLink = () => {
         return(

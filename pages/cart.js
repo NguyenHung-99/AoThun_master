@@ -34,14 +34,18 @@ const Cart = () => {
           const updateCart = async () => {
             for (const item of cartLocal){
                 const res = await getData(`product/${item._id}`)
-                const { _id, title, images, price, inStock, sold } = res.product
+                const { _id, size, title, images, price, inStock, sold } = res.product
                 //sp con hang ton kho => push vao newArray / outStock sẽ không push vào/. cart = newArray
                 //sp outStock sẽ tự xóa khỏi cart
                 if(inStock > 0){
-                  newArr.push({ 
-                    _id, title, images, price, inStock, sold,
-                    quantity: item.quantity > inStock ? 1 : item.quantity
-                  })
+                  const result = size.filter(sizeDetail => sizeDetail.Size === item.sizeSelection)
+                  if(result[0].InStock_Size > 0){
+                    newArr.push({ 
+                      _id, title, images, price, inStock, sold, size: item.size,
+                      quantity: item.quantity > inStock ? 1 : item.quantity, sizeSelection: item.sizeSelection
+                    })
+                  }
+                  
                 }
             }
             dispatch({ type: 'ADD_CART', payload: newArr })
@@ -85,7 +89,7 @@ const Cart = () => {
             <tbody>
               {
                 cart.map(item => (
-                  <CartItem key={item._id} item={item} dispatch={dispatch} cart={cart} />
+                  <CartItem key={item.sizeSelection} item={item} dispatch={dispatch} cart={cart} />
                 ))
               }
             </tbody>
