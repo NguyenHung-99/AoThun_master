@@ -116,8 +116,8 @@ const Checkout = () => {
                                     </thead>
                                     <tbody>
                                         {
-                                            cart.map(item => (
-                                                <tr className="product" key={item._id}>
+                                            cart.map((item, index) =>  (
+                                                <tr className="product" key={index}>
                                                 <td className="product-image">
                                                     <div className="product-thumbnail">
                                                         <div className="product-thumbnail-wrapper">
@@ -131,13 +131,13 @@ const Checkout = () => {
                                                     <span className="product-description-name order-summary-emphasis">{item.title}</span>
     
                                                     <span className="product-description-variant order-summary-small-text">
-                                                                S
+                                                                {item.sizeSelection}
                                                             </span>
     
                                                 </td>
                                                 <td className="product-quantity visually-hidden">1</td>
                                                 <td className="product-price">
-                                                    <span className="order-summary-emphasis">${item.price}</span>
+                                                    <span className="order-summary-emphasis">${item.price * item.quantity}</span>
                                                 </td>
                                             </tr>
                                             ))

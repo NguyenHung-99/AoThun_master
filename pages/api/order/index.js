@@ -5,7 +5,10 @@ import Products from '../../../models/productModel'
 import Addresss from '../../../models/addressModel'
 import Users from '../../../models/userModel'
 
+
 connectDB()
+
+
 
 export default async (req, res) => {
     switch(req.method){
@@ -50,14 +53,27 @@ const createOrder = async (req, res) => {
             user: result.id, address: address._id, mobile: sdt, cart , total
 
         })
+        
         //cập nhật số lượng sản phẩm còn trong kho và đã bán
+        let index = 0
         cart.filter(item => {
-            return sold(item._id, item.quantity, item.inStock, item.sold)
-        })
+            
+                const sizeSelect = item.size.filter(itemSize => itemSize.Size === item.sizeSelection)
+                
+                sizeSelect[0].InStock_Size = sizeSelect[0].InStock_Size - item.quantity
+                sizeSelect[0].sold = sizeSelect[0].sold + item.quantity
+               
+                
+                
+               return sold(item._id, item.quantity, sizeSelect[0], item.sizeSelection)     
+                
+            })
+       
         newOrders.save()
         res.json({
             msg: 'Order thành công! Chúng tôi sẻ liên hệ với bạn để xác nhận đơn hàng.',
-            newOrders
+            newOrders,
+           
         })
         
     } catch (err) {
@@ -65,6 +81,12 @@ const createOrder = async (req, res) => {
     }
 }
 
-const sold = async (id, quantity, OldInStock, oldSold) => {
-    await Products.findOneAndUpdate({_id: id}, {inStock: OldInStock - quantity, sold: quantity + oldSold})
+//Cập nhât instock, old và instock, old từng size
+
+const sold = async (id, quantity, sizeUpdate, sizeSelection) => {
+     await Products.findOneAndUpdate({_id: id , inStock: {$ne: 0}, sold: {$ne: 0}}, {$inc: {inStock: - quantity, sold: + quantity}, $set: {"size.$[el].InStock_Size": sizeUpdate.InStock_Size, "size.$[el].sold": sizeUpdate.sold}}, {arrayFilters: [{"el.Size": sizeSelection}]});
+
+    
 }
+
+

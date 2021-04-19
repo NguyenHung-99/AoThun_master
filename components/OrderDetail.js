@@ -74,9 +74,9 @@ const OrderDetail = ({orderDetail, state, dispatch}) => {
                             <h2 style={{textAlign:'center'}}><b>Order Items</b></h2>
                             <br/>
                             {
-                                order.cart.map(item => (
+                                order.cart.map((item, index) => (
                                     <div className="row border-bottom mx-0 p-2 justify-content-betwenn
-                                    align-items-center" key={item._id} style={{maxWidth: '550px'}}>
+                                    align-items-center" key={index} style={{maxWidth: '550px'}}>
                                         <img src={item.images[0].url} alt={item.images[0].url}
                                         style={{width: '50px', height: '45px', objectFit: 'cover'}} />
 

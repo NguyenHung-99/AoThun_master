@@ -16,13 +16,15 @@ const CartItem = ({item, dispatch, cart}) => {
                         <a>{item.title} +  {item.sizeSelection}</a>
                     </Link>
                 </h5>
-
+                
                 <h6 className="text-danger">${item.quantity * item.price}</h6>
+                
                 {
-                    item.inStock > 0
-                    ? <p className="mb-1 text-danger">In Stock: {item.inStock}</p>
+                    item.size.filter(it => it.Size === item.sizeSelection)[0].InStock_Size > 0
+                    ? <p className="mb-1 text-danger">Size In Stock: {item.size.filter(it => it.Size === item.sizeSelection)[0].InStock_Size}</p>
                     : <p className="mb-1 text-danger">Out Stock</p>
                 }
+            
             </td>
             <td className="align-middle" style={{minWidth: '150px'}}>
                 <button className="btn btn-outline-secondary"

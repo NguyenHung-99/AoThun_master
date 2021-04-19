@@ -89,7 +89,7 @@ const Cart = () => {
             <tbody>
               {
                 cart.map(item => (
-                  <CartItem key={item.sizeSelection} item={item} dispatch={dispatch} cart={cart} />
+                  <CartItem key={item._id + item.sizeSelection} item={item} dispatch={dispatch} cart={cart} />
                 ))
               }
             </tbody>
