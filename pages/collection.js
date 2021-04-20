@@ -1,15 +1,31 @@
 import {getData} from '../utils/fetchData'
-import {useState,useContext} from 'react'
+import {useState, useContext, useEffect} from 'react'
 import Head from 'next/head'
 import ProductItem from '../components/product/ProductItem'
 import { DataContext } from '../store/GlobalState'
-
+import filterSearch from '../utils/filterSearch'
+import {useRouter} from 'next/router'
 
 const Home = (props) => {
   const [products, setProducts] = useState(props.products)
   const [isCheck, setIsCheck] = useState(false)
   const [state, dispatch] = useContext(DataContext)
   const {auth} = state
+  const [page, setPage] = useState(1)
+  const router = useRouter()
+
+  useEffect(() => {
+    setProducts(props.products)
+  },[props.products])
+  
+  useEffect(() => {
+    if(Object.keys(router.query).length === 0){
+      setPage(1)
+    }else{
+      setPage(Number(router.query.page))
+    }
+  },[router.query])
+ 
 
   const handleCheck = (id) => {
     products.forEach(product => {
@@ -42,6 +58,11 @@ const Home = (props) => {
     setProducts([...products])
     setIsCheck(!isCheck)
   }
+  const handleLoadmore = () => {
+    setPage(page + 1)
+    filterSearch({router, page: page + 1})
+    
+  }
  
   return (
     <div className="home_page" style={{marginLeft:'10%', marginRight:'10%'}}>
@@ -49,7 +70,7 @@ const Home = (props) => {
       <Head>
         <title>Home Page</title>
       </Head>
-
+    
       {
         auth.user && auth.user.role === 'admin' &&
         <div className="delete_all btn btn-danger mt-2" style={{marginBottom: '-10px'}}>
@@ -64,24 +85,41 @@ const Home = (props) => {
 
       <div className="products">
         {
-        products.length === 0
-        ? <h2>No Product</h2>
-        :
-        products.map(product =>(
-        <ProductItem key={product._id} product={product} handleCheck={handleCheck} />
+          products.length === 0
+          ? <h2>No Product</h2>
+          :
+          products.map(product =>(
+          <ProductItem key={product._id} product={product} handleCheck={handleCheck} />
 
-        ))
+          ))
 
         }
+        
       </div>
+      {
+        props.result < page * 8 ? ""
+        : <button className="btn btn-outline-info d-block mx-auto mb-4"
+        onClick={handleLoadmore}>
+          Load more
+        </button>
+      }
+     
     </div>
 
   )
 }
 
 
-export async function getServerSideProps() {
-  const res = await getData('product')
+export async function getServerSideProps({query}) {
+  const page = query.page || 1
+  const category = query.category || 'all'
+  const sort = query.sort || ''
+  const search = query.search || 'all'
+ 
+  const res = await getData(
+    `product?limit=${page * 8}&category=${category}&sort=${sort}&title=${search}`
+  )
+  
     return {
       props: {
         products: res.products,

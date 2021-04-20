@@ -1,6 +1,6 @@
 import {useContext} from 'react'
 import {DataContext} from '../store/GlobalState'
-import {deleteItem} from '../store/Actions'
+import {deleteItem, deleteItemCart} from '../store/Actions'
 import { deleteData } from '../utils/fetchData'
 import {useRouter} from 'next/router'
 
@@ -43,7 +43,7 @@ const Modal = () => {
         if(modal.length !== 0){
             for(const item of modal){
                 if(item.type === 'ADD_CART'){
-                    dispatch(deleteItem(item.data, item.id, item.sizeSelection , item.type))
+                    dispatch(deleteItemCart(item.data, item.id, item.sizeSelection , item.type))
                 }
 
                 if(item.type === 'ADD_USERS') deleteUser(item)

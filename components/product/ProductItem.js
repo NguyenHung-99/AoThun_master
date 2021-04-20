@@ -16,10 +16,9 @@ const ProductItem = ({product, handleCheck}) => {
     const userLink = () => {
         return(
             <>
-               <Link href={`product/${product._id}`}>
-                    <a className="btn btn-info"
-                    style={{marginRight: '5px', flex: 1}}>View</a>
-                </Link>                
+               <a href={`product/${product._id}`} className="btn btn-info"style={{marginRight: '5px', flex: 1}}>
+                   View
+                </a>                
                 <button className="btn btn-success"
                 style={{marginLeft: '5px', flex: 1}}
                 disabled={product.inStock === 0 ? true : false} 

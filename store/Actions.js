@@ -51,9 +51,12 @@ export const increase = (data, id, sizeSelection) => {
     })
     return ({type: 'ADD_CART', payload: newData})
 }
-
-export const deleteItem = (data, id, sizeSelection, type) => {
-    const newData = data.filter(item => item._id === id && item.sizeSelection !== sizeSelection)
+export const deleteItemCart = (data, id, sizeSelection, type) => {
+    const newData = data.filter(item => item._id !== id || item._id === id && item.sizeSelection !== sizeSelection)
+    return ({ type, payload: newData})
+}
+export const deleteItem = (data, id, type) => {
+    const newData = data.filter(item => item._id !== id )
     return ({ type, payload: newData})
 }
 export const Notified = () =>{
