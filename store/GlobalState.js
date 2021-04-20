@@ -24,11 +24,12 @@ export const DataProvider = ({children}) => {
                     }
                 })
             })
-            getData('categories', auth.token).then(res =>{
-                if(res.err) return dispatch({type: 'NOTIFY' , payload: {err: res.err}})
-                dispatch({type: 'ADD_CATEGORIES' , payload: res.categories})
-            })
+            
         }
+        getData('categories', auth.token).then(res =>{
+            if(res.err) return dispatch({type: 'NOTIFY' , payload: {err: res.err}})
+            dispatch({type: 'ADD_CATEGORIES' , payload: res.categories})
+        })
     }, []);
 
     useEffect(() => {

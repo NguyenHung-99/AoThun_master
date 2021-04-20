@@ -25,7 +25,6 @@ class APIfeatures {
     
     const excludeFields = ['page', 'sort', 'limit']
     excludeFields.forEach(el => delete(queryObj[el]))
-
     if(queryObj.category !== 'all')
       this.query.find({category: queryObj.category})
     if(queryObj.title !== 'all')
