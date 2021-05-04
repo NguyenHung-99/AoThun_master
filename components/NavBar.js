@@ -42,6 +42,9 @@ function NavBar(){
             <Link href="/dashBoard">
                 <a className="dropdown-item">Report</a>
             </Link>
+            <Link href="/testSideBar">
+                <a className="dropdown-item">testSideBar</a>
+            </Link>
             </>
         )
     }

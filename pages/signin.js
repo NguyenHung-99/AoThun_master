@@ -47,6 +47,7 @@ const Signin = () => {
     useEffect(() => {
         //login success redirect home
         if(Object.keys(auth).length !== 0) router.push('/')
+        if(Object.keys(auth).length !== 0 && auth.user.role === 'admin') router.push('/dashBoard')
        
     }, [auth])
 

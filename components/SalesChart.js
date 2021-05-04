@@ -1,5 +1,5 @@
 import React from 'react'
-import { useContext } from 'react'
+import { useContext , useEffect} from 'react'
 import { DataContext } from '../store/GlobalState'
 import moment from 'moment';
 
@@ -14,6 +14,7 @@ const SalesChart = () =>{
     const total = [0,0,0,0,0,0,0,0,0,0,0,0]
     
     orders.map(order =>{
+     
         switch (moment(order.createdAt).format('MM')) {
             case '01':
                 total[0] =  total[0] + order.total
