@@ -55,7 +55,7 @@ const createOrder = async (req, res) => {
         })
         
         //cập nhật số lượng sản phẩm còn trong kho và đã bán
-        let index = 0
+   
         cart.filter(item => {
             const sizeSelect = item.size.filter(itemSize => itemSize.Size === item.sizeSelection)
             sizeSelect[0].InStock_Size = sizeSelect[0].InStock_Size - item.quantity
@@ -78,8 +78,8 @@ const createOrder = async (req, res) => {
 //Cập nhât instock, old và instock, old từng size
 
 const sold = async (id, quantity, sizeUpdate, sizeSelection) => {
-    
-   await Products.findOneAndUpdate({_id: id , inStock: {$ne: 0}, sold: {$ne: 0}}, {$inc: {inStock: -quantity, sold: +quantity}, $set: {"size.$[el].InStock_Size": sizeUpdate.InStock_Size, "size.$[el].sold": sizeUpdate.sold}}, {arrayFilters: [{"el.Size": sizeSelection}]}).then(iss => console.log(iss))
+    await Products.findOneAndUpdate({_id: id }, {$inc: {inStock: -quantity, sold: +quantity}});
+   await Products.findOneAndUpdate({_id: id }, {$set: {"size.$[el].InStock_Size": sizeUpdate.InStock_Size, "size.$[el].sold": sizeUpdate.sold}}, {arrayFilters: [{"el.Size": sizeSelection}]}).then(iss => console.log(iss))
     
 }
 

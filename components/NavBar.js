@@ -39,6 +39,9 @@ function NavBar(){
             <Link href="/categories">
                 <a className="dropdown-item">Categories</a>
             </Link>
+            <Link href="/dashBoard">
+                <a className="dropdown-item">Report</a>
+            </Link>
             </>
         )
     }
