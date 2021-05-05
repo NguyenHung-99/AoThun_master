@@ -40,8 +40,8 @@ const ThongKe = () => {
 
     return (
        <>
-        <div className="row">
-					<div className="col-3 col-md-3 col-sm-6">
+        <div className="row">		
+					<div className="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 						<div className="counter bg-success">
 
 							<p>
@@ -51,7 +51,7 @@ const ThongKe = () => {
 							<span>${totalSale}</span>
 						</div>
 					</div>
-					<div className="col-3 col-md-3 col-sm-6">
+					<div className="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 						<div className="counter bg-danger">
 							<p>
 								<i className="fas fa-shopping-cart"></i>
@@ -60,7 +60,7 @@ const ThongKe = () => {
 							<span>{orders.length} (Đơn)</span>
 						</div>
 					</div>
-					<div className="col-3 col-md-3 col-sm-6">
+					<div className="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 						<div className="counter bg-info">
 							<p>
 								<i className="fas fa-users"></i>
@@ -69,7 +69,7 @@ const ThongKe = () => {
 							<span>{users.length} (Thành viên)</span>
 						</div>
 					</div>
-					<div className="col-3 col-md-3 col-sm-6">
+					<div className="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 						<div className="counter bg-secondary">
 							<p>
 								<i className="fas fa-bug"></i>
@@ -81,18 +81,18 @@ const ThongKe = () => {
 				</div>
 				
                 <div className="row">
-			
-			<div className="col-8 col-md-8 col-sm-8">
+				
+			<div className="col-xs-12 col-sm-12 col-md-6 col-lg-8">
 				<div className="card">
 					<div className="card-header">
                   
                     <table>
 					<div className="row card-nav">
-							<div className="col-10 col-md-9 col-ms-10">
+							<div className="col-xs-12 col-sm-10 col-md-6 col-lg-10">
 								
 								<h3>Stats</h3>
 							</div>
-							<div className="col-2 col-md-2 col-ms-3">
+							<div className="col-xs-12 col-sm-2 col-md-6 col-lg-2">
 								<Link href="/profile">
 								<button>See All       
 											<span style={{paddingLeft:'5px'}}><i className="fas fa-arrow-right"></i></span>
@@ -120,10 +120,10 @@ const ThongKe = () => {
                                             <td  className="col-md-3">
                                                 {order.user.ten}
                                             </td>
-                                            <td  className="col-md-3">
+                                            <td  className="col-md-2">
                                                 {new Date(order.createdAt).toLocaleDateString()}
                                             </td>
-                                            <td  className="col-md-1">
+                                            <td  className="col-md-2">
                                                 {
                                                     order.delivered
                                                     ? <i className="fas fa-check text-success"></i>
@@ -149,22 +149,22 @@ const ThongKe = () => {
 					<tr className="row">
 									<th className="col-md-4">order ID</th>
 									<th className="col-md-3">Customer</th>
-                                    <th className="col-md-3">Date</th>
-									<th className="col-md-1">Delivery</th>
+                                    <th className="col-md-2">Date</th>
+									<th className="col-md-2">Delivery</th>
 									<th className="col-md-1">Paid</th>
 								</tr>
 								</table>
 								</div>
 				</div>
 			</div>
-			<div className="col-4 col-md-4 col-sm-4">
+			<div className="col-xs-12 col-sm-12 col-md-6 col-lg-4">
 			<div className="card">
 					<div className="card-header">
                   
                     <table>
 						<div className="row card-nav">
-							<div className="col-9 col-md-7 col-ms-10"><h3>Customers</h3></div>
-							<div className="col-3 col-md-5 col-ms-3">
+							<div className="col-xs-12 col-sm-10 col-md-6 col-lg-10"><h3>Customers</h3></div>
+							<div className="col-xs-12 col-sm-2 col-md-6 col-lg-2">
 								<Link href="/users">
 								<button>See All       
 											<span style={{paddingLeft:'5px'}}><i className="fas fa-arrow-right"></i></span>
@@ -212,11 +212,9 @@ const ThongKe = () => {
 					</div>
 
 				</div>
-						<div className="row">
-					</div>
 			</div>
             </div>
-                <div className="col-12 col-m-12 col-sm-12">
+                <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 						<div className="card">
 							<div className="card-header">
 								<h3>

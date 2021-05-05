@@ -12,7 +12,7 @@ function Layout({children}){
             <Modal/>
             <div style={{paddingTop:'5%'}}/>
             {children}
-            <Footer/>
+            {/* <Footer/> */}
             
         </div>
     )

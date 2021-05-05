@@ -66,3 +66,6 @@ export const updateItem = (data, id, post, type) => {
     const newData = data.map(item => (item._id === id ? post : item))
     return ({ type, payload: newData})
 }
+export function daysInMonth(month, year) {
+    return new Date(year, month, 0).getDate();
+}

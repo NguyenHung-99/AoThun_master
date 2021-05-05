@@ -9,7 +9,8 @@ const SalesChart = () =>{
     const [state] = useContext(DataContext)
     const { orders} = state
 	const router = useRouter()
- 
+    
+    
     const reportLabels = moment.months();
     const total = [0,0,0,0,0,0,0,0,0,0,0,0]
     
@@ -79,7 +80,11 @@ const SalesChart = () =>{
                                 {
                                    
                                     const xLabel = elements[0].index;
-                                    return router.push(`DetailOrderMonth/${xLabel + 1}`); 
+                                    return router.push({
+                                        pathname:'DetailOrderMonth',
+                                        query: {year: 2021, month: xLabel +1}
+                                    })
+                                    
                                 }
                             }
                         }}
