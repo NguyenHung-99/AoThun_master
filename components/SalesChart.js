@@ -7,7 +7,7 @@ import {Bar } from 'react-chartjs-2'
 import {useRouter} from 'next/router'
 const SalesChart = () =>{
     const [state] = useContext(DataContext)
-    const { orders} = state
+    const {auth, orders} = state
 	const router = useRouter()
     
     

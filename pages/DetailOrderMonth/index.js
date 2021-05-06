@@ -4,7 +4,8 @@ import {DataContext} from '../../store/GlobalState'
 import {useRouter} from 'next/router'
 import moment from 'moment';
 import {Bar } from 'react-chartjs-2'
-import { daysInMonth } from '../../store/Actions';
+import { getData } from '../../utils/fetchData';
+
 
 const DetailOrder = () => {
 
@@ -13,44 +14,18 @@ const DetailOrder = () => {
     const router = useRouter()
   
     const [orderList, setOrderList] = useState([])
+    const [arrLabel, setArrLabel] = useState([])
+    const [arrData, setArrData] = useState([])
    
-    useEffect(() => {
-        const newArr = orders.filter(order => Number(moment(order.createdAt).format('MM')) ===  Number(router.query.month))
-        
-        setOrderList(newArr)
-        
-    }, [orders]);
     //get day in month
-
-    var soNgayTrongThang = daysInMonth(router.query.month, router.query.year);
-    var firstDateOfMonth = new Date(router.query.year, router.query.month - 1, 1);
+    useEffect(async() => {
+        const month = router.query.month
+        const year = router.query.year
+        const res = await getData(`thongke/${month}/${year}`);
+        setArrLabel(res.arrResult)
+        setArrData(res.arrDoanhThu)
+    }, [router]);
     
-    var arrDate = [];
-    var arrResult = [];
-    for (let index = 1; index <= soNgayTrongThang; index++) {
-        var dateThem = new Date(firstDateOfMonth.getFullYear(), firstDateOfMonth.getMonth(), index);
-         var dateResult = moment(dateThem).format('DD-MM-yyyy')
-        arrDate.push(dateThem);
-        arrResult.push(dateResult)
-    }
-
-//    get data order in day of month 
-    var arrDoanhThu = [];
-    for (let i = 0; i < arrDate.length; i++) {
-        var doanhThu = 0;
-        for (let index = 0; index < orderList.length; index++) {
-           
-            if (Number(arrDate[i].getDate()) === Number(moment(orderList[index].createdAt).format('DD')) &&
-            Number(arrDate[i].getMonth() + 1) === Number(moment(orderList[index].createdAt).format('MM')) &&
-            Number(arrDate[i].getFullYear()) === Number(moment(orderList[index].createdAt).format('yyyy'))) {
-                console.log('vo được đat r')
-                doanhThu += orderList[index].total;
-                
-            }
-        }
-        arrDoanhThu.push(doanhThu);
-        
-    }
   
     if(!auth.user) return null
     return (
@@ -61,11 +36,11 @@ const DetailOrder = () => {
 
         <Bar
                         data={{
-                            labels: arrResult,
+                            labels: arrLabel,
                             datasets:[
                                 {
                                     label: 'Sales',
-                                    data:arrDoanhThu,
+                                    data: arrData,
                                     backgroundColor: 'rgba(255,99,133,0.6)',
                                     labels:{
                                         color:'rgb(255,99,132)'   
@@ -78,12 +53,6 @@ const DetailOrder = () => {
                         }}
                         
                     />
-        {orderList.map(oder => <p>{oder.createdAt} + {oder.total}</p>)}
-        
-       
-        
-     
-
     </div>
     )
 }

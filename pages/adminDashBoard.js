@@ -3,6 +3,7 @@ import {DataContext} from '../store/GlobalState'
 import $ from 'jquery';
 import ThongKe from '../components/ThongKe'
 
+
 const report = () => {
     const [state, dispatch] = useContext(DataContext)
     const {auth} = state
@@ -254,7 +255,7 @@ const report = () => {
       <h2>Pro Sidebar</h2>
       <hr/>
       <ThongKe/>
-      
+ 
     </div>
   </main>
   </div>

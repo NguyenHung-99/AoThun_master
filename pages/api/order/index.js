@@ -23,16 +23,17 @@ export default async (req, res) => {
 const getOrders = async (req,res) => {
     try {
         const result = await auth(req,res)
-
         let orders;
+      
         //user => get all oders by users
         if(result.role !== 'admin'){
             orders = await Orders.find({user: result.id}).populate("user", "-diaChi")
         }else{
             //get all order in db
             orders = await Orders.find().populate("user", "-diaChi")
+          
         }
-        res.json({orders})
+        res.json({orders, totalOrd: orders.length})
     } catch (err) {
         return res.status(500).json({err: err.message})
     }

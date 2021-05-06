@@ -3,15 +3,18 @@ import Head from 'next/head'
 import ThongKe from '../components/ThongKe'
 import {useContext} from 'react'
 import { DataContext } from '../store/GlobalState'
+import Statistical from '../components/Statistical'
 
 
 const report = () => {
 	const [state, dispatch] = useContext(DataContext)
+	const {auth} = state
 	const [showAbout, setShowAbout] = useState(false)
 
 	const handleClick = () => {
 		return setShowAbout(true)
 	}
+	if(!auth.user) return null
 	
 	return(
 		
@@ -66,8 +69,8 @@ const report = () => {
 
 				</div>
 				<div className="col-md-9">
-				{ showAbout ? <ThongKe ></ThongKe> : <ThongKe ></ThongKe> }
-					
+				{/* { showAbout ? <ThongKe ></ThongKe> : <ThongKe ></ThongKe> } */}
+					<Statistical/>
 					</div>
 			</div>
 		</div>
