@@ -2,18 +2,33 @@ import React, { useContext, useState, useEffect } from 'react'
 import {DataContext} from '../store/GlobalState'
 import $ from 'jquery';
 import ThongKe from '../components/ThongKe'
+import SalesChart from '../components/SalesChart';
+
+import DoanhThuChart from '../components/DoanhThuChart';
+import OrderChart from '../components/OrderChart';
 
 
 const report = () => {
     const [state, dispatch] = useContext(DataContext)
     const {auth} = state
  
-    const [showAbout, setShowAbout] = useState(false)
+    const [showOrder, setShowOrder] = useState(false)
+    const [showDoanhThu, setShowDoanhThu] = useState(false)
 
     const handleClick = () => {
-      return setShowAbout(true)
+      return setShowOrder(true)
+      setShowDoanhThu(false)
+      setShowOrder(false)
     }
- 
+    const handleDoanhThuChart = () => {
+      setShowDoanhThu(true)
+      setShowOrder(false)
+    }
+    const handleOrderChart = () => {
+      setShowOrder(true)
+      setShowDoanhThu(false)
+    }
+    
     
     useEffect(() => {
       $(".sidebar-dropdown > a").click(function() {
@@ -175,10 +190,10 @@ const report = () => {
               <div className="sidebar-submenu">
                 <ul>
                   <li>
-                    <a href="#">Pie chart</a>
+                    <a onClick={handleDoanhThuChart}>Doanh Thu</a>
                   </li>
                   <li>
-                    <a href="#">Line chart</a>
+                    <a onClick={handleOrderChart}>Đơn Hàng</a>
                   </li>
                   <li>
                     <a href="#">Bar chart</a>
@@ -254,7 +269,10 @@ const report = () => {
     <div className="container-fluid">
       <h2>Pro Sidebar</h2>
       <hr/>
-      <ThongKe/>
+      
+      
+      {showDoanhThu ? <DoanhThuChart/> : null}
+      {showOrder ? <OrderChart/> : null}
  
     </div>
   </main>

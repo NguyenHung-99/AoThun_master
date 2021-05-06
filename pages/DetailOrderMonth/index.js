@@ -39,7 +39,7 @@ const DetailOrder = () => {
                             labels: arrLabel,
                             datasets:[
                                 {
-                                    label: 'Sales',
+                                    label: 'Total',
                                     data: arrData,
                                     backgroundColor: 'rgba(255,99,133,0.6)',
                                     labels:{

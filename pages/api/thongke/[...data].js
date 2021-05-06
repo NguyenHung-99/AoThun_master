@@ -25,7 +25,7 @@ const getData_Month = async (req, res) => {
                 return ord;
             }
         })
-        console.log(orderList)
+     
         var soNgayTrongThang = daysInMonth(month,  year);
         var firstDateOfMonth = new Date( year,  month - 1, 1);
         
@@ -33,7 +33,7 @@ const getData_Month = async (req, res) => {
         var arrResult = [];
         for (let index = 1; index <= soNgayTrongThang; index++) {
             var dateThem = new Date(firstDateOfMonth.getFullYear(), firstDateOfMonth.getMonth(), index);
-             var dateResult = moment(dateThem).format('DD-MM-yyyy')
+             var dateResult = moment(dateThem).format('DD-MM')
             arrDate.push(dateThem);
             arrResult.push(dateResult)
         }
@@ -44,9 +44,9 @@ const getData_Month = async (req, res) => {
             var doanhThu = 0;
             for (let index = 0; index < orderList.length; index++) {
            
-                if (Number(arrDate[i].getDate()) === Number(moment(orderList[index].createdAt).format('DD')) &&
-                Number(arrDate[i].getMonth() + 1) === Number(moment(orderList[index].createdAt).format('MM')) &&
-                Number(arrDate[i].getFullYear()) === Number(moment(orderList[index].createdAt).format('yyyy'))) {
+                if (Number(arrDate[i].getDate()) === Number(moment(orderList[index].dateOfPayment).format('DD')) &&
+                Number(arrDate[i].getMonth() + 1) === Number(moment(orderList[index].dateOfPayment).format('MM')) &&
+                Number(arrDate[i].getFullYear()) === Number(moment(orderList[index].dateOfPayment).format('yyyy'))) {
                 
                     doanhThu += orderList[index].total;
                     
