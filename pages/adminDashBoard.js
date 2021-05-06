@@ -269,7 +269,7 @@ const report = () => {
     <div className="container-fluid">
       <h2>Pro Sidebar</h2>
       <hr/>
-      
+      {/* <ThongKe/> */}
       
       {showDoanhThu ? <DoanhThuChart/> : null}
       {showOrder ? <OrderChart/> : null}

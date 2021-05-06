@@ -18,14 +18,14 @@ export default async (req, res) => {
 const getData_Month = async (req, res) => {
     try {
         const month = req.query.data[0] // get tháng
-        const year = req.query.data[1] // năm\
+        const year = req.query.data[1] // năm
 
         var orderList = (await Orders.find()).filter(ord => {
             if(ord.dateOfPayment && Number(moment(ord.dateOfPayment).format('MM')) ===  Number(month)){
                 return ord;
             }
         })
-     
+      
         var soNgayTrongThang = daysInMonth(month,  year);
         var firstDateOfMonth = new Date( year,  month - 1, 1);
         
@@ -33,15 +33,19 @@ const getData_Month = async (req, res) => {
         var arrResult = [];
         for (let index = 1; index <= soNgayTrongThang; index++) {
             var dateThem = new Date(firstDateOfMonth.getFullYear(), firstDateOfMonth.getMonth(), index);
-             var dateResult = moment(dateThem).format('DD-MM')
+             var dateResult = moment(dateThem).format('DD-MM-yyyy')
             arrDate.push(dateThem);
             arrResult.push(dateResult)
         }
     
     //    get data order in day of month 
         var arrDoanhThu = [];
+        var arrCountOrder = []
+       
+           var countOrder = 0;
         for (let i = 0; i < arrDate.length; i++) {
             var doanhThu = 0;
+         
             for (let index = 0; index < orderList.length; index++) {
            
                 if (Number(arrDate[i].getDate()) === Number(moment(orderList[index].dateOfPayment).format('DD')) &&
@@ -49,18 +53,20 @@ const getData_Month = async (req, res) => {
                 Number(arrDate[i].getFullYear()) === Number(moment(orderList[index].dateOfPayment).format('yyyy'))) {
                 
                     doanhThu += orderList[index].total;
-                    
+                    countOrder ++
                 }
             }
-            arrDoanhThu.push(doanhThu);
             
+            arrDoanhThu.push(doanhThu);
+          
         }
-        
+          arrCountOrder.push(countOrder)
         res.json({
             msg: 'Order thành công! Chúng tôi sẻ liên hệ với bạn để xác nhận đơn hàng.',
             arrDoanhThu,
-            arrResult
-           
+            arrResult,
+            arrCountOrder,
+            year
         })
         
     } catch (err) {

@@ -6,7 +6,6 @@ import { useState, useContext, useEffect } from 'react'
 import SalesChart from './SalesChart'
 import { getData } from '../utils/fetchData'
 import { DataContext } from '../store/GlobalState'
-
 const ThongKe = () => {
     const [state, dispatch] = useContext(DataContext)
     
@@ -87,15 +86,15 @@ const ThongKe = () => {
 					<div className="card-header">
                   
                     <table>
-					<div className="row card-nav">
-							<div className="col-xs-12 col-sm-10 col-md-6 col-lg-10">
+					<div className=" card-nav">
+							<div >
 								
 								<h3>Stats</h3>
 							</div>
-							<div className="col-xs-12 col-sm-2 col-md-6 col-lg-2">
+							<div>
 								<Link href="/profile">
-								<button>See All       
-											<span style={{paddingLeft:'5px'}}><i className="fas fa-arrow-right"></i></span>
+								<button >See All       
+											<span > <i className="fas fa-arrow-right"></i></span>
 								</button>		
 								</Link>
 							</div>
@@ -111,26 +110,26 @@ const ThongKe = () => {
                                     orders.map(order => (
                                         <tr className="row" key={order._id}>
                                            
-                                            <td className="col-md-4">
+                                            <td className="col-3">
                                                 <Link href={`/order/${order._id}`}>
                                                     {order._id}
                                                 </Link>
                                                 
                                             </td>
-                                            <td  className="col-md-3">
+                                            <td  className="col-3">
                                                 {order.user.ten}
                                             </td>
-                                            <td  className="col-md-2">
+                                            <td  className="col-2">
                                                 {new Date(order.createdAt).toLocaleDateString()}
                                             </td>
-                                            <td  className="col-md-2">
+                                            <td  className="col-2">
                                                 {
                                                     order.delivered
                                                     ? <i className="fas fa-check text-success"></i>
                                                     : <i className="fas fa-times text-danger"></i>
                                                 }
                                             </td>
-                                            <td className="col-md-1">
+                                            <td className="col-2">
                                                 {
                                                     order.paid
                                                     ? <i className="fas fa-check text-success"></i>
@@ -147,11 +146,11 @@ const ThongKe = () => {
 					<div className="card-header">
 					<table>
 					<tr className="row">
-									<th className="col-md-4">order ID</th>
-									<th className="col-md-3">Customer</th>
-                                    <th className="col-md-2">Date</th>
-									<th className="col-md-2">Delivery</th>
-									<th className="col-md-1">Paid</th>
+									<th className="col-3">order ID</th>
+									<th className="col-3">Customer</th>
+                                    <th className="col-2">Date</th>
+									<th className="col-2">Delivery</th>
+									<th className="col-2">Paid</th>
 								</tr>
 								</table>
 								</div>
@@ -162,12 +161,12 @@ const ThongKe = () => {
 					<div className="card-header">
                   
                     <table>
-						<div className="row card-nav">
-							<div className="col-xs-12 col-sm-10 col-md-6 col-lg-10"><h3>Customers</h3></div>
-							<div className="col-xs-12 col-sm-2 col-md-6 col-lg-2">
+						<div className=" card-nav">
+							<div className=""><h3>Customers</h3></div>
+							<div className="">
 								<Link href="/users">
-								<button>See All       
-											<span style={{paddingLeft:'5px'}}><i className="fas fa-arrow-right"></i></span>
+								<button >See All       
+											<span > <i className="fas fa-arrow-right"></i></span>
 								</button>		
 								</Link>
 							</div>
@@ -179,13 +178,12 @@ const ThongKe = () => {
                    
                    
 					<div className="card-content-y">
-						<table>
+						<table className="table table-rounded">
 							<tbody>
                                 {
                                     users.map(user => (
                                         <tr className="row" key={user._id}>
-                                           <td className="col-md-1"></td>
-                                            <td className="col-md-2">
+                                            <td className="col-2">
                                                 
 												<img src={user.anhDaiDien} alt={user.anhDaiDien}
 													style={{
@@ -195,10 +193,10 @@ const ThongKe = () => {
                                                 
                                                 
                                             </td>
-                                            <td  className="col-md-7">
+                                            <td  className="col-7">
                                                 {user.ten}
                                             </td>
-                                            <td  className="col-md-2 ">
+                                            <td  className="col-2 ">
 												<Link href={`/edit_user/${user._id}`}>
 													<i className="fas fa-edit text-info"></i>
 												</Link>
@@ -216,11 +214,22 @@ const ThongKe = () => {
             </div>
                 <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 						<div className="card">
-							<div className="card-header">
+					<div className="card-header">
+						<div className="row">
+							<div className="col-5 col-md-5 col-xs-5">
 								<h3>
 									Chart
 								</h3>
 							</div>
+							<div className="col-7 col-md-7 col-xs-7 ">
+								<select  class="form-select w-25" aria-label="Default select example">
+								<option class="" value="1">2019</option>
+									<option value="2">2020</option>
+									<option value="3">2021</option>
+								</select>
+							</div>
+						</div>
+					</div>
 							<SalesChart></SalesChart>
 						</div>
 				</div>
