@@ -6,7 +6,7 @@ import { getData } from '../utils/fetchData';
 import { DataContext } from '../store/GlobalState';
 import Link from 'next/link'
 
-const DoanhThuChart = () => {
+const ProductChart = () => {
 
     const [state, dispatch] = useContext(DataContext)
    
@@ -15,7 +15,7 @@ const DoanhThuChart = () => {
         labels: [],
         datasets: [
             {
-                label: 'Doanh thu',
+                label: 'Order',
                 data: [],
                 backgroundColor: 'rgba(75,192,192,0.6)',
                 borderWidth: 4
@@ -44,16 +44,45 @@ const DoanhThuChart = () => {
         return a;
     }
     //get Doannh thu => chart
-    //get doanh thu đơn đã hoàn thành theo tuần
-    async function LayDataDoanhThuTuanNay() {
+    
+     //get Sản Phẩm đơn đã hoàn thành theo 3 tháng gần nhất
+    async function LayDataOder3ThangGanNhat() {
         
-        const res = await getData('thongke/DoanhThu/TheoTuan')
+        const res = await getData('thongke/SoLuong/3Thang')
+        console.log(res.dataDate)
         if (res.status === 'success') {
             var chartDataa = {
                 labels: res.dataDate,
                 datasets: [
                     {
-                        label: 'Doanh Thu',
+                        label: 'Sản Phẩm',
+                        data: res.dataSanPham,
+                        backgroundColor: 'rgba(75,192,192,0.6)',
+                        borderWidth: 4
+                    }
+                    
+                ]
+            }
+            setChartData(chartDataa);
+            setDataChiTietDonHang(res.data);
+        } else {
+            dispatch({ type: 'NOTIFY', payload: {error: res.err} })
+            message.error();
+        }
+
+       
+    }
+     //get Sản Phẩm đơn đã hoàn thành theo tháng
+    async function LayDataOrderThangNay() {
+        
+        const res = await getData('thongke/SoLuong/TheoThang')
+     
+        if (res.status === 'success') {
+            var chartDataa = {
+                labels: res.dataDate,
+                datasets: [
+                    {
+                        label: 'Sản Phẩm',
                         data: res.dataDoanhThu,
                         backgroundColor: 'rgba(75,192,192,0.6)',
                         borderWidth: 4
@@ -70,18 +99,18 @@ const DoanhThuChart = () => {
 
        
     }
-     //get doanh thu đơn đã hoàn thành theo 3 tháng gần nhất
-    async function LayDataDoanhThu3ThangGanNhat() {
-        
-        const res = await getData('thongke/DoanhThu/3Thang')
-        console.log(res.dataDate)
+
+
+    //get so down hang
+    async function LayDataSoDonHangTuanNay() {
+        const res = await getData('thongke/SoLuong/TheoTuan')
         if (res.status === 'success') {
             var chartDataa = {
                 labels: res.dataDate,
                 datasets: [
                     {
-                        label: 'Doanh Thu',
-                        data: res.dataDoanhThu,
+                        label: 'Sản Phẩm',
+                        data: res.dataSoDonHang,
                         backgroundColor: 'rgba(75,192,192,0.6)',
                         borderWidth: 4
                     }
@@ -92,14 +121,13 @@ const DoanhThuChart = () => {
             setDataChiTietDonHang(res.data);
         } else {
             dispatch({ type: 'NOTIFY', payload: {error: res.err} })
-         
+            message.error();
         }
 
-       
     }
-    async function LayDataDoanhThu6ThangGanNhat() {
+    async function LayDataOrder6ThangGanNhat() {
         
-        const res = await getData('thongke/DoanhThu/6Thang')
+        const res = await getData('thongke/SoLuong/6Thang')
         console.log(res.dataDate)
         if (res.status === 'success') {
             var chartDataa = {
@@ -107,7 +135,7 @@ const DoanhThuChart = () => {
                 datasets: [
                     {
                         label: 'Doanh Thu',
-                        data: res.dataDoanhThu,
+                        data: res.dataProduct,
                         backgroundColor: 'rgba(75,192,192,0.6)',
                         borderWidth: 4
                     }
@@ -123,67 +151,39 @@ const DoanhThuChart = () => {
 
        
     }
-     //get doanh thu đơn đã hoàn thành theo tháng
-    async function LayDataDoanhThuThangNay() {
-        
-        const res = await getData('thongke/DoanhThu/TheoThang')
-       
-        if (res.status === 'success') {
-            var chartDataa = {
-                labels: res.dataDate,
-                datasets: [
-                    {
-                        label: 'Doanh Thu',
-                        data: res.dataDoanhThu,
-                        backgroundColor: 'rgba(75,192,192,0.6)',
-                        borderWidth: 4
-                    }
-                    
-                ]
-            }
-            setChartData(chartDataa);
-            setDataChiTietDonHang(res.data);
-        } else {
-            dispatch({ type: 'NOTIFY', payload: {error: res.err} })
-            message.error();
-        }
-
-       
-    }
-
     useEffect(() => {
-        LayDataDoanhThuTuanNay()
+        LayDataSoDonHangTuanNay()
     }, []);
    
 
     useEffect(() => {
         if (optionValueTime === 0) {
-            LayDataDoanhThuTuanNay();
+            LayDataSoDonHangTuanNay();
         }
 
         if (optionValueTime === 1) {
-            LayDataDoanhThuThangNay();
+            LayDataOrderThangNay();
         }
 
         if (optionValueTime === 2) {
-            LayDataDoanhThu3ThangGanNhat();
+            LayDataOder3ThangGanNhat();
         }
 
         if (optionValueTime === 3) {
-            LayDataDoanhThu6ThangGanNhat();
+            LayDataOrder6ThangGanNhat();
         }
     }, [optionValueTime])
-    
     useEffect(() => {
         if (countDonHangShow >= dataChiTietDonHang.length && dataChiTietDonHang.length !== 0) {
             setDonHangShowEnd(true);
         }
     }, [countDonHangShow])
+
     return (
         <Fragment>
         <div className="col-sm-10" style={{ padding: 20 }}>
             <div className='col'>
-                <span>(*Kết quả báo cáo đều được dựa vào các đơn hàng đã hoàn thành)</span>
+                <span>(*Kết quả báo cáo đều được dựa vào các Sản Phẩm đã hoàn thành)</span>
                 <br></br>
                 <Radio.Group value={optionValueTime} onChange={(e) => {
                     setOptionValueTime(e.target.value);
@@ -271,14 +271,14 @@ const DoanhThuChart = () => {
                 </div>
 
                 <div style={{ width: '100%', marginTop: 300 }}>
-                    <h4 >CHI TIẾT DOANH THU</h4>
+                    <h4 >CHI TIẾT Sản Phẩm</h4>
                     <Table bordered hover responsive>
                         <thead>
                             <tr>
-                                <th>ID đơn hàng</th>
+                                <th>ID Sản Phẩm</th>
                                 
-                                <th>Khách Hàng</th>
-                                <th>Doanh thu</th>
+                                <th>Tên sản phẩm</th>
+                                <th>Sản Phẩm</th>
                                 <th>Ngày tạo</th>
                                 <th>Ngày hoàn thành</th>
                             </tr>
@@ -291,7 +291,7 @@ const DoanhThuChart = () => {
                                         return <tr key={i}>
                                             <td>{item._id}</td>
                                             
-                                            <td style={{ width: 400 }}>{item.user.ten}</td>
+                                            <td style={{ width: 400 }}>{item.cart.map(p => p.title)}</td>
                                             <td>{format_curency((item.total).toString())}</td>
                                             <td>{hamChuyenDoiNgay(new Date(item.createdAt))}</td>
                                             <td>{hamChuyenDoiNgay(new Date(item.dateOfPayment))}</td>
@@ -304,7 +304,7 @@ const DoanhThuChart = () => {
                     </Table>
                     {
                         donHangShowEnd === false && (
-                            <center>                               
+                            <center>
                                 <a onClick={(e) => {
                                     e.preventDefault();
                                     setCountDonHangShow(prev => prev + 8);
@@ -319,4 +319,4 @@ const DoanhThuChart = () => {
     </Fragment >
     )
 }
-export default DoanhThuChart
+export default ProductChart

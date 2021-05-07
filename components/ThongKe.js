@@ -222,8 +222,8 @@ const ThongKe = () => {
 								</h3>
 							</div>
 							<div className="col-7 col-md-7 col-xs-7 ">
-								<select  class="form-select w-25" aria-label="Default select example">
-								<option class="" value="1">2019</option>
+								<select  className="form-select w-25" aria-label="Default select example">
+								<option className="" value="1">2019</option>
 									<option value="2">2020</option>
 									<option value="3">2021</option>
 								</select>

@@ -1,6 +1,6 @@
 import connectDB from '../../../../../utils/connectDB'
 import Orders from '../../../../../models/orderModel'
-
+import moment from 'moment'
 
 connectDB()
 
@@ -8,12 +8,12 @@ export default async (req, res) => {
     switch(req.method){
         
         case 'GET': 
-            await getDataDoanhThu_6Month(req, res)
+            await getDataOrders_6Month(req, res)
             break;
     }
 }
 
-const getDataDoanhThu_6Month = async (req, res) => {
+const getDataOrders_6Month = async (req, res) => {
     try {
         var curr = new Date(); // get current date
 
@@ -24,59 +24,59 @@ const getDataDoanhThu_6Month = async (req, res) => {
         var thangThuNam = new Date(curr.getFullYear(), curr.getMonth() - 5, 1);
         var thangThuSau = new Date(curr.getFullYear(), curr.getMonth() - 6, 1);
 
-        var arrDoanhThu = [];
+        var arrOders = [];
 
         var result = (await Orders.find().populate("user")).filter(ord => {
             if(ord.dateOfPayment){
                 return ord
             }
         })
-        var doanhThu1 = 0;
-        var doanhThu2 = 0;
-        var doanhThu3 = 0;
-        var doanhThu4 = 0;
-        var doanhThu5 = 0;
-        var doanhThu6 = 0;
+        var order1 = 0;
+        var order2 = 0;
+        var order3 = 0;
+        var order4 = 0;
+        var order5 = 0;
+        var order6 = 0;
         let arrOrderDetail = [];
 
         for (let index2 = 0; index2 < result.length; index2++) {
             if (thangThuNhat.getMonth() === result[index2].dateOfPayment.getMonth() &&
                 thangThuNhat.getFullYear() === result[index2].dateOfPayment.getFullYear()) {
-                doanhThu1 += result[index2].total;
+                order1 += 1;
                 arrOrderDetail.push(result[index2]);
             }
 
             if (thangThuHai.getMonth() === result[index2].dateOfPayment.getMonth() &&
                 thangThuHai.getFullYear() === result[index2].dateOfPayment.getFullYear()) {
-                doanhThu2 += result[index2].total;
+                order2 += 1;
                 arrOrderDetail.push(result[index2]);
             }
 
             if (thangThuBa.getMonth() === result[index2].dateOfPayment.getMonth() &&
                 thangThuBa.getFullYear() === result[index2].dateOfPayment.getFullYear()) {
-                doanhThu3 += result[index2].total;
+                order3 += 1;
                 arrOrderDetail.push(result[index2]);
             }
 
             if (thangThuTu.getMonth() === result[index2].dateOfPayment.getMonth() &&
                 thangThuTu.getFullYear() === result[index2].dateOfPayment.getFullYear()) {
-                doanhThu4 += result[index2].total;
+                order4 += 1;
                 arrOrderDetail.push(result[index2]);
             }
 
             if (thangThuNam.getMonth() === result[index2].dateOfPayment.getMonth() &&
                 thangThuNam.getFullYear() === result[index2].dateOfPayment.getFullYear()) {
-                doanhThu5 += result[index2].total;
+                order5 += 1;
                 arrOrderDetail.push(result[index2]);
             }
 
             if (thangThuSau.getMonth() === result[index2].dateOfPayment.getMonth() &&
                 thangThuSau.getFullYear() === result[index2].dateOfPayment.getFullYear()) {
-                doanhThu6 += result[index2].total;
+                order6 += 1;
                 arrOrderDetail.push(result[index2]);
             }
         }
-        arrDoanhThu.push(doanhThu6, doanhThu5, doanhThu4, doanhThu3, doanhThu2, doanhThu1);
+        arrOders.push(order6, order5, order4, order3, order2, order1);
  
         var arrDateResult = [];
 
@@ -94,12 +94,12 @@ const getDataDoanhThu_6Month = async (req, res) => {
             status: 'success',
             data: arrOrderDetail,
             dataDate: arrDateResult,
-            dataDoanhThu: arrDoanhThu,
-            message: 'Tính doanh thu 6 tháng gần nhất thành công'
+            dataSoDonHang: arrOders,
+            message: 'Tính số đơn hàng 6 tháng gần nhất thành công'
         });
         
     } catch (err) {
-        return res.status(500).json({err: 'Lấy data doanh thu 6 tháng gần nhất thất bại'})
+        return res.status(500).json({err: 'Lấy data số đơn hàng 6 tháng gần nhất thất bại'})
     }
 }
 

@@ -23,6 +23,7 @@ const getDataOrders_Week = async (req, res) => {
 
         var arrDate = [];
         var arrSoDonHang = [];
+        var arrOrderDetail = [];
 
         for (let index = 0; index <= 7; index++) {
             var dateThem = new Date(firstday.getFullYear(), firstday.getMonth(), firstday.getDate() + index);
@@ -31,7 +32,7 @@ const getDataOrders_Week = async (req, res) => {
             }
         }
 
-        var result = (await Orders.find()).filter(ord => {
+        var result = (await Orders.find().populate("user")).filter(ord => {
             if(ord.dateOfPayment){
                 return ord
             }
@@ -47,6 +48,7 @@ const getDataOrders_Week = async (req, res) => {
                 Number(arrDate[index1].getMonth() + 1) === Number(moment(result[index2].dateOfPayment).format('MM')) &&
                 Number(arrDate[index1].getFullYear()) === Number(moment(result[index2].dateOfPayment).format('yyyy'))) {
                     soDonHang += 1;
+                    arrOrderDetail.push(result[index2]);
                 }
             }
             
@@ -63,6 +65,7 @@ const getDataOrders_Week = async (req, res) => {
 
         res.status(200).json({
             status: 'success',
+            data: arrOrderDetail,
             dataDate: arrDateResult,
             dataSoDonHang:  arrSoDonHang,
             message: 'Tính số đơn hàng tuần này thành công'

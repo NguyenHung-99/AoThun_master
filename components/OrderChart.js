@@ -48,7 +48,7 @@ const OrderChart = () => {
      //get Đơn Hàng đơn đã hoàn thành theo 3 tháng gần nhất
     async function LayDataOder3ThangGanNhat() {
         
-        const res = await getData('thongke/DoanhThu/3Thang')
+        const res = await getData('thongke/DonHang/3Thang')
         console.log(res.dataDate)
         if (res.status === 'success') {
             var chartDataa = {
@@ -56,7 +56,7 @@ const OrderChart = () => {
                 datasets: [
                     {
                         label: 'Đơn Hàng',
-                        data: res.dataDoanhThu,
+                        data: res.dataSoDonHang,
                         backgroundColor: 'rgba(75,192,192,0.6)',
                         borderWidth: 4
                     }
@@ -75,15 +75,15 @@ const OrderChart = () => {
      //get Đơn Hàng đơn đã hoàn thành theo tháng
     async function LayDataOrderThangNay() {
         
-        const res = await getData('thongke/DoanhThu/TheoThang')
-        console.log(res.dataDate)
+        const res = await getData('thongke/DonHang/TheoThang')
+     
         if (res.status === 'success') {
             var chartDataa = {
                 labels: res.dataDate,
                 datasets: [
                     {
                         label: 'Đơn Hàng',
-                        data: res.dataDoanhThu,
+                        data: res.dataSoDonHang,
                         backgroundColor: 'rgba(75,192,192,0.6)',
                         borderWidth: 4
                     }
@@ -98,31 +98,6 @@ const OrderChart = () => {
         }
 
        
-    }
-
-
-    //get so luong theo tuan
-    async function LayDataSanLuongTuanNay() {
-        const res = await getData('thongke/SoLuong/TheoTuan')
-        console.log(res.dataSanLuong)
-        if (res.status === 'success') {
-            var chartDataa = {
-                labels: res.dataDate,
-                datasets: [
-                    {
-                        label: 'Sản phẩm',
-                        data: res.dataSanLuong,
-                        backgroundColor: 'rgba(75,192,192,0.6)',
-                        borderWidth: 4
-                    }
-                ]
-            }
-            setChartData(chartDataa);
-        } else {
-            dispatch({ type: 'NOTIFY', payload: {error: res.err} })
-           
-        }
-
     }
 
 
@@ -143,13 +118,39 @@ const OrderChart = () => {
                 ]
             }
             setChartData(chartDataa);
+            setDataChiTietDonHang(res.data);
         } else {
             dispatch({ type: 'NOTIFY', payload: {error: res.err} })
             message.error();
         }
 
     }
+    async function LayDataOrder6ThangGanNhat() {
+        
+        const res = await getData('thongke/DonHang/6Thang')
+        console.log(res.dataDate)
+        if (res.status === 'success') {
+            var chartDataa = {
+                labels: res.dataDate,
+                datasets: [
+                    {
+                        label: 'Doanh Thu',
+                        data: res.dataSoDonHang,
+                        backgroundColor: 'rgba(75,192,192,0.6)',
+                        borderWidth: 4
+                    }
+                    
+                ]
+            }
+            setChartData(chartDataa);
+            setDataChiTietDonHang(res.data);
+        } else {
+            dispatch({ type: 'NOTIFY', payload: {error: res.err} })
+           
+        }
 
+       
+    }
     useEffect(() => {
         LayDataSoDonHangTuanNay()
     }, []);
@@ -157,7 +158,7 @@ const OrderChart = () => {
 
     useEffect(() => {
         if (optionValueTime === 0) {
-            LayDataSanLuongTuanNay();
+            LayDataSoDonHangTuanNay();
         }
 
         if (optionValueTime === 1) {
@@ -169,14 +170,14 @@ const OrderChart = () => {
         }
 
         if (optionValueTime === 3) {
-            LayDataDoanhThu6ThangGanNhat();
+            LayDataOrder6ThangGanNhat();
         }
     }, [optionValueTime])
     useEffect(() => {
         if (countDonHangShow >= dataChiTietDonHang.length && dataChiTietDonHang.length !== 0) {
             setDonHangShowEnd(true);
         }
-    }, [countDonHangShow,dataChiTietDonHang])
+    }, [countDonHangShow])
 
     return (
         <Fragment>
@@ -277,7 +278,7 @@ const OrderChart = () => {
                                 <th>ID đơn hàng</th>
                                 
                                 <th>Tên sản phẩm</th>
-                                <th>Đơn Hàng</th>
+                                <th>Tổng tiền</th>
                                 <th>Ngày tạo</th>
                                 <th>Ngày hoàn thành</th>
                             </tr>
@@ -290,7 +291,9 @@ const OrderChart = () => {
                                         return <tr key={i}>
                                             <td>{item._id}</td>
                                             
-                                            <td style={{ width: 400 }}>{item.cart.map(p => p.title)}</td>
+                                            <td style={{ width: 400 }}>{item.cart.map(p => {
+                                                return (<p>{p.title} {p.sizeSelection}</p>)
+                                            })}</td>
                                             <td>{format_curency((item.total).toString())}</td>
                                             <td>{hamChuyenDoiNgay(new Date(item.createdAt))}</td>
                                             <td>{hamChuyenDoiNgay(new Date(item.dateOfPayment))}</td>
@@ -302,12 +305,12 @@ const OrderChart = () => {
                         </tbody>
                     </Table>
                     {
-                        donHangShowEnd !== false && (
+                        donHangShowEnd === false && (
                             <center>
-                                <Link href='#' onClick={(e) => {
+                                <a onClick={(e) => {
                                     e.preventDefault();
                                     setCountDonHangShow(prev => prev + 8);
-                                }}>Xem thêm</Link>
+                                }}>Xem thêm</a>
                             </center>
                         )
                     }

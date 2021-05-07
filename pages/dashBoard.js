@@ -26,7 +26,7 @@ const report = () => {
 			</title>
 		</Head>
 	
-		<div class="wrapper">
+		<div className="wrapper">
 			<div className="row">
 				<div className="col-md-3">
 					<div className="report-sidebar">
@@ -36,29 +36,29 @@ const report = () => {
 						<div className="report-sidebar-menu">
 							<ul>
 								<li>
-									<a href="" className="active "><i class="fas fa-clipboard-list  text-success "
+									<a href="" className="active "><i className="fas fa-clipboard-list  text-success "
 											style={{paddingLeft:'15px'}}></i>
 										<span style={{paddingLeft:'5px'}}>Dashboard</span>
 									</a>
 								</li>
 								<li>
-									<a className=" "><i class="fas fa-user " style={{paddingLeft:'15px'}}></i>
+									<a className=" "><i className="fas fa-user " style={{paddingLeft:'15px'}}></i>
 										<span style={{paddingLeft:'5px'}}  onClick={handleClick}>Users</span>
 									</a>
 								</li>
 								<li>
-									<a href="" className=""><i class="fas fa-tshirt " style={{paddingLeft:'15px'}}></i>
+									<a href="" className=""><i className="fas fa-tshirt " style={{paddingLeft:'15px'}}></i>
 										<span style={{paddingLeft:'5px'}}>Create Products</span>
 									</a>
 								</li>
 								<li>
-									<a href="" className=" "><i class="fas fa-list" style={{paddingLeft:'15px'}}></i>
+									<a href="" className=" "><i className="fas fa-list" style={{paddingLeft:'15px'}}></i>
 										<span style={{paddingLeft:'5px'}}>Create Categories</span>
 									</a>
 								</li>
 								<li>
 
-									<a href="" className=" "><i class="fas fa-sign-out-alt "
+									<a href="" className=" "><i className="fas fa-sign-out-alt "
 											style={{paddingLeft:'15px'}}></i>
 										<span style={{paddingLeft:'5px'}}>Logout</span>
 									</a>

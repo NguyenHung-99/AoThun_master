@@ -31,7 +31,7 @@ const getDataDoanhThu_Week = async (req, res) => {
             }
         }
 
-        var result = (await Orders.find()).filter(ord => {
+        var result = (await Orders.find().populate("user")).filter(ord => {
             if(ord.dateOfPayment){
                 return ord
             }

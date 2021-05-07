@@ -8,19 +8,19 @@ export default async (req, res) => {
     switch(req.method){
         
         case 'GET': 
-            await getDataDoanhThu_Month(req, res)
+            await getDataOrder_Month(req, res)
             break;
     }
 }
 
-const getDataDoanhThu_Month = async (req, res) => {
+const getDataOrder_Month = async (req, res) => {
     try {
         var curr = new Date(); // get current date
         var soNgayTrongThang = daysInMonth(curr.getMonth() + 1, curr.getFullYear());
         var firstDateOfMonth = new Date(curr.getFullYear(), curr.getMonth(), 1);
 
         var arrDate = [];
-        var arrDoanhThu = [];
+        var arrProduct = [];
         var arrOrderDetail = [];
 
         for (let index = 1; index <= soNgayTrongThang; index++) {
@@ -36,7 +36,7 @@ const getDataDoanhThu_Month = async (req, res) => {
        
 
         for (let index1 = 0; index1 < arrDate.length; index1++) {
-            var doanhThu = 0;
+            var sanLuong = 0;
         
             for (let index2 = 0; index2 < result.length; index2++) {
                 
@@ -45,12 +45,12 @@ const getDataDoanhThu_Month = async (req, res) => {
                if (Number(arrDate[index1].getDate()) === Number(moment(result[index2].dateOfPayment).format('DD')) &&
                 Number(arrDate[index1].getMonth() + 1) === Number(moment(result[index2].dateOfPayment).format('MM')) &&
                 Number(arrDate[index1].getFullYear()) === Number(moment(result[index2].dateOfPayment).format('yyyy'))) {
-                    doanhThu += result[index2].total;
+                    result[index2].cart.map(it => sanLuong += it.quantity)
                     arrOrderDetail.push(result[index2]);
                 }
             }
             
-            arrDoanhThu.push(doanhThu);
+            arrProduct.push(sanLuong);
            
         }
       
@@ -65,12 +65,12 @@ const getDataDoanhThu_Month = async (req, res) => {
             status: 'success',
             data: arrOrderDetail,
             dataDate: arrDateResult,
-            dataDoanhThu: arrDoanhThu,
-            message: 'Tính lợi nhuận tuần này thành công'
+            dataDoanhThu: arrProduct,
+            message: 'Tính số đơn hàng tuần này thành công'
         });
         
     } catch (err) {
-        return res.status(500).json({err: 'Lấy data doanh thu tuần này thất bại'})
+        return res.status(500).json({err: 'Lấy data số đơn hàng tuần này thất bại'})
     }
 }
 

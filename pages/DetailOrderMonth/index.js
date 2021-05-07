@@ -3,12 +3,12 @@ import {useContext, useState, useEffect} from 'react'
 import {DataContext} from '../../store/GlobalState'
 import {useRouter} from 'next/router'
 import moment from 'moment';
-import {Line,Pie } from 'react-chartjs-2'
+import {Line } from 'react-chartjs-2'
 import { getData } from '../../utils/fetchData';
 
 import Link from 'next/link'
 
-const DetailOrder = (props) => {
+const DetailOrder = () => {
 
     const [state, dispatch] = useContext(DataContext)
     const {orders, auth} = state
@@ -25,7 +25,7 @@ const DetailOrder = (props) => {
     useEffect(()=>{
         const getTotalSale = () => {
             const res = orderByMonth.reduce((prev, order) => {
-            console.log(order.total + "total")
+            
             return prev + order.total
             
         },0)
@@ -40,7 +40,7 @@ const DetailOrder = (props) => {
         
     const orderByMonth = orders.filter(order => {
         if (order.dateOfPayment && Number(moment(order.dateOfPayment).format('MM')) === Number(router.query.month)) {
-            console.log('vo day ne ba')
+    
               return order
         }
     })
@@ -59,7 +59,7 @@ const DetailOrder = (props) => {
         setarrCountOrder(res.arrCountOrder)
     }, [router]);
     
-    console.log(arrCountOrder+"asdasdasd")
+    
     
     // render layout
     if (!auth.user) return null
@@ -90,7 +90,7 @@ const DetailOrder = (props) => {
 
                                 <div className="col-md-6">
                                     <p>
-                                        <i class="fas fa-hand-holding-usd"></i>
+                                        <i className="fas fa-hand-holding-usd"></i>
                                     </p>
                                 </div>
                             </div>
@@ -156,7 +156,7 @@ const DetailOrder = (props) => {
 								</table>
                         </div>
                         <div className="card-content-y">
-						<table class="table table-striped ">
+						<table className="table table-striped ">
 							<tbody>
                                 {
                                     orderByMonth.map((order,index) => (

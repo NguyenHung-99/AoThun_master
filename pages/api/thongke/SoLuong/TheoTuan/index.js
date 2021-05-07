@@ -23,6 +23,7 @@ const getDataSoLuong_Week = async (req, res) => {
 
         var arrDate = [];
         var arrSanLuong = [];
+        var arrOrderDetail = [];
 
         for (let index = 0; index <= 7; index++) {
             var dateThem = new Date(firstday.getFullYear(), firstday.getMonth(), firstday.getDate() + index);
@@ -47,6 +48,7 @@ const getDataSoLuong_Week = async (req, res) => {
                 Number(arrDate[index1].getMonth() + 1) === Number(moment(result[index2].dateOfPayment).format('MM')) &&
                 Number(arrDate[index1].getFullYear()) === Number(moment(result[index2].dateOfPayment).format('yyyy'))) {
                     result[index2].cart.map(it => sanLuong += it.quantity) 
+                    arrOrderDetail.push(result[index2]);
                 }
             }
           
@@ -63,8 +65,9 @@ const getDataSoLuong_Week = async (req, res) => {
 
         res.status(200).json({
             status: 'success',
+            data: arrOrderDetail,
             dataDate: arrDateResult,
-            dataSanLuong: arrSanLuong,
+            dataSoDonHang: arrSanLuong,
             message: 'Tính sản lượng tuần này thành công'
         });
         

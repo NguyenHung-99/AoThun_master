@@ -6,27 +6,42 @@ import SalesChart from '../components/SalesChart';
 
 import DoanhThuChart from '../components/DoanhThuChart';
 import OrderChart from '../components/OrderChart';
+import ProductChart from '../components/ProductChart';
 
 
 const report = () => {
     const [state, dispatch] = useContext(DataContext)
     const {auth} = state
- 
+    const [showDashBoard, setShowDashBoard] = useState(true)
     const [showOrder, setShowOrder] = useState(false)
     const [showDoanhThu, setShowDoanhThu] = useState(false)
+    const [showProduct, setShowProduct] = useState(false)
 
+    
     const handleClick = () => {
-      return setShowOrder(true)
+      setShowDashBoard(true)
       setShowDoanhThu(false)
       setShowOrder(false)
+      setShowProduct(false)
+    }
+    
+    const handleProductChart = () => {
+      setShowProduct(true)
+      setShowDoanhThu(false)
+      setShowOrder(false)
+      setShowDashBoard(false)
     }
     const handleDoanhThuChart = () => {
       setShowDoanhThu(true)
       setShowOrder(false)
+      setShowDashBoard(false)
+      setShowProduct(false)
     }
     const handleOrderChart = () => {
       setShowOrder(true)
       setShowDoanhThu(false)
+      setShowDashBoard(false)
+      setShowProduct(false)
     }
     
     
@@ -113,27 +128,14 @@ const report = () => {
             <li className="header-menu">
               <span>General</span>
             </li>
-            <li className="sidebar-dropdown">
-              <a href="#">
+            
+            <li>
+              <a onClick={handleClick} >
                 <i className="fa fa-tachometer-alt"></i>
-                <span>Dashboard</span>
+                <span >Dashboard</span>
                 <span className="badge badge-pill badge-warning">New</span>
               </a>
-              <div className="sidebar-submenu">
-                <ul>
-                  <li>
-                    <a onClick={handleClick} >Dashboard 1
-                      <span className="badge badge-pill badge-success" >Pro</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">Dashboard 2</a>
-                  </li>
-                  <li>
-                    <a href="#">Dashboard 3</a>
-                  </li>
-                </ul>
-              </div>
+              
             </li>
             <li className="sidebar-dropdown">
               <a href="#">
@@ -196,11 +198,9 @@ const report = () => {
                     <a onClick={handleOrderChart}>Đơn Hàng</a>
                   </li>
                   <li>
-                    <a href="#">Bar chart</a>
+                    <a onClick={handleProductChart}>Sản Phẩm</a>
                   </li>
-                  <li>
-                    <a href="#">Histogram</a>
-                  </li>
+            
                 </ul>
               </div>
             </li>
@@ -269,10 +269,11 @@ const report = () => {
     <div className="container-fluid">
       <h2>Pro Sidebar</h2>
       <hr/>
-      {/* <ThongKe/> */}
-      
+     
+      {showDashBoard ? <ThongKe/>: null}
       {showDoanhThu ? <DoanhThuChart/> : null}
       {showOrder ? <OrderChart/> : null}
+      {showProduct ? <ProductChart/> : null}
  
     </div>
   </main>
