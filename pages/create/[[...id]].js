@@ -120,6 +120,8 @@ const createProduct = () => {
         newArr.splice(index, 1)
         setImages(newArr)
     }
+
+    if(!auth.user || auth.user.role !== 'admin') return null
     return (
         <div className="products_manager" style={{marginLeft:'10%', marginRight:'10%'}}>
             

@@ -76,7 +76,7 @@ const report = () => {
       });
     
     }, [auth.user]);
-    if(!auth.user) return null
+    if(!auth.user || auth.user.role !== "admin") return null
 
     return(
   
@@ -146,7 +146,7 @@ const report = () => {
               <div className="sidebar-submenu">
                 <ul>
                   <li>
-                    <a href="#">Products
+                    <a href="/create">Products
   
                     </a>
                   </li>

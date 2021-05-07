@@ -43,6 +43,7 @@ const Categories = () => {
         setCategoryName(category.categoryName)
         setCategoryDescription(category.categoryDescription)
     }
+    if(!auth.user || auth.user.role !== 'admin') return null
 
     return (
         <div className="col-md-6 mx-auto my-3" style={{marginLeft: '10%', marginRight:'10%'}}>

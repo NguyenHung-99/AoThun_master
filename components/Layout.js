@@ -5,6 +5,7 @@ import Modal from './Modal'
 import Footer from './Footer'
 
 function Layout({children}){
+
     return (
         <div>
             <Notify/>
@@ -13,7 +14,6 @@ function Layout({children}){
             <div style={{paddingTop:'5%'}}/>
             {children}
             <Footer/>
-            
         </div>
     )
 }
