@@ -21,7 +21,18 @@ const DetailProduct = (props) =>{
         if(tab === index) return " active";
         return ""
     }
-
+    useEffect(async() => {
+        const page = 4  
+        const category = product.category
+        
+        const search = 'all'
+        
+        const res = await getData(
+            `product?limit=${page}&category=${category}&title=${search}`
+        )
+        setProductFeature(res.products)
+    }, []);
+   
 
     
     return (
@@ -111,20 +122,25 @@ const DetailProduct = (props) =>{
                     </div>
                       <div className="row">
                           {
-                              productFeature.map(ite => {
+                              productFeature.map(ite =>(
                                 <div className="col-4">
-                                <img src="/img/product/p4.jpg"></img>
-                                <h4>{ite.title}</h4>
-                                <div className="rating">
-                                    <i className="fa fa-star" aria-hidden></i>
-                                    <i className="fa fa-star" aria-hidden></i>
-                                    <i className="fa fa-star" aria-hidden></i>
-                                    <i className="fa fa-star" aria-hidden></i>
-                                    <i className="fa fa-star-0" aria-hidden></i>
+                                    <div className="box">
+                                        <div className="slide-img">
+                                            <img src={ite.images[0].url}></img>
+                                            <div className="overlay">
+                                                <a className="buy_btn" href={`${ite._id}`}>View</a>      
+                                            </div>
+                                        </div>
+                                        <div className="detail-box">
+                                            <div className="type">
+                                                <a>{ite.title}</a>
+                                            </div>
+                                            <a className="price"> {ite.price}</a>
+                                        </div>
+                                    </div>
+                       
                                 </div>
-                                <p>$50.00</p>
-                            </div>
-                              })
+                               ))
                           }
                 
                         

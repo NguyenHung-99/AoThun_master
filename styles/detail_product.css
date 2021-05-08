@@ -1,76 +1,206 @@
-.single-product{
+.single-product {
     margin-top: 20px
 }
-.single-product .col img{
-    padding:0
+
+.single-product .col img {
+    padding: 0
 }
+
 .single-product .col {
-    padding:02rem
+    padding: 02rem
 }
+
 .single-product .col h4 {
     margin: 20px 0;
-    font-size:22px;
+    font-size: 22px;
     font-weight: bold;
 }
+
 .size-container {
-    margin-top:50px;
-    size:20px;
+    margin-top: 50px;
+    size: 20px;
 }
-.form-check-S{
-    margin-right:10px;
+
+.form-check-S {
+    margin-right: 10px;
     text-align: center;
-    width:4rem;
-    padding:10px 0px;
-    border:solid 3px;
+    width: 4rem;
+    padding: 10px 0px;
+    border: solid 3px;
     border-color: brown;
-    color:brown;
+    color: brown;
 }
-.content-container .fa{
-    color:#ff523b;
-    margin-left:10px;
+
+.content-container .fa {
+    color: #ff523b;
+    margin-left: 10px;
 }
-.content-container h3{
-    font-size:20px;
+
+.content-container h3 {
+    font-size: 20px;
     margin-top: 50px;
 }
-.content-container p{
-    font-size:1rem;
+
+.content-container p {
+    font-size: 1rem;
 }
-.description-container .fa{
-    color:#ff523b;
-    margin-left:10px;
+
+.description-container .fa {
+    color: #ff523b;
+    margin-left: 10px;
 }
-.description-container h3{
-    font-size:20px;
+
+.description-container h3 {
+    font-size: 20px;
 }
-.description-container p{
-    font-size:1rem;
+
+.description-container p {
+    font-size: 1rem;
 }
-.small_container .col-4{
-    flex-basis: 25% ;
-    padding:10px;
+
+.small_container .col-4 {
+    flex-basis: 25%;
     min-width: 200px;
     margin-bottom: 50px;
 }
-.small_container .col-4 img{
-    width:100%;
+
+.small_container .col-4 img {
+    width: 100%;
 }
-.title-product-feature{
+
+.title-product-feature {
     text-align: center;
     margin: 0 auto 80px;
     position: relative;
     line-height: 60px;
-    color:#555;
-    font-size:1.5rem;
+    color: #555;
+    font-size: 1.5rem;
 }
-.title-product-feature::after{
-    content:'';
+
+.title-product-feature::after {
+    content: '';
     background: #ff523b;
-    width:80px;
+    width: 80px;
     height: 5px;
-    border-radius: 5px ;
+    border-radius: 5px;
     position: absolute;
     bottom: -13px;
     left: 50%;
     transform: translate(-50%);
+}
+
+.box {
+    margin: 0px;
+    padding: 0px;
+    background-color: #eef8ff;
+}
+
+.box {
+    width: 300px;
+    box-shadow: 2px 2px 30px rgba(0, 0, 0, 0, 2);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.light-slider {
+    position: flex;
+}
+
+.slide-img {
+    height: 450px;
+    position: relative;
+}
+
+.slide-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    box-sizing: border-box;
+}
+
+.detail-box {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    box-sizing: border-box;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.type {
+    display: flex;
+    flex-direction: column;
+}
+
+.type a {
+    color: #222222;
+    margin: 5px 0px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    padding-right: 8px;
+    text-decoration: none;
+}
+
+.type span {
+    color: rgba(26, 26, 26, 0, 5)
+}
+
+.price {
+    color: #333333;
+    font-weight: 600;
+    font-size: 1.1rem;
+    font-family: poppins;
+    letter-spacing: 0.5px;
+}
+
+.overlay {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    background-color: rgba(92, 95, 236, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.buy_btn {
+    width: 160px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffffff;
+    color: #252525;
+    font-weight: 700;
+    letter-spacing: 1px;
+    font-family: calibri;
+    border-radius: 20px;
+    box-shadow: 2px 2px 30px rgba(0, 0, 0, 0.2);
+}
+
+.buy_btn:hover {
+    color: #ffffff;
+    background-color: #f15fa3;
+    transition: all ease 0.3s;
+}
+
+.overlay {
+    visibility: hidden;
+}
+
+.slide-img:hover .overlay {
+    visibility: visible;
+}
+
+@keyframes fade {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
 }
