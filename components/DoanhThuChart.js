@@ -181,7 +181,7 @@ const DoanhThuChart = () => {
     }, [countDonHangShow])
     return (
         <Fragment>
-        <div className="col-sm-10" style={{ padding: 20 }}>
+        <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12" style={{ padding: 20 }}>
             <div className='col'>
                 <span>(*Kết quả báo cáo đều được dựa vào các đơn hàng đã hoàn thành)</span>
                 <br></br>

@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import {useContext, useState} from 'react'
+
 import { updateItem } from '../store/Actions'
 import {DataContext} from '../store/GlobalState'
 import { postData, putData } from '../utils/fetchData'
@@ -51,7 +52,7 @@ const Categories = () => {
                 <title>Categories</title>
             </Head>
 
-
+         
             <div className="form-label-group">
                 <input type="text" className="form-control" placeholder="Add a new category" value={categoryName} onChange={e => setCategoryName(e.target.value)}/>
                 <label htmlFor="inputEmail">Tên</label>

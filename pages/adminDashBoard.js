@@ -2,14 +2,12 @@ import React, { useContext, useState, useEffect } from 'react'
 import {DataContext} from '../store/GlobalState'
 import $ from 'jquery';
 import ThongKe from '../components/ThongKe'
-import SalesChart from '../components/SalesChart';
-
 import DoanhThuChart from '../components/DoanhThuChart';
 import OrderChart from '../components/OrderChart';
 import ProductChart from '../components/ProductChart';
 
 
-const report = () => {
+const dashBoard = () => {
     const [state, dispatch] = useContext(DataContext)
     const {auth} = state
     const [showDashBoard, setShowDashBoard] = useState(true)
@@ -151,6 +149,11 @@ const report = () => {
                     </a>
                   </li>
                   <li>
+                    <a href="/categories">Categories
+  
+                    </a>
+                  </li>
+                  <li>
                     <a href="#">Orders</a>
                   </li>
                   <li>
@@ -283,4 +286,4 @@ const report = () => {
 	
 	
 
-export default report;
+export default dashBoard;
