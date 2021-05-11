@@ -3,6 +3,7 @@ import {getData, postData} from '../utils/fetchData'
 import { useState, useContext, useEffect } from 'react'
 import { DataContext } from '../store/GlobalState'
 import {useRouter} from 'next/router'
+import { updateItem } from '../store/Actions'
 
 const Checkout = () => {
 
@@ -77,6 +78,53 @@ const Checkout = () => {
                 dispatch({type: 'NOTIFY', payload: {success: res.msg}})
                 return router.push(`/order/${res.newOrders._id}`)
         })
+    }
+    const handleSumitOrder_withMoMo = async() => {
+        if(!name || !email || !sdt || !diachi || !phuongxa || !quanhuyen || !tinhtp)
+        return dispatch({type: 'NOTIFY', payload: {error: 'Vui lòng nhập đủ thông tin. '}})
+        
+        let newCart = []
+        //get product trong cart: => số lượng trong giỏ <= tồn kho: add vào newCart
+        for(const item of cart){
+            const res = await getData(`product/${item._id}`)
+            if(res.product.inStock - item.quantity >=0){
+                newCart.push(item)
+            }
+        }
+        if(newCart.length < cart.length){
+            // setCallback(!callback)
+            return dispatch({type:'NOTIFY', payload: {error: 'Sản phẩm đã hết hàng hoặc số lượng sản phẩm không đủ. '} })
+        }
+
+        // dispatch({ type: 'NOTIFY', payload: {loading: true} })
+
+        postData('order', {name, email, sdt, diachi, phuongxa, quanhuyen, tinhtp, total, cart}, auth.token)
+            .then(async(res) => {
+              
+                //Thất bại => err
+                if(res.err) return dispatch({ type: 'NOTIFY', payload: {error: res.err} })
+                //Thành công => xóa cart
+                dispatch({ type: 'ADD_CART', payload: [] })
+                const newOrders = {
+                    ...res.newOrders,
+                    user: auth.user
+                }
+                dispatch({type: 'ADD_ORDERS', payload: [...orders, newOrders] })
+                console.log(res.newOrders._id + ' ben checkout')
+                let ress = await postData('gw_payment/transactionProcessor', {
+                    amount: res.newOrders.total.toString(),
+                    orderInfo: res.newOrders._id.toString(),
+                    auth: auth
+                });
+                
+                if (ress.status === 'success') {
+                    window.location.assign(ress.data); 
+                } else {
+                    alert('Thanh toán MoMo thất bại');
+                }
+            
+        })
+        
     }
 
     if(!auth.user) return null
@@ -398,6 +446,10 @@ const Checkout = () => {
                         <div className="step-footer">
                               <button type="submit" className="step-footer-continue-btn btn" onClick={handleSumitOrder}>
                                             <span className="btn-content">Hoàn tất đơn hàng</span>
+                                            <i className="btn-spinner icon icon-button-spinner"></i>
+                                        </button>
+                                        <button type="submit" className="step-footer-continue-btn btn" onClick={handleSumitOrder_withMoMo}>
+                                            <span className="btn-content">MOMO test</span>
                                             <i className="btn-spinner icon icon-button-spinner"></i>
                                         </button>
                                                       

@@ -7,6 +7,7 @@ import filterSearch from '../utils/filterSearch'
 import {useRouter} from 'next/router'
 import Filter from '../components/Filter'
 
+
 const Home = (props) => {
   const [products, setProducts] = useState(props.products)
   const [isCheck, setIsCheck] = useState(false)

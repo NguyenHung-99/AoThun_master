@@ -80,7 +80,7 @@ const createOrder = async (req, res) => {
 
 const sold = async (id, quantity, sizeUpdate, sizeSelection) => {
     await Products.findOneAndUpdate({_id: id }, {$inc: {inStock: -quantity, sold: +quantity}});
-   await Products.findOneAndUpdate({_id: id }, {$set: {"size.$[el].InStock_Size": sizeUpdate.InStock_Size, "size.$[el].sold": sizeUpdate.sold}}, {arrayFilters: [{"el.Size": sizeSelection}]}).then(iss => console.log(iss))
+   await Products.findOneAndUpdate({_id: id }, {$set: {"size.$[el].InStock_Size": sizeUpdate.InStock_Size, "size.$[el].sold": sizeUpdate.sold}}, {arrayFilters: [{"el.Size": sizeSelection}]})
     
 }
 

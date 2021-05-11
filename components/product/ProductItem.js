@@ -1,18 +1,21 @@
 import Link from 'next/link'
-import {useContext, useState} from 'react'
+import {useContext, useState,useEffect} from 'react'
 import {DataContext} from '../../store/GlobalState'
 import {addToCart} from '../../store/Actions'
 import {Notified} from '../../store/Actions'
+
 
 const ProductItem = ({product, handleCheck}) => {
 
     const [state, dispatch] = useContext(DataContext)
     const {cart, auth} = state
-
+    
     const handleSubmit = () => {
         dispatch(Notified())
         dispatch(addToCart(product, cart, 'S'))
     }
+    
+   
     const userLink = () => {
         return(
             <>

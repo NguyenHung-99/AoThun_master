@@ -57,7 +57,7 @@ return (
             </a>
             <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                 <Link href="/profile">
-                <a className="dropdown-item">Profile</a>
+                    <a className="dropdown-item">Profile</a>
                 </Link>
                 {
                     auth.user.role === 'admin' && adminRouter()
