@@ -3,6 +3,7 @@ import valid from '../utils/valid'
 import {DataContext} from '../store/GlobalState'
 import {postData} from '../utils/fetchData'
 import {useRouter} from 'next/router'
+import Head from 'next/head'
 
 
 const Register = () => {
@@ -50,6 +51,9 @@ const Register = () => {
 
     return (
         <div className="signup">
+            <Head>
+                <title>Register</title>
+            </Head>
             <div className="body">
             <div className="container">
                 <div className="row">

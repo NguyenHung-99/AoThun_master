@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Head from 'next/head'
 import {useState, useContext, useEffect} from 'react'
 import {DataContext} from '../store/GlobalState'
 import {postData} from '../utils/fetchData'
@@ -53,6 +54,9 @@ const Signin = () => {
 
     return (
         <div className='signin'>
+            <Head>
+                <title>Sign In</title>
+            </Head>
             <div className='body'>
             <div className="container">
                 <div className="row">
@@ -76,8 +80,10 @@ const Signin = () => {
                             <label className="custom-control-label" htmlFor="customCheck1">Remember password</label>
                         </div>
                         <button className="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Sign in</button>
+                        <br/>
+                        <center><Link href="/forgotPassword"><a style={{color: 'crimson'}}>Forgot your password?</a></Link></center>
                         <hr className="my-4"/>
-                        <p>You don't have an account? <Link href="/register"><a style={{color: 'crimson'}}>Register Now</a></Link></p>
+                        <p>You don't have an account? <Link href="/register"><a style={{color: 'crimson'}}>Register Now</a></Link></p>                  
                         </form>
                     </div>
                     </div>

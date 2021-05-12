@@ -7,9 +7,10 @@ module.exports = {
         "CLOUD_UPDATE_PRESET": "aothun_store",
         "CLOUD_NAME": "nguyenhungdev",
         "CLOUD_API": "https://api.cloudinary.com/v1_1/nguyenhungdev/image/upload",
-        "PAYPAL_CLIENT_ID": 'AcCLjrr9VUsRtqNUmZYJeRnxc22AsuUrVK23NTrYne7kE-t-STWwuW31lzZTW1hvqmN9B7FIwj2IBnub'
-        
-        
+        "PAYPAL_CLIENT_ID": 'AcCLjrr9VUsRtqNUmZYJeRnxc22AsuUrVK23NTrYne7kE-t-STWwuW31lzZTW1hvqmN9B7FIwj2IBnub',
+        "JWT_RESET_PASS": 'hungrau2471999ResetPass',
+        'EMAIL_FROM': 'person290421@gmail.com',
+        'SEND_MAIL_KEY': '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'
         
     }
 }
