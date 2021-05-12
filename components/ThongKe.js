@@ -85,7 +85,7 @@ const ThongKe = () => {
 				<div className="card">
 					<div className="card-header">
                   
-                    <table>
+             
 					<div className=" card-nav">
 							<div >
 								
@@ -99,8 +99,7 @@ const ThongKe = () => {
 								</Link>
 							</div>
 						</div>
-								
-                   </table>
+			
 					</div>
                  
 					<div className="card-content-y">
@@ -145,22 +144,25 @@ const ThongKe = () => {
 					</div>
 					<div className="card-header">
 					<table>
-					<tr className="row">
-									<th className="col-3">order ID</th>
-									<th className="col-3">Customer</th>
-                                    <th className="col-2">Date</th>
-									<th className="col-2">Delivery</th>
-									<th className="col-2">Paid</th>
-								</tr>
-								</table>
-								</div>
+						<thead>
+							<tr className="row">
+								<th className="col-3">order ID</th>
+								<th className="col-3">Customer</th>
+                                <th className="col-2">Date</th>
+								<th className="col-2">Delivery</th>
+								<th className="col-2">Paid</th>
+							</tr>
+						</thead>
+					
+					</table>
+					</div>
 				</div>
 			</div>
 			<div className="col-xs-12 col-sm-12 col-md-6 col-lg-4">
 			<div className="card">
 					<div className="card-header">
                   
-                    <table>
+                
 						<div className=" card-nav">
 							<div className=""><h3>Customers</h3></div>
 							<div className="">
@@ -171,9 +173,7 @@ const ThongKe = () => {
 								</Link>
 							</div>
 						</div>
-                        
-						
-                   </table>
+                 
 					</div>
                    
                    

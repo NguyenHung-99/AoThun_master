@@ -5,6 +5,7 @@ import { Line, Bar, Pie } from 'react-chartjs-2';
 import { getData } from '../utils/fetchData';
 import { DataContext } from '../store/GlobalState';
 import Link from 'next/link'
+import Head from 'next/head';
 
 const DoanhThuChart = () => {
 
@@ -182,6 +183,11 @@ const DoanhThuChart = () => {
     return (
         <Fragment>
         <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12" style={{ padding: 20 }}>
+            <Head>
+                <title>Doanh Thu</title>
+            </Head>
+            <h2>Doanh Thu</h2>
+            <hr/>
             <div className='col'>
                 <span>(*Kết quả báo cáo đều được dựa vào các đơn hàng đã hoàn thành)</span>
                 <br></br>
@@ -289,7 +295,10 @@ const DoanhThuChart = () => {
                                 dataChiTietDonHang.map((item, i) => {
                                     if (i < countDonHangShow) {
                                         return <tr key={i}>
-                                            <td>{item._id}</td>
+                                            <td><Link href={`/order/${item._id}`}>
+                                                    {item._id}
+                                                </Link>
+                                            </td>
                                             
                                             <td style={{ width: 400 }}>{item.user.ten}</td>
                                             <td>{format_curency((item.total).toString())}</td>

@@ -16,7 +16,7 @@ a {
 
 img {
     object-fit: cover;
-    object-position: 0 30%;
+    /* object-position: 0 30%; */
 }
 
 

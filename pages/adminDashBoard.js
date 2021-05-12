@@ -5,6 +5,8 @@ import ThongKe from '../components/ThongKe'
 import DoanhThuChart from '../components/DoanhThuChart';
 import OrderChart from '../components/OrderChart';
 import ProductChart from '../components/ProductChart';
+import BestSeller from '../components/BestSeller';
+import Head from 'next/head';
 
 
 const dashBoard = () => {
@@ -14,6 +16,7 @@ const dashBoard = () => {
     const [showOrder, setShowOrder] = useState(false)
     const [showDoanhThu, setShowDoanhThu] = useState(false)
     const [showProduct, setShowProduct] = useState(false)
+    const [showBestSeller, setShowBestSeller] = useState(false)
 
     
     const handleClick = () => {
@@ -21,6 +24,7 @@ const dashBoard = () => {
       setShowDoanhThu(false)
       setShowOrder(false)
       setShowProduct(false)
+      setShowBestSeller(false)
     }
     
     const handleProductChart = () => {
@@ -28,20 +32,29 @@ const dashBoard = () => {
       setShowDoanhThu(false)
       setShowOrder(false)
       setShowDashBoard(false)
+      setShowBestSeller(false)
     }
     const handleDoanhThuChart = () => {
       setShowDoanhThu(true)
       setShowOrder(false)
       setShowDashBoard(false)
       setShowProduct(false)
+      setShowBestSeller(false)
     }
     const handleOrderChart = () => {
       setShowOrder(true)
       setShowDoanhThu(false)
       setShowDashBoard(false)
       setShowProduct(false)
+      setShowBestSeller(false)
     }
-    
+    const handleBestSeller = () => {
+      setShowBestSeller(true)
+      setShowOrder(false)
+      setShowDoanhThu(false)
+      setShowDashBoard(false)
+      setShowProduct(false)
+    }
     
     useEffect(() => {
       $(".sidebar-dropdown > a").click(function() {
@@ -77,8 +90,11 @@ const dashBoard = () => {
     if(!auth.user || auth.user.role !== "admin") return null
 
     return(
-  
+ 
       <div className="page-wrapper chiller-theme toggled">
+       <Head>
+            <title>DASHBOARD</title>
+        </Head>
         <a id="show-sidebar" className="btn btn-sm btn-dark" href="#">
           <i className="fas fa-bars"></i>
          
@@ -93,14 +109,13 @@ const dashBoard = () => {
         </div>
         <div className="sidebar-header">
           <div className="user-pic">
-            <img className="img-responsive img-rounded" src="https://raw.githubusercontent.com/azouaoui-med/pro-sidebar-template/gh-pages/src/img/user.jpg"
-              alt="User picture"/>
+            <img className="img-responsive img-rounded" src={auth.user.avata} alt="User picture"/>
           </div>
           <div className="user-info">
-            <span className="user-name">Jhon
-              <strong>Smith</strong>
+            <span className="user-name">
+              <strong>{auth.user.name}</strong>
             </span>
-            <span className="user-role">Administrator</span>
+            <span className="user-role">{auth.user.role === 'admin' && 'Administrator'}</span>
             <span className="user-status">
               <i className="fa fa-circle"></i>
               <span>Online</span>
@@ -227,10 +242,10 @@ const dashBoard = () => {
               <span>Extra</span>
             </li>
             <li>
-              <a href="#">
+              <a onClick={handleBestSeller}>
                 <i className="fa fa-book"></i>
-                <span>Documentation</span>
-                <span className="badge badge-pill badge-primary">Beta</span>
+                <span>Best Seller</span>
+                <span className="badge badge-pill badge-primary">Seller</span>
               </a>
             </li>
             <li>
@@ -270,13 +285,12 @@ const dashBoard = () => {
     </nav>
     <main className="page-content">
     <div className="container-fluid">
-      <h2>Pro Sidebar</h2>
-      <hr/>
-     
+      
       {showDashBoard ? <ThongKe/>: null}
       {showDoanhThu ? <DoanhThuChart/> : null}
       {showOrder ? <OrderChart/> : null}
       {showProduct ? <ProductChart/> : null}
+      {showBestSeller ? <BestSeller/> : null}
  
     </div>
   </main>
