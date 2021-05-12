@@ -12,6 +12,9 @@ export default async (req,res) => {
       case "POST":
         await createProduct(req, res)
         break;
+      case "PUT":
+        await updateUserView(req, res)
+        break;
     }
 }
 
@@ -88,5 +91,29 @@ const createProduct = async (req, res) => {
 
   } catch (err) {
       return res.status(500).json({err: err.message})
+  }
+}
+const updateUserView = async (req, res) => {
+  try{
+    const result = await auth(req, res)
+    const idUser = result.id
+    const idProduct = req.body.idProduct;
+    let result2 = await Products.findOne({ _id: idProduct, idUserDaXem: idUser });
+        if (result2 === null) {
+            let result = await Products.updateOne({ _id: idProduct }, { $push: { idUserDaXem: idUser } });
+            
+            res.status(200).json({
+                status: 'success',
+                message: 'Cập nhật thành công'
+            });
+        } else {
+            
+            res.status(200).json({
+                status: 'success',
+                message: 'Đã cập nhật user này!'
+            });
+        }
+  }catch (err) {
+    return res.status(500).json({err: err.message})
   }
 }

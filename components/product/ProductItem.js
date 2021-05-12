@@ -3,6 +3,7 @@ import {useContext, useState,useEffect} from 'react'
 import {DataContext} from '../../store/GlobalState'
 import {addToCart} from '../../store/Actions'
 import {Notified} from '../../store/Actions'
+import { putData } from '../../utils/fetchData'
 
 
 const ProductItem = ({product, handleCheck}) => {
@@ -14,12 +15,17 @@ const ProductItem = ({product, handleCheck}) => {
         dispatch(Notified())
         dispatch(addToCart(product, cart, 'S'))
     }
+    const handleUpdate_UserView = async() => {
+        if(auth.user){
+            let res = await putData(`product`, {idProduct: product._id}, auth.token)
+        };
+    }
     
    
     const userLink = () => {
         return(
             <>
-               <a href={`product/${product._id}`} className="btn btn-info"style={{marginRight: '5px', flex: 1}}>
+               <a href={`product/${product._id}`} className="btn btn-info"style={{marginRight: '5px', flex: 1}} onClick={handleUpdate_UserView}>
                    View
                 </a>                
                 <button className="btn btn-success"

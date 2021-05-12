@@ -22,19 +22,12 @@ const DetailProduct = (props) =>{
         return ""
     }
     useEffect(async() => {
-        const page = 4  
-        const category = product.category
-        
-        const search = 'all'
-        
         const res = await getData(
-            `product?limit=${page}&category=${category}&title=${search}`
+            `product?limit=${4}&category=${product.category}&title=${'all'}`
         )
         setProductFeature(res.products)
     }, []);
-   
 
-    
     return (
         <div className="container single-product"style={{maxWidth:"1500px"}}>
         <div className="row detail_page" >
@@ -135,7 +128,7 @@ const DetailProduct = (props) =>{
                                             <div className="type">
                                                 <a>{ite.title}</a>
                                             </div>
-                                            <a className="price"> {ite.price}</a>
+                                            <a className="price"> {ite.price}đ</a>
                                         </div>
                                     </div>
                        

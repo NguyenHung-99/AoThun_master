@@ -59,6 +59,9 @@ return (
                 <Link href="/profile">
                     <a className="dropdown-item">Profile</a>
                 </Link>
+                <Link href="/productViewed">
+                    <a className="dropdown-item">Products Viewed</a>
+                </Link>
                 {
                     auth.user.role === 'admin' && adminRouter()
                 }
