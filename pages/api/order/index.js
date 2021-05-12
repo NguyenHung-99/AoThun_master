@@ -4,6 +4,8 @@ import auth from '../../../middleware/auth'
 import Products from '../../../models/productModel'
 import Addresss from '../../../models/addressModel'
 import Users from '../../../models/userModel'
+import sgMail from '@sendgrid/mail'
+sgMail.setApiKey(process.env.SEND_MAIL_KEY);
 
 
 connectDB()
@@ -65,11 +67,51 @@ const createOrder = async (req, res) => {
         })
        
         newOrders.save()
-        res.json({
-            msg: 'Order thành công! Chúng tôi sẻ liên hệ với bạn để xác nhận đơn hàng.',
-            newOrders,
-           
+        var htmlData = '<h1>DANH SÁCH SẢN PHẨM</h1>';
+        newOrders.cart.map(item => {
+            return (
+                htmlData += `
+            <img src=${item.images[0].url} alt="ảnh" width="150" height="160">
+            <p><b>Tên sản phẩm: </b>${item.title}</p>
+            <p><b>Số lượng: </b>${item.quantity}</p>
+            <p><b>Giá: </b>${item.price}đ</p>
+            <p><b>Size: </b>${item.sizeSelection}</p>
+            <p><b>Thành tiền: </b>${(item.quantity*item.price).toString()}đ</p>
+            <br></br>`
+            )
         })
+        htmlData += `
+                <h2>ĐƠN HÀNG ĐƯỢC GIAO ĐẾN</h2>
+                <p><b>Tên : </b>${users.ten}</p>
+                <p><b>Địa chỉ nhà: </b>${address.diaChi} ${address.phuongXa} ${address.quanHuyen} ${address.tinhThanhPho}</p>
+                <p><b>Điện thoại: </b>${users.sdt}</p>
+                <p><b>Email: </b>${users.email}</p>
+                <br></br>
+                <h3>Cám ơn bạn đã mua hàng tại HT_Store.</h3>
+                ` 
+            
+            
+        
+        // console.log(htmlData)
+        const emailData = {
+            to: users.email,
+            from: process.env.EMAIL_FROM,
+            subject: `HT_Store đã nhận đơn hàng ${newOrders._id}`,
+            html: htmlData
+        }
+
+        await sgMail.send(emailData).then(sent => {
+            console.log('send mail thành công')
+            res.json({
+                msg: 'Order thành công! Chúng tôi sẻ liên hệ với bạn để xác nhận đơn hàng.',
+                newOrders,
+               
+            })
+        }).catch(err => {
+            console.log(err)
+            
+        })
+        
         
     } catch (err) {
         return res.status(500).json({err: err.message})

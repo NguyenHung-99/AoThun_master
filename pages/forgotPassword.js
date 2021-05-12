@@ -2,7 +2,7 @@ import Link from 'next/link'
 import Head from 'next/head'
 import {useState, useContext, useEffect} from 'react'
 import {DataContext} from '../store/GlobalState'
-import { getData, postData } from '../utils/fetchData';
+import {postData } from '../utils/fetchData';
 
 const forgotPassword = () => {
     const initialState = { email: ''};
@@ -20,10 +20,7 @@ const forgotPassword = () => {
     const handleSubmit = async e =>{
         //ko load lai trang
         e.preventDefault()
-        // dispatch({ type: 'NOTIFY', payload: {loading: true} })
-    
-
-        // const res = await getData(`user/${userData.email}`)
+        dispatch({ type: 'NOTIFY', payload: {loading: true} })
         
         const res = await postData('user/forgotPassword', {email: userData.email})
         console.log(res.err)
@@ -32,20 +29,6 @@ const forgotPassword = () => {
 
         dispatch({ type: 'NOTIFY', payload: {success: res.message} });
         
-        // if(res.err) return dispatch({ type: 'NOTIFY', payload: {error: res.err} })
-
-        // dispatch({ type: 'NOTIFY', payload: {success: res.msg} });
-        // dispatch({ type: 'AUTH', payload: {
-        //     toke: res.access_token,
-        //     user:  res.user
-        // } });
-        
-        // //lưu token vào cookie
-        // Cookie.set('refreshtoken', res.refresh_token,{
-        //     path:'api/auth/accessToken',
-        //     expires: 7
-        // })
-        // localStorage.setItem('firstLogin', true)
     }
 
     return (
