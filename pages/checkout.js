@@ -46,6 +46,7 @@ const Checkout = () => {
 
     //xử lí order
     const handleSumitOrder = async(e) => {
+      
         if(!name || !email || !sdt || !diachi || !phuongxa || !quanhuyen || !tinhtp)
         return dispatch({type: 'NOTIFY', payload: {error: 'Vui lòng nhập đủ thông tin. '}})
         
