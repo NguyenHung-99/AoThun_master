@@ -10,11 +10,7 @@ const changePassword = (props) => {
     const {password, confirmPassword } = userData
 
     const [state, dispatch] = useContext(DataContext)
-    
-
-
-
-
+   
     const handleChangeInput = e =>{
         const {name, value} = e.target
         setUserData({...userData, [name]:value})

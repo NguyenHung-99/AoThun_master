@@ -4,7 +4,6 @@ const accountSchema = new mongoose.Schema({
     
     phanQuyen: {
         type: String,
-
         default: 'user',
     },
     password: {
@@ -16,10 +15,9 @@ const accountSchema = new mongoose.Schema({
     },
     trangThai: {
         type: Boolean,
-
-        default: true,
+        default: false
     }
-}, {
+    }, {
 
         timestamps: true
 })

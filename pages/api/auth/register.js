@@ -4,6 +4,12 @@ import Accounts from '../../../models/accountModel'
 import Addresss from '../../../models/addressModel'
 import valid from '../../../utils/valid'
 import bcrypt from 'bcrypt'
+import jwt from 'jsonwebtoken'
+const sgMail = require('@sendgrid/mail') 
+sgMail.setApiKey(process.env.SEND_MAIL_KEY);
+
+var nodemailer = require('nodemailer');
+var smtpTransport = require('nodemailer-smtp-transport');
 
 
 connectDB()
@@ -30,8 +36,10 @@ const register = async (req, res) => {
         // Tạo account cho user
         let account = {}
         account.password = passwordHash
+        account.trangThai = false
         let userAccount = new Accounts(account)
         await userAccount.save();
+    
         // Tạo Address mặc định cho user
         let userAddress = new Addresss();
         await userAddress.save();
@@ -46,8 +54,42 @@ const register = async (req, res) => {
         userSignup.diaChi = userAddress.id;
         const newUser = new Users(userSignup)
         await newUser.save()
-        res.json({msg: "Register Success!"})
 
+        //send email active user
+
+        var transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+                user: 'hungrau.store@gmail.com',
+                pass: 'Hungraustore99'
+            }
+        });
+        const token = jwt.sign({newUser} ,process.env.JWT_RESET_PASS, {expiresIn: '15m'});
+        
+        const emailData = {
+            to: email,
+            from: process.env.EMAIL_FROM,
+            subject: 'Đăng kí thành công tài khoản HTStore',
+            html: `
+                <h1>Vui lòng nhấn vào link dưới đây để active tài khoản của bạn</h1>
+                <p>${process.env.BASE_URL}/activeUser/${token}</p>
+                <hr/>
+                <p>Email này chứa những thông tin nhạy cảm và sẽ hết hạn trong vòng 15 phút</p>
+                <p>${process.env.BASE_URL}</p>
+            `
+        }
+       
+        transporter.sendMail(emailData, function (err, info) {
+            if(err){
+                res.status(200).json({
+                    status: 'fail',
+                    msg: 'Gửi email xác thực thất bại !'
+                })
+            }
+            
+            else
+                res.json({msg: `Đăng kí thành công! Vui lòng kiểm tra Email: ${email} của bạn để active tài khoản!!!`})
+        })
     }catch(err){
         return res.status(500).json({err: err.message})
     }

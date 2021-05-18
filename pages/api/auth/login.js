@@ -28,6 +28,12 @@ const login = async (req, res) => {
         const address = await Addresss.findById(user.diaChi)
         const isMatch = await bcrypt.compare(password, account.password);
         if(!isMatch) return res.status(400).json({err: 'Incorrect password.'})
+        if(account.trangThai === false) {
+            return res.status(400).json({
+                notActive: true,
+                email: user.email
+            })
+        }
 
         const access_token = createAccessToken({id: user._id});
         const refresh_token = createRefreshToken({id: user._id});

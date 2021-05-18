@@ -98,6 +98,7 @@ const Register = () => {
                                                 maxDate={new Date()} 
                                                 showYearDropdown
                                                 scrollableMonthYearDropdown
+                                                placeholderText="Your Birthday"
                                                  ></DatePicker>
                                             </div>  
                                            
@@ -139,7 +140,7 @@ const Register = () => {
                                         <div className="col">
                                         <div className="input-group">
                                             <label className="label">Confirm Password</label>
-                                            <input className="input--style-4" type="password" id="inputConfirmPassword" name="cf_password" value={cf_password} onChange={handleChangeInput}  placeholder="Password"/>
+                                            <input className="input--style-4" type="password" id="inputConfirmPassword" name="cf_password" value={cf_password} onChange={handleChangeInput}  placeholder="Confirm Password"/>
                                         </div>
                                     </div>
                                 </div>

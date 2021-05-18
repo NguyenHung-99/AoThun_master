@@ -30,6 +30,12 @@ const Signin = () => {
         const res = await postData('auth/login', userData)
         
         if(res.err) return dispatch({ type: 'NOTIFY', payload: {error: res.err} })
+        if(res.notActive === true) {
+                return router.push({
+                pathname:'active',
+                query: {email: res.email}
+            })
+        }
 
         dispatch({ type: 'NOTIFY', payload: {success: res.msg} });
         dispatch({ type: 'AUTH', payload: {
