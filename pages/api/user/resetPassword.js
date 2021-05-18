@@ -22,10 +22,17 @@ const resetPassword = async (req, res) => {
         const passwordHash = await bcrypt.hash(password, 12)
 
         const users = await Users.findById({_id: result.id})
-        const account = await Accounts.findOneAndUpdate({_id: users.account}, {password: passwordHash})
-        console.log(account._id + 'id account ne hung')
+        const ComPareAccount = await Accounts.findById({_id : users.account})
+    
+        if(bcrypt.compareSync(password, ComPareAccount.password))
+        {
+            return res.status(500).json({err: "Mật khẩu mới phải khác mật khẩu cũ."})
+        }
+        else{
+            const account = await Accounts.findOneAndUpdate({_id: users.account}, {password: passwordHash})
 
-        res.json({ msg: "Update Success!"})
+        res.json({ msg: "Password has Changed!"})
+        }
         
     } catch (err) {
         return res.status(500).json({err: err.message})

@@ -81,7 +81,7 @@
 
 .card {
     padding: 15px;
-    background: var(--main-bg-color);
+    background: whitesmoke;
     color: var(--main-color);
     border-radius: 10px;
     margin-bottom: 10px;
@@ -134,7 +134,7 @@
 }
 
 .card-content-y {
-    padding:  15px;
+    padding: 15px;
     overflow-x: auto;
     position: relative;
     height: 300px;
@@ -187,14 +187,17 @@ table th {
 .counter i {
     font-size: 50px;
 }
-.content{
-    padding:15px
+
+.content {
+    padding: 15px
 }
+
 .counter-header i {
     font-size: 50px;
 }
+
 .counter-header {
     padding: 40px 20px;
-    color:#f0f0f0;
+    color: #f0f0f0;
     min-height: calc(100vh-90px);
 }

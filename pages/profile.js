@@ -2,10 +2,12 @@ import Head from 'next/head'
 import { useState, useContext, useEffect } from 'react'
 import { DataContext } from '../store/GlobalState'
 import Link from 'next/link'
-import valid from '../utils/valid'
+import valid, { validatePhone } from '../utils/valid'
 import { getData, patchData } from '../utils/fetchData'
 import {ImageUpload} from '../utils/ImageUpload'
 import moment from 'moment';
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 const getUser = async (email) => {
     const res = await getData(`user/${email}`)
@@ -26,6 +28,8 @@ const Profile = () => {
     const [dataUser, setDataUser] = useState({})
     const [account, setAccount] = useState({})
     const [address, setAddress] = useState({})
+
+    const [dob, setdob] = useState("")
       
     useEffect(() => {
         if(auth.user){
@@ -34,9 +38,9 @@ const Profile = () => {
                 const users = res.users
                 const accounts = res.account
                 const addresss = res.address
-                setAccount({accounts})
-                setDataUser({users})
-                setAddress({addresss})
+                setAccount(accounts)
+                setDataUser(users)
+                setAddress(addresss)
                 setData({...data, name: users.ten, sdt: users.sdt, gioiTinh: users.gioiTinh, ngaySinh: users.ngaySinh, 
                     ngayTao: users.ngayTao, role: accounts.phanQuyen, trangThai: accounts.trangThai, diachi: addresss.diaChi,
                 phuongxa: addresss.phuongXa, quanhuyen: addresss.quanHuyen, tinhtp: addresss.tinhThanhPho})  
@@ -53,26 +57,61 @@ const Profile = () => {
         dispatch({type: 'NOTIFY', payload: {} })
 
      }
-     const handleUpdateProfile = e => {
-        e.preventDefault()
-         if(password){
-             const errMsg = valid(name , sdt, auth.user.email, ngaySinh, gioiTinh, password, cf_password) 
-             if(errMsg) return dispatch({ type: 'NOTIFY', payload: {error: errMsg} })
-             updatePassword()
-         }
-         if(name!== dataUser.ten || sdt !== dataUser.sdt || gioiTinh !== data.gioiTinh || avata) updateInfor()
 
+     const handleChangeDateInput = (date) => {
+        setData({...data, ngaySinh:date})
+        dispatch({ type: 'NOTIFY', payload: {} })
      }
-     const handleUpdateAddress = e => {
+
+     const handleUpdateProfile = async e => {
         e.preventDefault()
-        if(diachi !== address.diaChi || phuongxa !== address.phuongXa || tinhtp !== address.tinhThanhPho || quanhuyen !== address.quanHuyen){
+        if(!validatePhone(sdt)){
+            return dispatch({ type: 'NOTIFY', payload: {error: 'Số điện thoại không đúng định dạng!.'} })
+        }
+        if(name === '' || sdt === ''){
+            return dispatch({ type: 'NOTIFY', payload: {error: 'Vui lòng nhập đủ thông tin.'} })
+        }
+        const res = await getUser(auth.user.email)
+        const users = res.users
+       
+        if(name!== users.ten || sdt !== users.sdt || gioiTinh !== users.gioiTinh || ngaySinh !== users.ngaySinh || avata){
+            return updateInfor()
+        } 
+        else {return dispatch({ type: 'NOTIFY', payload: {error: 'Vui lòng nhập thông tin muốn thay đổi!.'} })} 
+       
+     }
+     const handleUpdateAddress = async e => {
+        e.preventDefault()
+        const res = await getUser(auth.user.email)
+        const Address = res.address
+        dispatch({ type: 'NOTIFY', payload: {loading: true} })
+        if(diachi === "" || phuongxa === '' || tinhtp === '' || quanhuyen=== '')
+        {
+            return dispatch({ type: 'NOTIFY', payload: {error: 'Vui lòng nhập đầy đủ thông tin!.'} })
+        }
+        if(diachi !== Address.diaChi || phuongxa !== Address.phuongXa || tinhtp !== Address.tinhThanhPho || quanhuyen !== Address.quanHuyen){
             patchData('user/updateAddress', {diachi, phuongxa, quanhuyen, tinhtp}, auth.token)
             .then(res => {
                 if(res.err) return dispatch({ type: 'NOTIFY', payload: {error: res.err} })
                 return dispatch({ type: 'NOTIFY', payload: {success: res.msg} })
             })
-        }
+        }else {
+            return dispatch({ type: 'NOTIFY', payload: {error: 'Vui lòng nhập thông tin muốn thay đổi!.'} })
+        } 
+     
      }
+     const handleChangePassword = e => {
+         e.preventDefault()
+         if(password.length < 6){
+            return dispatch({ type: 'NOTIFY', payload: {error: 'Mật khẩu có ít nhất 6 kí tự!.'} })
+         }
+         if(password !== cf_password){
+            return dispatch({ type: 'NOTIFY', payload: {error: 'Mật khẩu không khớp vui lòng nhập lại!'} })  
+         }
+         updatePassword()
+     }
+            
+            
      const updatePassword = () => {
         dispatch({ type: 'NOTIFY', payload: {loading: true} })
         patchData('user/resetPassword', {password}, auth.token)
@@ -93,7 +132,7 @@ const Profile = () => {
          let media
          dispatch({type:'NOTIFY', payload: {loading:true}})
          if(avata) media = await ImageUpload([avata])
-         patchData('user', {name, avata: avata? media[0].url : auth.user.avata}, auth.token).then(res => {
+         patchData('user', {name, avata: avata? media[0].url : auth.user.avata, sdt:sdt, gioiTinh: gioiTinh, ngaySinh: ngaySinh}, auth.token).then(res => {
              if(!res) return dispatch({type: 'NOTIFY', payload: {error: res.err}})
              dispatch({
                  type: 'AUTH',
@@ -195,52 +234,71 @@ const Profile = () => {
 
                         </table>
                     </div>
-                        </div>
-                        <div className="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                </div>
+                <div className="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
                             <div style={{marginLeft:'20%', marginRight:'20%'}}>
                                 <h2 style={{textAlign:'center'}}>PROFILE</h2>
                                 <br/>
-                                <div className="form-label-group">
-                                        <input type="text" id="inputUsername" name="name" value={name}  onChange={handleChangeInput} className="form-control" placeholder="Username" />
-                                        <label htmlFor="inputUserame">Username</label>
+                                    <div className='row'>
+                                        <div className='col'>
+                                            <div className="form-label-group">
+                                                <input type="text" id="inputUsername" name="name" value={name}  onChange={handleChangeInput} className="form-control" placeholder="Username" />
+                                                <label htmlFor="inputUserame">Username</label>
+                                            </div>
+                                        </div>
+                                        <div className="col">
+                                            <div className="form-label-group">
+                                                <input type="tel" id="phone" name="sdt" value={sdt} onChange={handleChangeInput} className="form-control" placeholder="Phone" />
+                                                <label htmlFor="inputPhone">Phone</label>
+                                            </div>
+                                        </div>
                                     </div>
-
                                     <div className="form-label-group">
                                         <input type="email" id="inputEmail" name="email" readOnly defaultValue={auth.user.email} onChange={handleChangeInput} className="form-control" placeholder="Email address" />
                                         <label htmlFor="inputEmail">Email address</label>
                                     </div>
-                                    
                                     <hr/>
-                                    <div className="form-label-group">
-                                        <input type="tel" id="phone" name="sdt" value={sdt} onChange={handleChangeInput} className="form-control" placeholder="Phone" />
-                                        <label htmlFor="inputPhone">Phone</label>
-                                    </div>
-                                    <hr/>
-                                    <div className="form-label-group">
-                                        <div>
-                                        <label style={{float:'left'}}>Male
-                                            <input type="radio" defaultChecked={gioiTinh? 'checked' : ''} name="gioiTinh" value="true" onChange={handleChangeInput}/>
-                                        </label>              
-                                        <label style={{float:'right'}}>Female
-                                            <input type="radio" defaultChecked={gioiTinh? '' : 'checked'} name="gioiTinh" value="false" onChange={handleChangeInput}/>
-                                        </label>   
-                                        </div> 
-                                    </div>
+                                    <div className="row row-space">
+                                        <div className="col">
+                                            <label htmlFor="inputBirthday" className="label">BirthDay</label>
 
+                                            <div className="input-group">
+                                                <div className="input-group-icon" >
+                                                    <DatePicker style={{width:'21rem'}} value={moment(ngaySinh).format('DD-MM-YYYY')} className="input--style-4 js-datepicker form-control" name='ngaySinh'  id="birthday" 
+                                                        selected={dob} 
+                                                        onChange={date => {
+                                                            handleChangeDateInput(date)
+                                                        }}
+                                                        maxDate={new Date()} 
+                                                        showYearDropdown
+                                                        scrollableMonthYearDropdown>
+                                                    </DatePicker>
+                                                </div>
+                                            </div>
+                                        </div>
+                                  
+                                        <div className="col"> 
+                                            <label className="label">Gender</label>
+                                            <div className="p-t-10">
+                                                <label className="radio-container m-r-45">Male
+                                                    <input  type="radio" defaultChecked={gioiTinh? 'checked' : ''} name="gioiTinh" value="true" onClick={handleChangeInput}/>
+                                                    <span className="checkmark"></span>
+                                                </label>
+                                                <label className="radio-container">Female
+                                                    <input  type="radio" defaultChecked={gioiTinh? 'checked' : ''} name="gioiTinh" value="false" onClick={handleChangeInput}/>
+                                                    <span className="checkmark"></span>
+                                                </label>
+                                            </div>
+                                        </div>   
+                                    </div>
+                                    <hr style={{backgroundColor:'gray'}}></hr>
                                 <br/>
-                                <hr/>
-            
                                 <div className="form-label-group">
-                                        
-                                        <input type="date" id="birthday" name="ngaySinh" value={moment(ngaySinh).format('YYYY-MM-DD')} onChange={handleChangeInput} className="form-control" placeholder="BirthDay" />
-                                        <label htmlFor="inputBirthday">BirthDay</label>
-                                    </div>
-                                <div className="form-label-group">
-                                        <input type="date" id="inputDateCreateUser" value={moment(ngayTao).format('YYYY-MM-DD')} readOnly name="password"  onChange={handleChangeInput} className="form-control" placeholder="Day Create User" />
-                                        <label htmlFor="inputPassword">Day create user</label>
-                                    </div>
-                                    
-                                <hr/>
+                                    <input id="inputDateCreateUser" value={moment(ngayTao).format('DD-MM-YYYY')} readOnly name="password"  onChange={handleChangeInput} className="form-control" placeholder="Day Create User" />
+                                    <label htmlFor="inputDateCreateUser">Day create user</label>
+                                </div>
+                                
+                             
                                 <div className="form-label-group">
                                         <input type="text" id="inputRole" name="role" value={role} readOnly={auth.user.role === 'user'? 'readOnly': ''} onChange={handleChangeInput} className="form-control" placeholder="Role" />
                                         <label htmlFor="inputRole">Role</label>
@@ -299,7 +357,7 @@ const Profile = () => {
                                             <label htmlFor="inputConfirmPassword">Confirm new password</label>
                                         </div>
                                     
-                                <button style={{marginLeft:'35%'}} className="btn btn-info" disabled={notify.loading} onClick={handleUpdateProfile}>
+                                <button style={{marginLeft:'35%'}} className="btn btn-info" disabled={notify.loading} onClick={handleChangePassword}>
                                     Update Password
                                 </button>
                             </div>

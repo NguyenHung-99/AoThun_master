@@ -3,25 +3,31 @@ import valid from '../utils/valid'
 import {DataContext} from '../store/GlobalState'
 import {postData} from '../utils/fetchData'
 import {useRouter} from 'next/router'
+import Link from 'next/link'
+import DatePicker from "react-datepicker";
 import Head from 'next/head'
-
+import "react-datepicker/dist/react-datepicker.css";
 
 const Register = () => {
-    const initialState = {name: '', sdt: '', email: '', ngaySinh: '', gioiTinh: true, password: '', cf_password: ''};
+    const initialState = {name: '', sdt: '',ngaySinh: '', email: '', gioiTinh: true, password: '', cf_password: ''};
     const [userData,setUserData] = useState(initialState)
-    const {name , sdt, email, ngaySinh, gioiTinh, password, cf_password } = userData
-
+    const {name , sdt, email,ngaySinh, gioiTinh, password, cf_password } = userData
     const [state, dispatch] = useContext(DataContext)
     const {auth} = state
-
     const router = useRouter()
-    
+    const [dob, setdob] = useState("")
+    function handleChangeDateInput(date) {
+        setdob(date)
+        setUserData({...userData, ngaySinh:date})
+        dispatch({ type: 'NOTIFY', payload: {} })
+    }
+
     const handleChangeInput = e =>{
         const {name, value} = e.target
         setUserData({...userData, [name]:value})
         dispatch({ type: 'NOTIFY', payload: {} })
     }
-    
+  
     const handleSubmit = async e =>{
         //ko load lai trang
         e.preventDefault()
@@ -49,79 +55,114 @@ const Register = () => {
        
     }, [auth])
 
+   
     return (
-        <div className="signup">
+        <div className="page-wrapper font-poppins" style={{backgroundColor:'whitesmoke'}}>
             <Head>
                 <title>Register</title>
             </Head>
-            <div className="body">
-            <div className="container">
-                <div className="row">
-                <div className="col-lg-10 col-xl-9 mx-auto">
-                    <div className="card card-signin flex-row my-5">
-                    <div className="card-img-left d-none d-md-flex">
-                       
-                    </div>
-                    <div className="card-body">
-                        <h5 className="card-title text-center">Register</h5>
-                        <form className="form-signin" onSubmit={handleSubmit}>
-                            <div className="form-label-group">
-                                <input type="text" id="inputUserame" name="name" value={name} onChange={handleChangeInput} className="form-control" placeholder="Username"  autoFocus/>
-                                <label htmlFor="inputUserame">Username</label>
-                            </div>
-
-                            <div className="form-label-group">
-                                <input type="email" id="inputEmail" name="email" value={email} onChange={handleChangeInput} className="form-control" placeholder="Email address" />
-                                <label htmlFor="inputEmail">Email address</label>
-                            </div>
+                <div className="wrapper wrapper--w680">
+                    <div className="card card-4">
+                        <div className="card-body">
+                            <center>
+                                <h2 className="title">Registration Form</h2>
+                            </center>
                             
-                            <hr/>
-                            <div className="form-label-group">
-                                <input type="tel" id="phone" name="sdt" value={sdt} onChange={handleChangeInput} className="form-control" placeholder="Phone" />
-                                <label htmlFor="inputPhone">Phone</label>
-                            </div>
-                            <div className="form-label-group">
-                                <input type="date" id="birthday" name="ngaySinh" value={ngaySinh} onChange={handleChangeInput} className="form-control" placeholder="BirthDay" />
-                                <label htmlFor="inputBirthday">BirthDay</label>
-                            </div>
-                            
-                            <div className="form-label-group">
-                                <div>
-                                <label style={{float:'left'}}>Male
-                                    <input type="radio" defaultChecked="defaultChecked" name="gioiTinh" value="true" onChange={handleChangeInput}/>
-                                </label>              
-                                <label style={{float:'right'}}>Female
-                                    <input type="radio" name="gioiTinh" value="false" onChange={handleChangeInput}/>
-                                </label>   
-                                </div> 
-                            </div>
-
-                            <hr/>
-                            <div className="form-label-group">
-                                <input type="password" id="inputPassword" name="password" value={password} onChange={handleChangeInput} className="form-control" placeholder="Password" />
-                                <label htmlFor="inputPassword">Password</label>
-                            </div>
-                            
-                            <div className="form-label-group">
-                                <input type="password" id="inputConfirmPassword" name="cf_password" value={cf_password} onChange={handleChangeInput} className="form-control" placeholder="Password" />
-                                <label htmlFor="inputConfirmPassword">Confirm password</label>
-                            </div>
-                            
-
-                            <button className="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Register</button>
-                            <a className="d-block text-center mt-2 small" href="/signin">Sign In</a>
-                            <hr className="my-4"/>
-                            <button className="btn btn-lg btn-google btn-block text-uppercase" type="submit"> Sign up with Google</button>
-                            <button className="btn btn-lg btn-facebook btn-block text-uppercase" type="submit"> Sign up with Facebook</button>
-                        </form>
-                    </div>
+                            <form  onSubmit={handleSubmit}>
+                                <div className="row row-space">
+                                    <div className="col">
+                                        <div className="input-group">
+                                            <label className="label">Name</label>
+                                            <input  className="input--style-4"  type="text" id="inputUserame" name="name" value={name} onChange={handleChangeInput}  placeholder="Username"  autoFocus/>
+                                        </div>
+                                    </div>
+                                    <div className="col">
+                                        <div className="input-group">
+                                            <label className="label">Phone</label>
+                                            <input className="input--style-4" type="tel" id="phone" name="sdt" value={sdt} 
+                                            onChange={handleChangeInput} 
+                                            placeholder="Phone"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="row row-space">
+                                    <div className="col">
+                                        <div className="input-group">
+                                            <label className="label">Birthday</label>
+                                            <div className="input-group-icon">
+                                                <DatePicker className="input--style-4 js-datepicker" name='ngaySinh'  
+                                                selected={dob} 
+                                                onChange={date => {
+                                                    handleChangeDateInput(date)
+                                                }}
+                                                maxDate={new Date()} 
+                                                showYearDropdown
+                                                scrollableMonthYearDropdown
+                                                 ></DatePicker>
+                                            </div>  
+                                           
+                                        </div>
+                                    </div>
+                                    <div className="col">
+                                        <div className="input-group">
+                                            <label className="label">Gender</label>
+                                            <div className="p-t-10">
+                                                <label className="radio-container m-r-45">Male
+                                                    <input  type="radio" defaultChecked="defaultChecked" name="gioiTinh" value="true" onChange={handleChangeInput}/>
+                                                    <span className="checkmark"></span>
+                                                </label>
+                                                <label className="radio-container">Female
+                                                    <input  type="radio" name="gioiTinh" value="false" onChange={handleChangeInput}/>
+                                                    <span className="checkmark"></span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="row row-space">
+                                    <div className="col">
+                                        <div className="input-group">
+                                            <label className="label">Email</label>
+                                            <input className="input--style-4"   type="email" id="inputEmail" name="email" value={email} onChange={handleChangeInput} placeholder="Email address"/>
+                                        </div>
+                                    </div>
+                                   
+                                </div>
+                               
+                                    <div className="row row-space">
+                                        <div className="col">
+                                            <div className="input-group">
+                                                <label className="label">Password</label>
+                                                <input className="input--style-4" type="password" id="inputPassword" name="password" value={password} onChange={handleChangeInput}  placeholder="Password"/>
+                                            </div>
+                                        </div>
+                                        <div className="col">
+                                        <div className="input-group">
+                                            <label className="label">Confirm Password</label>
+                                            <input className="input--style-4" type="password" id="inputConfirmPassword" name="cf_password" value={cf_password} onChange={handleChangeInput}  placeholder="Password"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                           
+                                <div className="p-t-15">
+                                <center>
+                                    <button className ="button__register" type="submit">
+                                        <span></span>
+                                        <span></span>
+                                        <span></span>
+                                        <span></span>
+                                        Register
+                                    </button>
+                                </center>
+                                <hr className="my-4"/>
+                                <p>Already have an account? <Link href="/signin"><a style={{color: 'crimson'}}>Login Now</a></Link></p>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
-                </div>
             </div>
-            </div>
-        </div>
-
     )
 }
 export default Register

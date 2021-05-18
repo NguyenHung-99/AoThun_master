@@ -34,6 +34,7 @@ const changePassword = (props) => {
         .then(res => {
             if(res.err) return dispatch({ type: 'NOTIFY', payload: {error: res.err} })
             return dispatch({ type: 'NOTIFY', payload: {success: res.msg} })
+            
         })       
         
     }
@@ -53,12 +54,12 @@ const changePassword = (props) => {
                         <form className="form-signin" onSubmit={handleSubmit}>
                         <div className="form-label-group">
                             <input type="password" id="inputPassword" name="password" value={password} onChange={handleChangeInput} className="form-control" placeholder="New Password" autoFocus/>
-                            <label htmlFor="inputEmail">New Password</label>
+                            <label htmlFor="inputPassword">New Password</label>
                         </div>
 
                         <div className="form-label-group">
                             <input type="password" id="inputConfirmPassword" name="confirmPassword" value={confirmPassword} onChange={handleChangeInput} className="form-control" placeholder="Confirm New Password"/>
-                            <label htmlFor="inputPassword">Confirm New Password</label>
+                            <label htmlFor="inputConfirmPassword">Confirm New Password</label>
                         </div>
 
                         <div className="custom-control custom-checkbox mb-3">

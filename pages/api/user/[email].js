@@ -15,7 +15,7 @@ export default async (req,res) => {
 const getUser = async (req,res) => {
   try{
       const {email} = req.query;
-      const users = await Users.findOne({email: email})      
+      const users = await Users.findOne({email: email}).populate('account', 'diaChi')    
       const account = await Accounts.findById(users.account)
       const address = await Addresss.findById(users.diaChi)
       if(!users) return res.status(400).json({err: 'User không tồn tại'})

@@ -7,6 +7,9 @@ import Users from '../../../models/userModel'
 import sgMail from '@sendgrid/mail'
 sgMail.setApiKey(process.env.SEND_MAIL_KEY);
 
+var nodemailer = require('nodemailer');
+var smtpTransport = require('nodemailer-smtp-transport');
+
 
 connectDB()
 
@@ -86,53 +89,75 @@ const createOrder = async (req, res) => {
             total
 
         })
+        var transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+                user: 'ken247199@gmail.com',
+                pass: 'Hungkcr123'
+            }
+        });
+        
+        const mailOptions = {
+            from: 'ken247199@any.com', // sender address
+            to: 'nguyenhung2407199@gmail.com', // list of receivers
+            subject: 'test mail', // Subject line
+            html: '<h1>this is a test mail.</h1>'// plain text body
+        };
+        
+        transporter.sendMail(mailOptions, function (err, info) {
+            if(err)
+                console.log(err)
+            else
+                console.log(info);
+        })
+        
 
         //cập nhật số lượng sản phẩm còn trong kho và đã bán
 
-        cart.filter(item => {
-            const sizeSelect = item.size.filter(itemSize => itemSize.Size === item.sizeSelection)
-            sizeSelect[0].InStock_Size = sizeSelect[0].InStock_Size - item.quantity
-            sizeSelect[0].sold = sizeSelect[0].sold + item.quantity
-            return sold(item._id, item.quantity, sizeSelect[0], item.sizeSelection)
-        })
+        // cart.filter(item => {
+        //     const sizeSelect = item.size.filter(itemSize => itemSize.Size === item.sizeSelection)
+        //     sizeSelect[0].InStock_Size = sizeSelect[0].InStock_Size - item.quantity
+        //     sizeSelect[0].sold = sizeSelect[0].sold + item.quantity
+        //     return sold(item._id, item.quantity, sizeSelect[0], item.sizeSelection)
+        // })
 
-        newOrders.save()
-        var htmlData = '<h1>DANH SÁCH SẢN PHẨM</h1>';
-        for(var i = 0; i < newOrders.cart.length; i++){
-            htmlData += `
-            <img src="${newOrders.cart[i].images[0].url}" alt="ảnh" width="150" height="160">
-            <p><b>Tên sản phẩm: </b>${newOrders.cart[i].title}</p>
-            <p><b>Số lượng: </b>${newOrders.cart[i].quantity}</p>
-            <p><b>Giá: </b>${newOrders.cart[i].price}đ</p>
-            <p><b>Size: </b>${newOrders.cart[i].sizeSelection}</p>
-            <p><b>Thành tiền: </b>${(newOrders.cart[i].quantity * newOrders.cart[i].price).toString()}đ</p>
-            <br></br>`
-        }
+        // newOrders.save()
+        // var htmlData = '<h1>DANH SÁCH SẢN PHẨM</h1>';
+        // for(var i = 0; i < newOrders.cart.length; i++){
+        //     htmlData += `
+        //     <img src="${newOrders.cart[i].images[0].url}" alt="ảnh" width="150" height="160">
+        //     <p><b>Tên sản phẩm: </b>${newOrders.cart[i].title}</p>
+        //     <p><b>Số lượng: </b>${newOrders.cart[i].quantity}</p>
+        //     <p><b>Giá: </b>${newOrders.cart[i].price}đ</p>
+        //     <p><b>Size: </b>${newOrders.cart[i].sizeSelection}</p>
+        //     <p><b>Thành tiền: </b>${(newOrders.cart[i].quantity * newOrders.cart[i].price).toString()}đ</p>
+        //     <br></br>`
+        // }
         
-        htmlData += `
-                <h2>ĐƠN HÀNG ĐƯỢC GIAO ĐẾN</h2>
-                <p><b>Tên : </b>${users.ten} </p>
-                <p><b>Tên : </b>${users.diaChi.diaChi} ${users.diaChi.phuongXa} ${users.diaChi.quanHuyen} ${users.diaChi.tinhThanhPho}</p>
-                <p><b>Điện thoại: </b>${users.sdt}</p>
-                <p><b>Email: </b>${users.email}</p>
-                <br></br>
-                <h3>Cám ơn bạn đã mua hàng tại HT_Store.</h3>`;
+        // htmlData += `
+        //         <h2>ĐƠN HÀNG ĐƯỢC GIAO ĐẾN</h2>
+        //         <p><b>Tên : </b>${users.ten} </p>
+        //         <p><b>Tên : </b>${users.diaChi.diaChi} ${users.diaChi.phuongXa} ${users.diaChi.quanHuyen} ${users.diaChi.tinhThanhPho}</p>
+        //         <p><b>Điện thoại: </b>${users.sdt}</p>
+        //         <p><b>Email: </b>${users.email}</p>
+        //         <br></br>
+        //         <h3>Cám ơn bạn đã mua hàng tại HT_Store.</h3>`;
 
-        const emailData = {
-            to: users.email,
-            from: process.env.EMAIL_FROM,
-            subject: `HT_Store đã nhận đơn hàng ${newOrders._id}`,
-            html: htmlData
-        }
+        // const emailData = {
+        //     to: users.email,
+        //     from: process.env.EMAIL_FROM,
+        //     subject: `HT_Store đã nhận đơn hàng ${newOrders._id}`,
+        //     html: htmlData
+        // }
 
-        await sgMail.send(emailData).then(sent => {
+        // await sgMail.send(emailData).then(sent => {
         
-            res.json({
-                msg: `Order thành công! Chúng tôi sẻ liên hệ với bạn để xác nhận đơn hàng. Email đã được gửi đến ${users.email}`,
-                newOrders,
+        //     res.json({
+        //         msg: `Order thành công! Chúng tôi sẻ liên hệ với bạn để xác nhận đơn hàng. Email đã được gửi đến ${users.email}`,
+        //         newOrders,
 
-            })
-        })
+        //     })
+        // })
 
 
     } catch (err) {
