@@ -1,8 +1,8 @@
 import connectDB from '../../../../utils/connectDB'
 import Users from '../../../../models/userModel'
 import jwt from 'jsonwebtoken'
-const sgMail = require('@sendgrid/mail') 
-sgMail.setApiKey(process.env.SEND_MAIL_KEY);
+var nodemailer = require('nodemailer');
+var smtpTransport = require('nodemailer-smtp-transport');
 
 
 connectDB()
@@ -22,6 +22,14 @@ const sendEmail_ResetPassword = async (req,res) => {
     if(user){
     
         const token = jwt.sign({user} ,process.env.JWT_RESET_PASS, {expiresIn: '15m'});
+
+        var transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+                user: process.env.SEND_MAIL_USER,
+                pass: process.env.SEND_MAIL_PASSWORD
+            }
+        });
         
         const emailData = {
             to: user.email,
@@ -35,18 +43,19 @@ const sendEmail_ResetPassword = async (req,res) => {
                 <p>${process.env.BASE_URL}</p>
             `
         }
-        
-        await sgMail.send(emailData).then(sent => {
-            res.status(200).json({
-                status: 'success',
-                message: `Email đã được gửi đến ${user.email}`
-            })
-        }).catch(err => {
-            console.log(err)
-            res.status(200).json({
-                status: 'fail',
-                message: 'Gửi email xác thực thất bại !'
-            })
+        transporter.sendMail(emailData, function (err, info) {
+            if(err){
+                res.status(200).json({
+                    status: 'fail',
+                    message: 'Gửi email xác thực thất bại !'
+                })
+            }
+            
+            else
+                res.json({
+                    status: 'success',
+                    message: `Email đã được gửi đến ${user.email}`
+                })
         })
 
     }else{

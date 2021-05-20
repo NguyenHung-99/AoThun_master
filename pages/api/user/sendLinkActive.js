@@ -25,8 +25,8 @@ const sendLinkActive = async (req, res) => {
         var transporter = nodemailer.createTransport({
             service: 'gmail',
             auth: {
-                user: 'hungrau.store@gmail.com',
-                pass: 'Hungraustore99'
+                user: process.env.SEND_MAIL_USER,
+                pass: process.env.SEND_MAIL_PASSWORD
             }
         });
         const token = jwt.sign({newUser} ,process.env.JWT_RESET_PASS, {expiresIn: '15m'});

@@ -4,6 +4,7 @@ import { useState, useContext, useEffect } from 'react'
 import { DataContext } from '../store/GlobalState'
 import {useRouter} from 'next/router'
 import { updateItem } from '../store/Actions'
+import PaypalBtn from '../components/paypalBtn'
 
 const Checkout = () => {
 
@@ -16,6 +17,7 @@ const Checkout = () => {
 
     const [total, setTotal] = useState(0)
     // const [callback, setCallback] = useState(false)
+    const [payment_method, setPayment_method] = useState('payment_cod')
     const router = useRouter()
 
     //get tổng tiền cho cart
@@ -97,7 +99,7 @@ const Checkout = () => {
             return dispatch({type:'NOTIFY', payload: {error: 'Sản phẩm đã hết hàng hoặc số lượng sản phẩm không đủ. '} })
         }
 
-        // dispatch({ type: 'NOTIFY', payload: {loading: true} })
+        dispatch({ type: 'NOTIFY', payload: {loading: true} })
 
         postData('order', {name, email, sdt, diachi, phuongxa, quanhuyen, tinhtp, total, cart}, auth.token)
             .then(async(res) => {
@@ -126,6 +128,9 @@ const Checkout = () => {
             
         })
         
+    }
+    const handlePayment_method = e => {
+        setPayment_method(e.target.value)
     }
 
     if(!auth.user) return null
@@ -419,7 +424,7 @@ const Checkout = () => {
                                                 <div className="radio-wrapper content-box-row">
                                                     <label className="radio-label" defaultValue="payment_method_id_941686">
                                                                     <div className="radio-input">
-                                                                        <input id="payment_method_id_941686" className="input-radio" name="payment_method_id" type="radio" defaultValue="941686" defaultChecked/>
+                                                                        <input id="payment_cod" className="input-radio" name="payment_cod" type="radio" value="payment_cod" onClick={handlePayment_method} checked={payment_method === 'payment_cod' && 'checked'}/>
                                                                     </div>
                                                                     <span className="radio-label-primary">Thanh toán khi giao hàng (COD)</span>
                                                                 </label>
@@ -427,9 +432,17 @@ const Checkout = () => {
                                                 <div className="radio-wrapper content-box-row">
                                                     <label className="radio-label" defaultValue="payment_method_id_941686">
                                                                     <div className="radio-input">
-                                                                        <input id="payment_method_id_941686" className="input-radio" name="payment_method_id" type="radio" defaultValue="941686" defaultChecked/>
+                                                                        <input id="payment_Paypal" className="input-radio" name="payment_Paypal" type="radio" value="payment_Paypal" onClick={handlePayment_method} checked={payment_method === 'payment_Paypal' && 'checked'}/>
                                                                     </div>
-                                                                    <span className="radio-label-primary">PayPal</span>
+                                                                    <span className="radio-label-primary">Paypal</span>
+                                                                </label>
+                                                </div>
+                                                <div className="radio-wrapper content-box-row">
+                                                    <label className="radio-label" defaultValue="payment_method_id_941686">
+                                                                    <div className="radio-input">
+                                                                        <input id="payment_Momo" className="input-radio" name="payment_Momo" type="radio" value="payment_Momo" onClick={handlePayment_method} checked={payment_method === 'payment_Momo' && 'checked'}/>
+                                                                    </div>
+                                                                    <span className="radio-label-primary">Momo</span>
                                                                 </label>
                                                 </div>
 
@@ -445,15 +458,26 @@ const Checkout = () => {
 
                         </div>
                         <div className="step-footer">
-                              <button type="submit" className="step-footer-continue-btn btn" onClick={handleSumitOrder}>
-                                            <span className="btn-content">Hoàn tất đơn hàng</span>
-                                            <i className="btn-spinner icon icon-button-spinner"></i>
-                                        </button>
-                                        <button type="submit" className="step-footer-continue-btn btn" onClick={handleSumitOrder_withMoMo}>
-                                            <span className="btn-content">MOMO test</span>
-                                            <i className="btn-spinner icon icon-button-spinner"></i>
-                                        </button>
-                                                      
+                            {
+                                payment_method === 'payment_cod' ? <button type="submit" className="step-footer-continue-btn btn" onClick={handleSumitOrder}>
+                                <span className="btn-content">Hoàn tất đơn hàng</span>
+                                <i className="btn-spinner icon icon-button-spinner"></i>
+                            </button> : null
+                            }
+                            {
+                                payment_method === 'payment_Momo'
+                                ?  <button type="submit" className="step-footer-continue-btn btn" onClick={handleSumitOrder_withMoMo}>
+                                <span className="btn-content">Momo</span>
+                                <i className="btn-spinner icon icon-button-spinner"></i>
+                                </button>
+                                :null
+                            }
+                            {
+                                payment_method === 'payment_Paypal'
+                                ?   <PaypalBtn order={cart} />
+                                :null
+                            }
+                                                    
                             <a className="step-footer-previous-link" href="/cart">
                                 <svg className="previous-link-icon icon-chevron icon" xmlns="http://www.w3.org/2000/svg" width="6.7" height="11.3" viewBox="0 0 6.7 11.3"><path d="M6.7 1.1l-1-1.1-4.6 4.6-1.1 1.1 1.1 1 4.6 4.6 1-1-4.6-4.6z"></path></svg> Giỏ
                                 hàng

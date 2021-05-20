@@ -5,7 +5,7 @@ import Products from '../../../models/productModel'
 import Addresss from '../../../models/addressModel'
 import Users from '../../../models/userModel'
 import sgMail from '@sendgrid/mail'
-sgMail.setApiKey(process.env.SEND_MAIL_KEY);
+
 
 var nodemailer = require('nodemailer');
 var smtpTransport = require('nodemailer-smtp-transport');
@@ -65,14 +65,17 @@ const createOrder = async (req, res) => {
             total,
             cart
         } = req.body
-
+        
         const users = await Users.findById({
             _id: result.id
         }).populate('diaChi')
+       
         const address = await Addresss.findById(users.diaChi)
+        
         if (diachi !== address.diaChi || phuongxa !== address.phuongXa || quanhuyen !== address.quanHuyen || tinhtp !== address.tinhThanhPho) {
+            console.log('vo if')
             await Addresss.findByIdAndUpdate({
-                _id: users.diaChi
+                _id: users.diaChi._id
             }, {
                 diaChi: diachi,
                 phuongXa: phuongxa,
@@ -80,7 +83,7 @@ const createOrder = async (req, res) => {
                 tinhThanhPho: tinhtp
             })
         }
-
+        
         const newOrders = new Orders({
             user: result.id,
             address: address._id,
@@ -89,29 +92,7 @@ const createOrder = async (req, res) => {
             total
 
         })
-        // var transporter = nodemailer.createTransport({
-        //     service: 'gmail',
-        //     auth: {
-        //         user: 'hungrau.store@gmail.com',
-        //         pass: 'Hungraustore99'
-        //     }
-        // });
         
-        // const mailOptions = {
-        //     from: 'ken247199@any.com', // sender address
-        //     to: 'nguyenhung2407199@gmail.com', // list of receivers
-        //     subject: 'test mail', // Subject line
-        //     html: '<h1>this is a test mail.</h1>'// plain text body
-        // };
-        
-        // transporter.sendMail(mailOptions, function (err, info) {
-        //     if(err)
-        //         console.log(err)
-        //     else
-        //         console.log(info);
-        // })
-        
-
         //cập nhật số lượng sản phẩm còn trong kho và đã bán
 
         cart.filter(item => {
@@ -122,6 +103,15 @@ const createOrder = async (req, res) => {
         })
 
         newOrders.save()
+
+        var transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+                user: process.env.SEND_MAIL_USER,
+                pass: process.env.SEND_MAIL_PASSWORD
+            }
+        });
+
         var htmlData = '<h1>DANH SÁCH SẢN PHẨM</h1>';
         for(var i = 0; i < newOrders.cart.length; i++){
             htmlData += `
@@ -137,7 +127,7 @@ const createOrder = async (req, res) => {
         htmlData += `
                 <h2>ĐƠN HÀNG ĐƯỢC GIAO ĐẾN</h2>
                 <p><b>Tên : </b>${users.ten} </p>
-                <p><b>Tên : </b>${users.diaChi.diaChi} ${users.diaChi.phuongXa} ${users.diaChi.quanHuyen} ${users.diaChi.tinhThanhPho}</p>
+                <p><b>Địa Chỉ : </b>${users.diaChi.diaChi} ${users.diaChi.phuongXa} ${users.diaChi.quanHuyen} ${users.diaChi.tinhThanhPho}</p>
                 <p><b>Điện thoại: </b>${users.sdt}</p>
                 <p><b>Email: </b>${users.email}</p>
                 <br></br>
@@ -150,14 +140,19 @@ const createOrder = async (req, res) => {
             html: htmlData
         }
 
-        await sgMail.send(emailData).then(sent => {
-        
-            res.json({
-                msg: `Order thành công! Chúng tôi sẻ liên hệ với bạn để xác nhận đơn hàng. Email đã được gửi đến ${users.email}`,
-                newOrders,
-
-            })
+         transporter.sendMail(emailData, function (err, info) {
+            if(err)
+                console.log(err)
+            else{
+                res.json({
+                    msg: `Order thành công! Chúng tôi sẻ liên hệ với bạn để xác nhận đơn hàng. Email đã được gửi đến ${users.email}`,
+                    newOrders,
+    
+                })
+            }
+            
         })
+
 
 
     } catch (err) {
