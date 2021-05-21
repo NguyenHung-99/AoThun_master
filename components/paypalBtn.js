@@ -8,7 +8,7 @@ const paypalBtn = ({order}) => {
     const refPaypalBtn = useRef()
     const [state, dispatch] = useContext(DataContext)
     const {auth, orders} = state
- 
+    
 
     useEffect(() => {
         paypal.Buttons({
@@ -17,7 +17,7 @@ const paypalBtn = ({order}) => {
               return actions.order.create({
                 purchase_units: [{
                   amount: {
-                    value: order.total
+                    value: parseInt(order.total/23000)
                   }
                 }]
               });

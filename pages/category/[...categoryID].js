@@ -1,13 +1,13 @@
-import { getData } from "../utils/fetchData"
+import { getData } from "../../utils/fetchData"
 import {useState, useContext, useEffect} from 'react'
 import Head from 'next/head'
-import ProductItem from '../components/product/ProductItem'
-import { DataContext } from '../store/GlobalState'
-import filterSearch from '../utils/filterSearch'
+import ProductItem from '../../components/product/ProductItem'
+import { DataContext } from '../../store/GlobalState'
+import filterSearch from '../../utils/filterSearch'
 import {useRouter} from 'next/router'
-import Filter from '../components/Filter'
+import Filter from '../../components/Filter'
 
-const catagoryID = (props) => {
+const categoryID = (props) => {
   const [products, setProducts] = useState(props.products)
   const [isCheck, setIsCheck] = useState(false)
   const [state, dispatch] = useContext(DataContext)
@@ -108,10 +108,10 @@ const catagoryID = (props) => {
 
 
 export async function getServerSideProps({query}) {
-    const getCategory = await getData(`categories/${query.catagoryID[0]}`)
+    const getCategory = await getData(`categories/${query.categoryID[0]}`)
     
     const page = query.page || 1
-    const category = query.category || query.catagoryID[0]
+    const category = query.category || query.categoryID[0]
     const sort = query.sort || ''
     const search = query.search || 'all'
    
@@ -127,4 +127,4 @@ export async function getServerSideProps({query}) {
         }, // will be passed to the page component as props
       }
   }
-export default catagoryID
+export default categoryID

@@ -108,18 +108,17 @@ return (
                                             {
                                                 categories.map(catagory => {
                                                     return (
-                                                        <a key={catagory._id} className="dropdown-item" href={catagory._id}>{catagory.categoryName}</a>
+                                                        <a key={catagory._id} className="dropdown-item" href={`/category/${catagory._id}`}>{catagory.categoryName}</a>
                                                     )
                                                 })
                                             }
                                         </div>
                                     </li>
                                     <li className="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
-                                        <a className="nav-link" href="#">Contact</a>
+                                        <a className="nav-link" href="/contact">Contact</a>
                                     </li>
                                     <li className="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
-                                        <a className="nav-link dropdown-toggle" data-toggle="dropdown" href="#"
-                                            role="button" aria-haspopup="true" aria-expanded="false">About</a>
+                                        <a className="nav-link" href="/abount">About</a>
                                        
                                     </li>
                                     <li className={"nav-item pl-4 pl-md-0 ml-0 ml-md-4" + isActive('/cart')}> <Link
