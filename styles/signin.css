@@ -207,3 +207,17 @@
     color: white;
     background-color: #3b5998;
 }
+.auth_page {
+    position: relative;
+    
+}
+
+.auth_page small{
+    position: absolute;
+    top: 50%;
+    right: 4px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    opacity: 0.5;
+    padding:0px 3px
+}

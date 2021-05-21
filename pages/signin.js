@@ -14,6 +14,7 @@ const Signin = () => {
 
     const [state, dispatch] = useContext(DataContext)
     const {auth} = state
+    const [typePass, setTypePass] = useState(false)
 
     const router = useRouter()
     
@@ -78,8 +79,11 @@ const Signin = () => {
                             <label htmlFor="inputEmail">Email address</label>
                         </div>
 
-                        <div className="form-label-group">
-                            <input type="password" id="inputPassword" name="password" value={password} onChange={handleChangeInput} className="form-control" placeholder="Password"/>
+                        <div className="form-label-group auth_page ">
+                            <input type={typePass ? 'text' : 'password'} id="inputPassword" name="password" value={password} onChange={handleChangeInput} className="form-control" placeholder="Password"/>
+                            <small onClick={() => setTypePass(!typePass)}>
+                            {typePass ? 'Hide' : 'Show'}
+                        </small>
                             <label htmlFor="inputPassword">Password</label>
                         </div>
 

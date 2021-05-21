@@ -13,7 +13,21 @@ export default async (req, res) => {
         case "DELETE":
             await deleteCategory(req, res)
             break;
+        case "GET":
+            await getCategoryID(req, res)
+            break;
     }
+}
+const getCategoryID = async(req, res) => {
+    try {
+        const {id} = req.query
+        const category = await Categories.findById({_id: id})
+        res.json({category})
+        
+    } catch (error) {
+        return res.status(500).json({err: error.message})
+    }
+    
 }
 const updateCategory = async (req, res) => {
     try {

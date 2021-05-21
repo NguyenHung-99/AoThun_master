@@ -460,14 +460,14 @@ const Checkout = () => {
                         <div className="step-footer">
                             {
                                 payment_method === 'payment_cod' ? <button type="submit" className="step-footer-continue-btn btn" onClick={handleSumitOrder}>
-                                <span className="btn-content">Hoàn tất đơn hàng</span>
+                                <span className="btn-content">Hoàn Tất Đặt Hàng</span>
                                 <i className="btn-spinner icon icon-button-spinner"></i>
                             </button> : null
                             }
                             {
                                 payment_method === 'payment_Momo'
                                 ?  <button type="submit" className="step-footer-continue-btn btn" onClick={handleSumitOrder_withMoMo}>
-                                <span className="btn-content">Momo</span>
+                                <span className="btn-content">Thanh toán qua Momo</span>
                                 <i className="btn-spinner icon icon-button-spinner"></i>
                                 </button>
                                 :null
@@ -480,7 +480,7 @@ const Checkout = () => {
                                                     
                             <a className="step-footer-previous-link" href="/cart">
                                 <svg className="previous-link-icon icon-chevron icon" xmlns="http://www.w3.org/2000/svg" width="6.7" height="11.3" viewBox="0 0 6.7 11.3"><path d="M6.7 1.1l-1-1.1-4.6 4.6-1.1 1.1 1.1 1 4.6 4.6 1-1-4.6-4.6z"></path></svg> Giỏ
-                                hàng
+                                hàng 
                             </a>
 
                         </div>

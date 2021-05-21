@@ -98,11 +98,11 @@ const Cart = () => {
           <div className="col-md-8 text-secondary table-responsive my-3"></div>
         <div className="col-md-4 my-3 text-right text-uppercase text-secondary">
 
-            <h3>Total: <span className="text-danger">${total}</span></h3>
+            <h3>Tổng tiền: <span className="text-danger">{total} vnđ</span></h3>
 
             
             <Link href={auth.user ? '/checkout' : '/signin'}>
-              <a className="btn btn-dark my-2">Checkout</a>
+              <a className="btn btn-dark my-2">Tiến Hành đặt hàng</a>
             </Link>
             
         </div>

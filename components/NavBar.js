@@ -9,7 +9,7 @@ function NavBar(){
     const router = useRouter()
 
     const [state, dispath] = useContext(DataContext)
-    const {auth, cart} = state
+    const {auth, cart, categories} = state
 
     const isActive = (r) => {
         if(r === router.pathname){
@@ -103,23 +103,24 @@ return (
                                         role="button" aria-haspopup="true" aria-expanded="false">Product</a>
                                         <div className="dropdown-menu">
                                             <a className="dropdown-item" href="/collection">All Product</a>
-                                            <a className="dropdown-item" href="#">Another action</a>
-                                            <a className="dropdown-item" href="#">Something else here</a>
-                                            <a className="dropdown-item" href="#">Another action</a>
+                                            <a className="dropdown-item" href="/bestSeller">Best Seller</a>
+                                            <a className="dropdown-item" href="/newArrivals">New Arrivals</a>
+                                            {
+                                                categories.map(catagory => {
+                                                    return (
+                                                        <a key={catagory._id} className="dropdown-item" href={catagory._id}>{catagory.categoryName}</a>
+                                                    )
+                                                })
+                                            }
                                         </div>
                                     </li>
                                     <li className="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
-                                        <a className="nav-link" href="#">Agency</a>
+                                        <a className="nav-link" href="#">Contact</a>
                                     </li>
                                     <li className="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
                                         <a className="nav-link dropdown-toggle" data-toggle="dropdown" href="#"
-                                            role="button" aria-haspopup="true" aria-expanded="false">Services</a>
-                                        <div className="dropdown-menu">
-                                            <a className="dropdown-item" href="#">Action</a>
-                                            <a className="dropdown-item" href="#">Another action</a>
-                                            <a className="dropdown-item" href="#">Something else here</a>
-                                            <a className="dropdown-item" href="#">Another action</a>
-                                        </div>
+                                            role="button" aria-haspopup="true" aria-expanded="false">About</a>
+                                       
                                     </li>
                                     <li className={"nav-item pl-4 pl-md-0 ml-0 ml-md-4" + isActive('/cart')}> <Link
                                         href="/cart">
