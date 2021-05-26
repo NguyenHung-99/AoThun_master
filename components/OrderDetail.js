@@ -16,7 +16,7 @@ const OrderDetail = ({orderDetail, state, dispatch}) => {
             return  dispatch({type: 'NOTIFY', payload: {success: res.msg}})
         })
     }
-    if(!auth.user) return null
+   
     return (
         <>
             {
@@ -79,7 +79,7 @@ const OrderDetail = ({orderDetail, state, dispatch}) => {
 
                                         <h5 className="flex-fill text-secondary px-3 m-0">
                                             <Link href={`/product/${item._id}`}>
-                                                <a>{item.title}</a>
+                                                <a>{item.title} <b>{item.sizeSelection}</b></a>
                                             </Link>
                                         </h5>
 

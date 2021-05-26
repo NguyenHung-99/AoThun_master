@@ -121,6 +121,10 @@ return (
                                         <a className="nav-link" href="/abount">About</a>
                                        
                                     </li>
+                                    <li className="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
+                                        <a className="nav-link" href="/findOrder">Find Order</a>
+                                       
+                                    </li>
                                     <li className={"nav-item pl-4 pl-md-0 ml-0 ml-md-4" + isActive('/cart')}> <Link
                                         href="/cart">
                                         <a className="nav-link"> <i className="fas fa-shopping-cart position-relative"
