@@ -47,13 +47,13 @@ export const DataProvider = ({children}) => {
                 if(res.err) return dispatch({type: 'NOTIFY' , payload: {err: res.err}})
                 dispatch({type: 'ADD_ORDERS' , payload: res.orders})
             })
-            if(auth.user.role === 'admin'){
-                getData('user', auth.token).then(res =>{
-                    if(res.err) return dispatch({type: 'NOTIFY' , payload: {err: res.err}})
-                    dispatch({type: 'ADD_USERS' , payload: res.users})
-                })
+            // if(auth.user.role === 'admin'){
+            //     getData('user', auth.token).then(res =>{
+            //         if(res.err) return dispatch({type: 'NOTIFY' , payload: {err: res.err}})
+            //         dispatch({type: 'ADD_USERS' , payload: res.users})
+            //     })
                 
-            }
+            // }
             
         }else{
             dispatch({type: 'ADD_ORDERS' , payload: []})
