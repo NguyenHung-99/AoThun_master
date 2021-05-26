@@ -1,13 +1,15 @@
 import {useEffect, useRef, useContext} from 'react'
-import {patchData} from '../utils/fetchData'
+import {patchData, postData} from '../utils/fetchData'
 import {DataContext} from '../store/GlobalState'
 import { updateItem } from '../store/Actions'
+import { useRouter } from 'next/router'
 
 
-const paypalBtn = ({order}) => {
+const paypalBtn = ({name, email, sdt, diachi, phuongxa, quanhuyen, tinhtp, total, cart}) => {
     const refPaypalBtn = useRef()
     const [state, dispatch] = useContext(DataContext)
     const {auth, orders} = state
+    const router = useRouter()
     
 
     useEffect(() => {
@@ -17,7 +19,7 @@ const paypalBtn = ({order}) => {
               return actions.order.create({
                 purchase_units: [{
                   amount: {
-                    value: parseInt(order.total/23000)
+                    value: parseInt(total/23000)
                   }
                 }]
               });
@@ -28,17 +30,20 @@ const paypalBtn = ({order}) => {
               return actions.order.capture().then(function(details) {
                 console.log(details)
                 //path data to api
-                patchData(`order/payment/${order._id}`, {paymentId: details.payer.payer_id}, auth.token)
-                    .then(res => {
-                        //Thất bại => err
-                        if(res.err) return dispatch({ type: 'NOTIFY', payload: {error: res.err} })
-                        
-                        dispatch(updateItem(orders, order._id, {
-                          ...order, paid: true, dateOfPayment: new Date().toISOString(), paymentId: details.payer.payer_id, method: 'Paypal'
-                        }, 'ADD_ORDERS'))
-                        dispatch({type: 'NOTIFY', payload: {success: res.msg}})
-                       
-                })
+                postData('order/payment', {name, email, sdt, diachi, phuongxa, quanhuyen, tinhtp, total, cart, paymentId: details.payer.payer_id}, auth.token)
+                  .then(res => {
+                    if(res.err) return dispatch({ type: 'NOTIFY', payload: {error: res.err} })
+                    //Thành công => xóa cart
+                    dispatch({ type: 'ADD_CART', payload: [] })
+                    const newOrders = {
+                        ...res.newOrders,
+                        user: auth.user
+                    }
+                    dispatch({type: 'ADD_ORDERS', payload: [...orders, newOrders] })
+                    dispatch({type: 'NOTIFY', payload: {success: res.msg}})
+                    return router.push(`/order/${res.newOrders._id}`)
+                  })
+                
               });
             }
           }).render(refPaypalBtn.current);

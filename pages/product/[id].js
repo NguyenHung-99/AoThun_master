@@ -116,7 +116,7 @@ const DetailProduct = (props) =>{
                       <div className="row">
                           {
                               productFeature.map(ite =>(
-                                <div className="col-4">
+                                <div key={ite._id} className="col-4">
                                     <div className="box">
                                         <div className="slide-img">
                                             <img src={ite.images[0].url}></img>

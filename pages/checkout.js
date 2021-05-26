@@ -424,7 +424,7 @@ const Checkout = () => {
                                                 <div className="radio-wrapper content-box-row">
                                                     <label className="radio-label" defaultValue="payment_method_id_941686">
                                                                     <div className="radio-input">
-                                                                        <input id="payment_cod" className="input-radio" name="payment_cod" type="radio" value="payment_cod" onClick={handlePayment_method} checked={payment_method === 'payment_cod' && 'checked'}/>
+                                                                        <input id="payment_cod" className="input-radio" name="payment_cod" type="radio" value="payment_cod" onChange={handlePayment_method} checked={payment_method === 'payment_cod' && 'checked'}/>
                                                                     </div>
                                                                     <span className="radio-label-primary">Thanh toán khi giao hàng (COD)</span>
                                                                 </label>
@@ -432,7 +432,7 @@ const Checkout = () => {
                                                 <div className="radio-wrapper content-box-row">
                                                     <label className="radio-label" defaultValue="payment_method_id_941686">
                                                                     <div className="radio-input">
-                                                                        <input id="payment_Paypal" className="input-radio" name="payment_Paypal" type="radio" value="payment_Paypal" onClick={handlePayment_method} checked={payment_method === 'payment_Paypal' && 'checked'}/>
+                                                                        <input id="payment_Paypal" className="input-radio" name="payment_Paypal" type="radio" value="payment_Paypal" onChange={handlePayment_method} checked={payment_method === 'payment_Paypal' && 'checked'}/>
                                                                     </div>
                                                                     <span className="radio-label-primary">Paypal</span>
                                                                 </label>
@@ -440,7 +440,7 @@ const Checkout = () => {
                                                 <div className="radio-wrapper content-box-row">
                                                     <label className="radio-label" defaultValue="payment_method_id_941686">
                                                                     <div className="radio-input">
-                                                                        <input id="payment_Momo" className="input-radio" name="payment_Momo" type="radio" value="payment_Momo" onClick={handlePayment_method} checked={payment_method === 'payment_Momo' && 'checked'}/>
+                                                                        <input id="payment_Momo" className="input-radio" name="payment_Momo" type="radio" value="payment_Momo" onChange={handlePayment_method} checked={payment_method === 'payment_Momo' && 'checked'}/>
                                                                     </div>
                                                                     <span className="radio-label-primary">Momo</span>
                                                                 </label>
@@ -474,7 +474,17 @@ const Checkout = () => {
                             }
                             {
                                 payment_method === 'payment_Paypal'
-                                ?   <PaypalBtn order={cart} />
+                                ?   <PaypalBtn 
+                                name = {name}
+                                email = {email}
+                                sdt = {sdt}
+                                diachi = {diachi}
+                                phuongxa = {phuongxa}
+                                quanhuyen = {quanhuyen}
+                                tinhtp = {tinhtp}
+                                total = {total}
+                                cart = {cart}
+                                />
                                 :null
                             }
                                                     

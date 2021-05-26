@@ -1,58 +1,25 @@
-import connectDB from '../../../utils/connectDB'
-import Orders from '../../../models/orderModel'
-import auth from '../../../middleware/auth'
-import Products from '../../../models/productModel'
-import Addresss from '../../../models/addressModel'
-import Users from '../../../models/userModel'
-
-
+import connectDB from '../../../../utils/connectDB'
+import Orders from '../../../../models/orderModel'
+import auth from '../../../../middleware/auth'
+import Addresss from '../../../../models/addressModel'
+import Users from '../../../../models/userModel'
+import Products from '../../../../models/productModel'
 
 var nodemailer = require('nodemailer');
 var smtpTransport = require('nodemailer-smtp-transport');
 
-
 connectDB()
 
-
-
-export default async (req, res) => {
-    switch (req.method) {
-        case 'POST':
-            await createOrder(req, res)
-            break;
-        case 'GET':
-            await getOrders(req, res)
+export default async(req,res) => {
+    switch(req.method){
+        case "POST":
+            await paymentPaypalOrder(req, res)
             break;
     }
 }
-const getOrders = async (req, res) => {
+const paymentPaypalOrder = async(req, res) => {
     try {
-        const result = await auth(req, res)
-        let orders;
-
-        //user => get all oders by users
-        if (result.role !== 'admin') {
-            orders = await Orders.find({
-                user: result.id
-            }).populate("user", "-diaChi")
-        } else {
-            //get all order in db
-            orders = await Orders.find().populate("user", "-diaChi")
-
-        }
-        res.json({
-            orders,
-            totalOrd: orders.length
-        })
-    } catch (err) {
-        return res.status(500).json({
-            err: err.message
-        })
-    }
-}
-
-const createOrder = async (req, res) => {
-    try {
+        console.log('vo paasd r hyng')
         const result = await auth(req, res)
         const {
             name,
@@ -63,7 +30,8 @@ const createOrder = async (req, res) => {
             quanhuyen,
             tinhtp,
             total,
-            cart
+            cart,
+            paymentId
         } = req.body
         
         const users = await Users.findById({
@@ -89,7 +57,9 @@ const createOrder = async (req, res) => {
             address: address._id,
             mobile: sdt,
             cart,
-            total
+            total,
+            paid: true, dateOfPayment: new Date().toISOString(), paymentId,
+                method: 'Paypal'
 
         })
         
