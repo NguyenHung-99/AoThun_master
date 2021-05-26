@@ -33,7 +33,7 @@ const sendLinkActive = async (req, res) => {
         
         const emailData = {
             to: newUser.email,
-            from: process.env.EMAIL_FROM,
+            from: process.env.SEND_MAIL_USER,
             subject: 'Active tài khoản HTStore',
             html: `
                 <h1>Vui lòng nhấn vào link dưới đây để active tài khoản của bạn</h1>

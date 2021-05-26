@@ -105,7 +105,7 @@ const paymentPaypalOrder = async(req, res) => {
 
         const emailData = {
             to: users.email,
-            from: process.env.EMAIL_FROM,
+            from: process.env.SEND_MAIL_USER,
             subject: `HT_Store đã nhận đơn hàng ${newOrders._id}`,
             html: htmlData
         }

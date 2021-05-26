@@ -33,7 +33,7 @@ const sendEmail_ResetPassword = async (req,res) => {
         
         const emailData = {
             to: user.email,
-            from: process.env.EMAIL_FROM,
+            from: process.env.SEND_MAIL_USER,
             subject: 'Đổi Mật khẩu tài khoản HTStore',
             html: `
                 <h1>Vui lòng nhấn vào link dưới đây để đổi mật khẩu</h1>

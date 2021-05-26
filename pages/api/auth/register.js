@@ -66,7 +66,7 @@ const register = async (req, res) => {
         
         const emailData = {
             to: email,
-            from: process.env.EMAIL_FROM,
+            from: process.env.SEND_MAIL_USER,
             subject: 'Đăng kí thành công tài khoản HTStore',
             html: `
                 <h1>Vui lòng nhấn vào link dưới đây để active tài khoản của bạn</h1>
