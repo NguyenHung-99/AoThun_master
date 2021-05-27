@@ -23,11 +23,8 @@ const forgotPassword = () => {
         dispatch({ type: 'NOTIFY', payload: {loading: true} })
         
         const res = await postData('user/forgotPassword', {email: userData.email})
-        console.log(res.err)
         if(res.err) return dispatch({ type: 'NOTIFY', payload: {error: res.err} })
-        if(res.errMsg) return dispatch({ type: 'NOTIFY', payload: {error: res.errMsg} })
-
-        dispatch({ type: 'NOTIFY', payload: {success: res.message} });
+        return dispatch({ type: 'NOTIFY', payload: {success: res.message} });
         
     }
 

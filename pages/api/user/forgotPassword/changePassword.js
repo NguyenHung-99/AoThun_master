@@ -31,8 +31,7 @@ const changePassword = async (req, res) => {
         }else{
             const passwordHash = await bcrypt.hash(password, 12)
             const account = await Accounts.findOneAndUpdate({_id: user.account}, {password: passwordHash})
-
-            res.json({ msg: "Update Success!"})
+            res.json({ msg: "Đổi Mật khẩu thành công!"})
         }
     } catch (err) {
         return res.status(500).json({err: 'Token hết hạn. Vui lòng đổi mật khẩu lại.'})

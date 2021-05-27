@@ -59,7 +59,7 @@ const sendEmail_ResetPassword = async (req,res) => {
         })
 
     }else{
-        res.json({errMsg: 'Không có email này'})
+        res.json({err: 'Không có email này'})
     }
       
   }catch(err){

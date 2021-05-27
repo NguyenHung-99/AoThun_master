@@ -75,7 +75,11 @@ const createProduct = () => {
             res = await postData('product', {...product,inStock: count, images: [...imgOldURL, ...media]}, auth.token)
             if(res.err) return dispatch({type: 'NOTIFY', payload: {error: res.err}})
         }
-        
+        setProduct(initialState)
+        setImages([])
+        setInStock_SizeS(0)
+        setInStock_SizeM(0)
+        setInStock_SizeL(0)
         return dispatch({type: 'NOTIFY', payload: {success: res.msg}})
 
        
@@ -123,7 +127,18 @@ const createProduct = () => {
 
     if(!auth.user || auth.user.role !== 'admin') return null
     return (
-        <div className="products_manager" style={{marginLeft:'10%', marginRight:'10%'}}>
+        <div className="page-wrapper font-poppins" style={{backgroundColor:'whitesmoke'}}>
+
+    <Head>
+        <title>Liên Hệ</title>
+    </Head>
+    <div className="wrapper wrapper--w750">
+        <div className="card card-4">
+            <div className="card-body">
+                
+                <div className="col-sm-12">
+
+                <div className="products_manager" style={{marginLeft:'5%', marginRight:'5%'}}>
             
             <Head>
                 <title>Products Manager</title>
@@ -133,42 +148,44 @@ const createProduct = () => {
                 <div className="col-md-6">
                     
                     <input type="text" name="title" value={title}
-                    placeholder="Title" className="d-block my-4 w-100 p-2"
+                    placeholder="Title" style={{border:'groove'}} className="d-block my-4 w-100 p-2"
                     onChange={handleChangeInput} />
 
                     <div className="row">
                         <div className="col-sm-12">
                             <label htmlFor="price">Price</label>
                             <input type="number" name="price" value={price}
-                            placeholder="Price" className="d-block w-100 p-2"
+                            placeholder="Price" style={{border:'groove'}} className="d-block w-100 p-2"
                             onChange={handleChangeInput} />
                         </div>  
                     </div>
-                    <hr/>
+                    <br/>
+                    <hr style={{backgroundColor:'gray'}}/>
                     <h3 style={{textAlign:'center'}}>Size</h3>
                     <div className="row">
                         
                         <div className="col-sm-4">
                             <label htmlFor="price">S</label>
-                            <input type="number" name="InStock_SizeS" value={InStock_SizeS}
+                            <input type="number" name="InStock_SizeS" style={{border:'groove'}} value={InStock_SizeS}
                             placeholder="InStock" className="d-block w-100 p-2"
                             onChange={e => setInStock_SizeS(e.target.value)}/>
                         </div>
 
                         <div className="col-sm-4">
                             <label htmlFor="price">M</label>
-                            <input type="number" name="InStock_SizeM" value={InStock_SizeM}
+                            <input type="number" name="InStock_SizeM" style={{border:'groove'}} value={InStock_SizeM}
                             placeholder="InStock" className="d-block w-100 p-2"
                             onChange={e => setInStock_SizeM(e.target.value)} />
                         </div>
                         <div className="col-sm-4">
                             <label htmlFor="price">L</label>
-                            <input type="number" name="InStock_SizeL" value={InStock_SizeL}
+                            <input type="number" name="InStock_SizeL" style={{border:'groove'}} value={InStock_SizeL}
                             placeholder="inStock" className="d-block w-100 p-2"
                             onChange={e => setInStock_SizeL(e.target.value)} />
                         </div>
                     </div>
-                    <hr/>
+                    <br/>
+                    <hr style={{backgroundColor:'gray'}}/>
 
                     <textarea name="description" id="description" cols="30" rows="4"
                     placeholder="Description" onChange={handleChangeInput}
@@ -230,7 +247,15 @@ const createProduct = () => {
             </form>
 
             
+        </div>          
+
+                </div>
+            </div>
         </div>
+    </div>
+</div>
+
+       
     )
 }
 export default createProduct
