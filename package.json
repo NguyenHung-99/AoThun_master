@@ -10,6 +10,7 @@
     "dependencies": {
         "antd": "^4.15.4",
         "bcrypt": "^5.0.0",
+        "chart.js": "^3.3.0",
         "crypto": "^1.0.1",
         "dateformat": "^4.5.1",
         "jquery": "^3.6.0",
