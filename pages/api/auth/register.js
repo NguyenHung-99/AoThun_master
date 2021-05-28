@@ -70,10 +70,10 @@ const register = async (req, res) => {
             subject: 'Đăng kí thành công tài khoản HTStore',
             html: `
                 <h1>Vui lòng nhấn vào link dưới đây để active tài khoản của bạn</h1>
-                <p>${process.env.NEXT_PUBLIC_STRAPI_API_URL}/activeUser/${token}</p>
+                <p>${process.env.BASE_URL}/activeUser/${token}</p>
                 <hr/>
                 <p>Email này chứa những thông tin nhạy cảm và sẽ hết hạn trong vòng 15 phút</p>
-                <p>${process.env.NEXT_PUBLIC_STRAPI_API_URL}</p>
+                <p>${process.env.BASE_URL}</p>
             `
         }
        

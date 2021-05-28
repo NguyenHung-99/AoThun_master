@@ -37,10 +37,10 @@ const sendEmail_ResetPassword = async (req,res) => {
             subject: 'Đổi Mật khẩu tài khoản HTStore',
             html: `
                 <h1>Vui lòng nhấn vào link dưới đây để đổi mật khẩu</h1>
-                <p>${process.env.NEXT_PUBLIC_STRAPI_API_URL}/changePassword/${token}</p>
+                <p>${process.env.BASE_URL}/changePassword/${token}</p>
                 <hr/>
                 <p>Email này chứa những thông tin nhạy cảm và sẽ hết hạn trong vòng 15 phút</p>
-                <p>${process.env.NEXT_PUBLIC_STRAPI_API_URL}</p>
+                <p>${process.env.BASE_URL}</p>
             `
         }
         transporter.sendMail(emailData, function (err, info) {
