@@ -66,19 +66,19 @@ const DetailProduct = (props) =>{
                 <div className="size-container">
                 
                     <div className="form-check-product">
-                    <a className="form-check-S " style={sizeSelection === 'S' ? {backgroundColor: 'grey'}: null} onClick={()=>{
+                    <a className="form-check-S " style={sizeSelection === 'S' ? {backgroundColor: 'grey',borderRadius:'40px', color:'white'}: {borderRadius:'40px'}} onClick={()=>{
                         setSizeSelection('S')
                     }}>
                     {/* <input type="radio" className="form-check-input" id="materialGroupExample1" name="groupOfMaterialRadios" value='S' checked={sizeSelection === 'S'} onChange={handleSize}/> */}
                         <label className="form-check-label  text-uppercase-dark" htmlFor="materialGroupExample1" > S</label>
                     </a>
-                    <a className="form-check-S" style={sizeSelection === 'M' ? {backgroundColor: 'grey'}: null} onClick={()=>{
+                    <a className="form-check-S" style={sizeSelection === 'M' ? {backgroundColor: 'grey',borderRadius:'40px', color:'white'}: {borderRadius:'40px'}} onClick={()=>{
                         setSizeSelection('M')
                     }}>
                     {/* <input type="radio" className="form-check-input" id="materialGroupExample2" name="groupOfMaterialRadios" value='M' checked={sizeSelection === 'M'} onChange={handleSize}/> */}
                         <label className="form-check-label small text-uppercase " htmlFor="materialGroupExample2"> M</label>
                     </a>
-                    <a className="form-check-S" style={sizeSelection === 'L' ? {backgroundColor: 'grey'}: null} onClick={()=>{
+                    <a className="form-check-S" style={sizeSelection === 'L' ? {backgroundColor: 'grey',borderRadius:'40px', color:'white'}: {borderRadius:'40px'}} onClick={()=>{
                         setSizeSelection('L')
                     }}>
                     {/* <input type="radio" className="form-check-input" id="materialGroupExample3" name="groupOfMaterialRadios" value='L' checked={sizeSelection === 'L'} onChange={handleSize}/> */}
