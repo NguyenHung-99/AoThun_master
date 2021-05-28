@@ -1,4 +1,4 @@
-const baseUrl = process.env.BASE_URL
+const baseUrl = process.env.NEXT_PUBLIC_STRAPI_API_URL
 
 export const getData = async (url, token) => {
     const res = await fetch(`${baseUrl}/api/${url}`, {
