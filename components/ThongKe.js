@@ -123,7 +123,7 @@ const ThongKe = () => {
                                             </td>
                                             <td  className="col-2">
                                                 {
-                                                    order.delivered
+                                                    order.delivered === 'Đã giao hàng'
                                                     ? <i className="fas fa-check text-success"></i>
                                                     : <i className="fas fa-times text-danger"></i>
                                                 }

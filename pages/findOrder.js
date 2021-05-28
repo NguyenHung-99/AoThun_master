@@ -56,10 +56,11 @@ const findOrder = () => {
                             <p><b>Address:</b> {resultOrder.address}</p>
                             <p><b>Mobile:</b> {resultOrder.mobile}</p>
                             <br/>
-                            <div className={`alert ${resultOrder.delivered ? 'alert-success' : 'alert-danger'}
+                            <div className={`alert ${resultOrder.delivered === 'Đã giao hàng' ? 'alert-success' : 'alert-danger'}
                             d-flex justify-content-between align-items-center`} role="alert">
+                                
                                 {
-                                    resultOrder.delivered ? `Deliverd on ${resultOrder.updatedAt}` : 'Not Delivered'
+                                    resultOrder.delivered === 'Đã giao hàng' ? `Deliverd on ${resultOrder.updatedAt}` : resultOrder.delivered
                                 }
                                 
                             </div>

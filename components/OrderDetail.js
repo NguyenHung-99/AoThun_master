@@ -4,10 +4,10 @@ import { updateItem } from '../store/Actions'
 
 const OrderDetail = ({orderDetail, state, dispatch}) => {
     const {auth, orders} = state
-    const handleDelivered = (order) => {
+    const handleDelivered = (order, delivere) => {
         dispatch({type: 'NOTIFY', payload: {loading: true}})
         
-        patchData(`order/delivered/${order._id}`,null, auth.token).then(res=>{
+        patchData(`order/delivered/${order._id}`, {delivere} , auth.token).then(res=>{
             if(res.err) return  dispatch({type: 'NOTIFY', payload: {error: res.err}})
             
             const { paid, dateOfPayment, method, delivered } = res.result
@@ -15,6 +15,7 @@ const OrderDetail = ({orderDetail, state, dispatch}) => {
             dispatch(updateItem(orders, order._id, {...order, paid, dateOfPayment, method, delivered}, 'ADD_ORDERS'))
             return  dispatch({type: 'NOTIFY', payload: {success: res.msg}})
         })
+        
     }
    
     return (
@@ -34,18 +35,42 @@ const OrderDetail = ({orderDetail, state, dispatch}) => {
                         <p><b>Address:</b> {order.address}</p>
                         <p><b>Mobile:</b> {order.mobile}</p>
                         <br/>
-                        <div className={`alert ${order.delivered ? 'alert-success' : 'alert-danger'}
+                        <div className={`alert ${order.delivered === 'Đã giao hàng' ? 'alert-success' : 'alert-danger'}
                         d-flex justify-content-between align-items-center`} role="alert">
                             {
-                                order.delivered ? `Deliverd on ${order.updatedAt}` : 'Not Delivered'
+                                order.delivered === 'Đã giao hàng' ? `Deliverd on ${order.updatedAt}` : order.delivered
                             }
+
                             {
-                                auth.user.role === 'admin' && !order.delivered &&
+                                auth.user.role === 'admin' && order.delivered === 'Chờ xác nhận' &&
                                 <button className="btn btn-dark text-uppercase"
-                                onClick={() => handleDelivered(order)}>
-                                    Mark as delivered
+                                onClick={(e) => {
+                                    const delivere = e.target.value
+                                    handleDelivered(order, delivere)
+                                }} value="Chờ lấy hàng">
+                                    Xác nhận Đơn hàng
                                 </button>
                             }
+                            {
+                                auth.user.role === 'admin' && order.delivered === 'Chờ lấy hàng' &&
+                                <button className="btn btn-dark text-uppercase"
+                                onClick={(e) => {
+                                    const delivere = e.target.value
+                                    handleDelivered(order, delivere)
+                                }} value="Đang giao hàng">
+                                    Đã lấy hàng
+                                </button>
+                            }
+                            {
+                                auth.user.role === 'admin' && order.delivered === 'Đang giao hàng' &&
+                                <button className="btn btn-dark text-uppercase"
+                                onClick={(e) => {
+                                    const delivere = e.target.value
+                                    handleDelivered(order, delivere)
+                                }} value="Đã giao hàng">
+                                    Đã giao hàng
+                                </button>
+                            }                                                       
                             
                         </div>
                         <hr/>

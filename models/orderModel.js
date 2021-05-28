@@ -15,8 +15,8 @@ const orderSchema = new mongoose.Schema({
     paymentId: String,
     method: String,
     delivered: {
-        type: Boolean,
-        default: false
+        type: String,
+        default: 'Chờ xác nhận'
     },
     paid: {
         type: Boolean,

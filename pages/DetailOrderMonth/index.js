@@ -8,7 +8,7 @@ import { getData } from '../../utils/fetchData';
 
 import Link from 'next/link'
 
-const DetailOrder = () => {
+const DetailOrderMonth = () => {
 
     const [state, dispatch] = useContext(DataContext)
     const {orders, auth} = state
@@ -187,7 +187,7 @@ const DetailOrder = () => {
                                             </td>
                                             <td  className="col-md-1">
                                                 {
-                                                    order.delivered
+                                                    order.delivered === 'Đã giao hàng'
                                                     ? <i className="fas fa-check text-success"></i>
                                                     : <i className="fas fa-times text-danger"></i>
                                                 }
@@ -210,4 +210,4 @@ const DetailOrder = () => {
     </div>
     )
 }
-export default DetailOrder
+export default DetailOrderMonth

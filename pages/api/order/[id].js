@@ -14,7 +14,7 @@ export default async (req, res) => {
 const getOrderByID = async (req, res) => {
     try {
         const {id} = req.query;
-        const order = await Orders.findById({_id: id});
+        const order = await Orders.findById({_id: id}).populate('user');
         if(!order) return res.json({err: 'Đơn hàng không tồn tại!!!.'})
         return res.json({
             order: order,

@@ -215,7 +215,7 @@ const Profile = () => {
                                             <td className="p-2">${order.total}</td>
                                             <td className="p-2">
                                                 {
-                                                    order.delivered
+                                                    order.delivered === 'Đã giao hàng'
                                                     ? <i className="fas fa-check text-success"></i>
                                                     : <i className="fas fa-times text-danger"></i>
                                                 }

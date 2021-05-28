@@ -4,16 +4,10 @@ import auth from '../../../middleware/auth'
 import Products from '../../../models/productModel'
 import Addresss from '../../../models/addressModel'
 import Users from '../../../models/userModel'
-
-
-
 var nodemailer = require('nodemailer');
 var smtpTransport = require('nodemailer-smtp-transport');
 
-
 connectDB()
-
-
 
 export default async (req, res) => {
     switch (req.method) {

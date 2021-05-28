@@ -18,35 +18,52 @@ const deliveredOrderd = async(req, res) => {
         if(result.role !== 'admin') return res.status(400).json({err: 'Tài khoản không hợp lệ.'})
 
         const {id} = req.query
+        const {delivere} = req.body
+        console.log(delivere + 'hung api')
         
         const order = await Orders.findOne({_id: id})
         if(order.paid){
-            await Orders.findOneAndUpdate({_id: id}, {delivered: true})
+            await Orders.findOneAndUpdate({_id: id}, {delivered: delivere})
     
             res.json({
-                msg: 'Updated success!',
+                msg: 'Cập nhật trạng thái đơn hàng thành công.',
                 result: {
                     paid: true, 
                     dateOfPayment: order.dateOfPayment, 
                     method: order.method, 
-                    delivered: true
+                    delivered: delivere
                 }
             })
         }else{
-            await Orders.findOneAndUpdate({_id: id}, {
-                paid: true, dateOfPayment: new Date().toISOString(), 
-                method: 'Receive Cash', delivered: true
-            })
-    
-            res.json({
-                msg: 'Updated success!',
-                result: {
-                    paid: true, 
-                    dateOfPayment: new Date().toISOString(), 
-                    method: 'Receive Cash', 
-                    delivered: true
-                }
-            })
+            if(delivere === 'Đã giao hàng'){
+                await Orders.findOneAndUpdate({_id: id}, {
+                    paid: true, dateOfPayment: new Date().toISOString(), 
+                    method: 'Receive Cash', delivered: delivere
+                })
+        
+                res.json({
+                    msg: 'Cập nhật trạng thái đơn hàng thành công.',
+                    result: {
+                        paid: true, 
+                        dateOfPayment: new Date().toISOString(), 
+                        method: 'Receive Cash', 
+                        delivered: delivere
+                    }
+                })
+            }else{
+                await Orders.findOneAndUpdate({_id: id}, {delivered: delivere})
+        
+                res.json({
+                    msg: 'Cập nhật trạng thái đơn hàng thành công.',
+                    result: {
+                        paid: false, 
+                        dateOfPayment: new Date().toISOString(), 
+                        method: '', 
+                        delivered: delivere
+                    }
+                })
+            }
+            
         }
     } catch (err) {
         return res.status(500).json({err: err.message})
