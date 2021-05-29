@@ -87,10 +87,6 @@ const Signin = () => {
                             <label htmlFor="inputPassword">Mật khẩu</label>
                         </div>
 
-                        <div className="custom-control custom-checkbox mb-3">
-                            <input type="checkbox" className="custom-control-input" id="customCheck1"/>
-                            <label className="custom-control-label" htmlFor="customCheck1">Remember password</label>
-                        </div>
                         <button className="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Đăng nhập</button>
                         <br/>
                         <center><Link href="/forgotPassword"><a style={{color: 'crimson'}}>Quên mật khẩu?</a></Link></center>

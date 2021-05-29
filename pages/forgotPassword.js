@@ -27,7 +27,8 @@ const forgotPassword = () => {
         return dispatch({ type: 'NOTIFY', payload: {success: res.message} });
         
     }
-
+    //có tk không vào được trang
+    if(auth.user) return null
     return (
         <div className='signin'>
         <Head>

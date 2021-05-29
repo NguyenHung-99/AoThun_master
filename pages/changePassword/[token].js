@@ -2,8 +2,9 @@ import Link from 'next/link'
 import Head from 'next/head'
 import {useState, useContext, useEffect} from 'react'
 import {DataContext} from '../../store/GlobalState'
-import {patchData} from '../../utils/fetchData'
+import {getData, patchData, postData} from '../../utils/fetchData'
 import {useRouter} from 'next/router'
+import jwt from 'jsonwebtoken'
 
 const changePassword = (props) => {
     const initialState = { password: '',confirmPassword: ''};
@@ -12,6 +13,7 @@ const changePassword = (props) => {
 
     const [state, dispatch] = useContext(DataContext)
     const router = useRouter()
+    const [tokenExpires, setTokenExpires] = useState(false)
    
     const handleChangeInput = e =>{
         const {name, value} = e.target
@@ -36,7 +38,39 @@ const changePassword = (props) => {
         })       
         
     }
-
+    useEffect(() => {
+        postData('user/forgotPassword/checkTokenExpires', {token: props.token}).then(res => {
+            if(res.err) return setTokenExpires(true)
+            
+        })  
+    }, []);
+    if(tokenExpires) return (
+        <div className='signin'>
+            <Head>
+                <title>Đổi mật khẩu</title>
+            </Head>
+            <div className='body'>
+            <div className="container">
+                <div className="row">
+                <div className="col-sm-9 col-md-7 col-lg-5 mx-auto">
+                    <div className="card card-signin my-5">
+                    <div className="card-body">
+                        <center >
+                            <h1 style={{color:'red'}}><b>TOKEN HẾT HẠN</b></h1>
+                            <br/>
+                            <span>Vui lòng đổi lại mật khẩu</span>
+                            <br/><br/>
+                            <a href='/forgotPassword' style={{borderRadius:'40px'}} className="btn btn-lg btn-primary btn-block text-uppercase">Quên mật khẩu</a>
+                        </center>
+                        
+                    </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    )
     return (
         <div className='signin'>
             <Head>

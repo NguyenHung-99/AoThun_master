@@ -26,7 +26,16 @@ const activeUser = (props) => {
         
     }
     const handleResendCode = async e => {
-
+        e.preventDefault()
+    
+        dispatch({ type: 'NOTIFY', payload: {loading: true} })
+        patchData('user/resendLinkActive', {token: props.token}, props.token)
+        .then(res => {
+            if(res.err) return dispatch({ type: 'NOTIFY', payload: {error: res.err} })
+            return dispatch({ type: 'NOTIFY', payload: {success: res.msg} })
+            
+            
+        })  
     }
 
     return (
