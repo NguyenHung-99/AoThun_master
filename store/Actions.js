@@ -11,14 +11,14 @@ export const ACTIONS = {
 export const addToCart = (product, cart, sizeSelection) => {
 
     if(product.inStock === 0){
-        return ({type: 'NOTIFY', payload: {error: 'This product is out of stock.'}})
+        return ({type: 'NOTIFY', payload: {error: 'Sản phẩm này đã outStock.'}})
     }
     
     const result = product.size.filter(item => item.Size === sizeSelection)
    
     if(result[0].InStock_Size === 0){
         
-        return ({type: 'NOTIFY', payload: {error: 'This Size is out of stock.'}})
+        return ({type: 'NOTIFY', payload: {error: 'Size được chọn đã hết hàng.'}})
     }
     //check sản phẩm được thêm vào cart chưa
     const check = cart.every(item => {
@@ -27,7 +27,7 @@ export const addToCart = (product, cart, sizeSelection) => {
     })
    
     //sản phẩm đã có trong giỏ hàng: check === false
-    if(!check) return ({ type: 'NOTIFY', payload: {error: 'The product has been added to cart.'} })
+    if(!check) return ({ type: 'NOTIFY', payload: {error: 'Sản phẩm đã có trong giỏ hàng của bạn.'} })
    
     //check === true => sp chưa có trong cart
     return ({ type: 'ADD_CART', payload: [...cart, {...product, quantity: 1, sizeSelection: sizeSelection}] })    

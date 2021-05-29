@@ -150,7 +150,7 @@ const Profile = () => {
     return( 
         <div className="profile_page" style={{marginLeft:'10%', marginRight:'10%', marginTop: '30px'}}>
             <Head>
-                <title>Profile</title>
+                <title>Thông tin cá nhân</title>
             </Head>
 
             <section className="row text-secondary my-3">
@@ -177,25 +177,25 @@ const Profile = () => {
                 <div className="col-md-8">              
                     <nav>
                         <div className="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
-                            <a className="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Orders</a>
-                            <a className="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Profile</a>
-                            <a className="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Address</a>
-                            <a className="nav-item nav-link" id="nav-about-tab" data-toggle="tab" href="#nav-about" role="tab" aria-controls="nav-about" aria-selected="false">Password</a>
+                            <a className="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Đơn hàng</a>
+                            <a className="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Thông tin cá nhân</a>
+                            <a className="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Địa chỉ</a>
+                            <a className="nav-item nav-link" id="nav-about-tab" data-toggle="tab" href="#nav-about" role="tab" aria-controls="nav-about" aria-selected="false">Mật khẩu</a>
                         </div>
                     </nav>
                     <div className="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
                         <div className="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-                        <h2 style={{textAlign:'center'}} className="text-uppercase">Orders</h2>
+                        <h2 style={{textAlign:'center'}} className="text-uppercase">Đơn hàng</h2>
                         <div className="my-3 table-responsive">
                         <table className="table-bordered table-hover w-100 text-uppercase"
                         style={{minWidth: '600px', cursor: 'pointer'}}>
                             <thead className="bg-light font-weight-bold">
                                 <tr>
-                                    <td className="p-2">id</td>
-                                    <td className="p-2">date</td>
-                                    <td className="p-2">total</td>
-                                    <td className="p-2">delivered</td>
-                                    <td className="p-2">paid</td>
+                                    <td className="p-2">Mã đơn hàng</td>
+                                    <td className="p-2">Ngày đặt hàng</td>
+                                    <td className="p-2">Tổng tiền</td>
+                                    <td className="p-2">Giao hàng</td>
+                                    <td className="p-2">Thanh toán</td>
                                 </tr>
                             </thead>
 
@@ -212,7 +212,7 @@ const Profile = () => {
                                             <td className="p-2">
                                                 {new Date(order.createdAt).toLocaleDateString()}
                                             </td>
-                                            <td className="p-2">${order.total}</td>
+                                            <td className="p-2">{order.total} ₫</td>
                                             <td className="p-2">
                                                 {
                                                     order.delivered === 'Đã giao hàng'
@@ -237,30 +237,30 @@ const Profile = () => {
                 </div>
                 <div className="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
                             <div style={{marginLeft:'20%', marginRight:'20%'}}>
-                                <h2 style={{textAlign:'center'}}>PROFILE</h2>
+                                <h2 style={{textAlign:'center'}}>THÔNG TIN CÁ NHÂN</h2>
                                 <br/>
                                     <div className='row'>
                                         <div className='col'>
                                             <div className="form-label-group">
                                                 <input type="text" id="inputUsername" name="name" value={name}  onChange={handleChangeInput} className="form-control" placeholder="Username" />
-                                                <label htmlFor="inputUserame">Username</label>
+                                                <label htmlFor="inputUserame">Tên</label>
                                             </div>
                                         </div>
                                         <div className="col">
                                             <div className="form-label-group">
                                                 <input type="tel" id="phone" name="sdt" value={sdt} onChange={handleChangeInput} className="form-control" placeholder="Phone" />
-                                                <label htmlFor="inputPhone">Phone</label>
+                                                <label htmlFor="inputPhone">Số điện thoại</label>
                                             </div>
                                         </div>
                                     </div>
                                     <div className="form-label-group">
                                         <input type="email" id="inputEmail" name="email" readOnly defaultValue={auth.user.email} onChange={handleChangeInput} className="form-control" placeholder="Email address" />
-                                        <label htmlFor="inputEmail">Email address</label>
+                                        <label htmlFor="inputEmail">Email</label>
                                     </div>
                                     <hr/>
                                     <div className="row row-space">
                                         <div className="col">
-                                            <label htmlFor="inputBirthday" className="label">BirthDay</label>
+                                            <label htmlFor="inputBirthday" className="label">Sinh nhật</label>
 
                                             <div className="input-group">
                                                 <div className="input-group-icon" >
@@ -278,13 +278,13 @@ const Profile = () => {
                                         </div>
                                   
                                         <div className="col"> 
-                                            <label className="label">Gender</label>
+                                            <label className="label">Giới tính</label>
                                             <div className="p-t-10">
-                                                <label className="radio-container m-r-45">Male
+                                                <label className="radio-container m-r-45">Nam
                                                     <input  type="radio" defaultChecked={gioiTinh? 'checked' : ''} name="gioiTinh" value="true" onClick={handleChangeInput}/>
                                                     <span className="checkmark"></span>
                                                 </label>
-                                                <label className="radio-container">Female
+                                                <label className="radio-container">Nữ
                                                     <input  type="radio" defaultChecked={gioiTinh? 'checked' : ''} name="gioiTinh" value="false" onClick={handleChangeInput}/>
                                                     <span className="checkmark"></span>
                                                 </label>
@@ -295,28 +295,30 @@ const Profile = () => {
                                 <br/>
                                 <div className="form-label-group">
                                     <input id="inputDateCreateUser" value={moment(ngayTao).format('DD-MM-YYYY')} readOnly name="password"  onChange={handleChangeInput} className="form-control" placeholder="Day Create User" />
-                                    <label htmlFor="inputDateCreateUser">Day create user</label>
+                                    <label htmlFor="inputDateCreateUser">Ngày tạo tài khoản</label>
                                 </div>
                                 
                              
                                 <div className="form-label-group">
                                         <input type="text" id="inputRole" name="role" value={role} readOnly={auth.user.role === 'user'? 'readOnly': ''} onChange={handleChangeInput} className="form-control" placeholder="Role" />
-                                        <label htmlFor="inputRole">Role</label>
+                                        <label htmlFor="inputRole">Phân quyền</label>
                                     </div>
                                     
                                     <div className="form-label-group">
                                         <input type="text" id="inpuStatus" value={trangThai? 'Activated' : 'Un Activated'} readOnly={auth.user.role === 'user'? 'readOnly': ''} name="status" onChange={handleChangeInput} className="form-control" placeholder="Status" />
-                                        <label htmlFor="inpuStatus">Status</label>
+                                        <label htmlFor="inpuStatus">Trạng thái</label>
                                     </div>
                                                               
-                            <button style={{marginLeft:'40%'}} className="btn btn-info" disabled={notify.loading} onClick={handleUpdateProfile}>
-                                Update
-                            </button>
+                            <center>
+                                <button className="btn btn-info" disabled={notify.loading} onClick={handleUpdateProfile}>
+                                    Cập nhật thông tin
+                                </button>
+                            </center>
                             </div>
                         </div>
                         <div className="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
                             <div style={{marginRight:'20%',marginLeft:'20%'}}>
-                                    <h2 style={{textAlign:'center'}}>UPDATE ADDRESS</h2>
+                                    <h2 style={{textAlign:'center'}}>ĐỊA CHỈ</h2>
                                     <br/>
                                     <div className="form-label-group">
                                         <input type="text" id="inputDiaChi" name="diachi" value={diachi} onChange={handleChangeInput} className="form-control" placeholder="Địa chỉ" />
@@ -338,28 +340,32 @@ const Profile = () => {
                                         <label htmlFor="inputTinhTP">Tỉnh / Thành Phố</label>
                                     </div>         
                                         
-                                    <button style={{marginLeft:'35%'}} className="btn btn-info" disabled={notify.loading} onClick={handleUpdateAddress}>
-                                        Update Address
-                                    </button>
+                                    <center>
+                                        <button className="btn btn-info" disabled={notify.loading} onClick={handleUpdateAddress}>
+                                            Cập nhật địa chỉ
+                                        </button>
+                                    </center>
                                 </div>
                         </div>
                         <div className="tab-pane fade" id="nav-about" role="tabpanel" aria-labelledby="nav-about-tab">
                             <div style={{marginRight:'20%',marginLeft:'20%'}}>
-                            <h2 style={{textAlign:'center'}}>CHANGE PASSWORD</h2>
+                            <h2 style={{textAlign:'center'}}>ĐỔI MẬT KHẨU</h2>
                             <br/>
                                 <div className="form-label-group">
                                             <input type="password" id="inputPassword" name="password" value={password} onChange={handleChangeInput} className="form-control" placeholder="Password" />
-                                            <label htmlFor="inputPassword">New Password</label>
+                                            <label htmlFor="inputPassword">Mật khẩu mới</label>
                                         </div>
                                         
                                         <div className="form-label-group">
                                             <input type="password" id="inputConfirmPassword" value={cf_password} name="cf_password" onChange={handleChangeInput} className="form-control" placeholder="Password" />
-                                            <label htmlFor="inputConfirmPassword">Confirm new password</label>
+                                            <label htmlFor="inputConfirmPassword">Nhập lại mật khẩu mới</label>
                                         </div>
                                     
-                                <button style={{marginLeft:'35%'}} className="btn btn-info" disabled={notify.loading} onClick={handleChangePassword}>
-                                    Update Password
-                                </button>
+                                <center>
+                                    <button className="btn btn-info" disabled={notify.loading} onClick={handleChangePassword}>
+                                        Đổi mật khẩu
+                                    </button>
+                                </center>
                             </div>
                         </div>
                     </div>

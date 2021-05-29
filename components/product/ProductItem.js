@@ -26,13 +26,13 @@ const ProductItem = ({product, handleCheck}) => {
         return(
             <>
                <a href={`product/${product._id}`} className="btn btn-info"style={{marginRight: '5px', flex: 1}} onClick={handleUpdate_UserView}>
-                   View
+                   Xem
                 </a>                
                 <button className="btn btn-success"
                 style={{marginLeft: '5px', flex: 1}}
                 disabled={product.inStock === 0 ? true : false} 
                 onClick={handleSubmit} >
-                    Buy
+                    Mua Ngay
                 </button>
             </>
         )
@@ -40,9 +40,12 @@ const ProductItem = ({product, handleCheck}) => {
     const adminLink = () => {
         return(
             <>
+                <a href={`product/${product._id}`} className="btn btn-success"style={{marginRight: '5px', flex: 1}} onClick={handleUpdate_UserView}>
+                   Xem
+                </a> 
                 <Link href={`create/${product._id}`}>
                     <a className="btn btn-info"
-                    style={{marginRight: '5px', flex: 1}}>Edit</a>
+                    style={{flex: 1}}>Sửa</a>
                 </Link>
                 <button className="btn btn-danger"
                 style={{marginLeft: '5px', flex: 1}}
@@ -54,7 +57,7 @@ const ProductItem = ({product, handleCheck}) => {
                         title: product.title, type: 'DELETE_PRODUCT' 
                     }]
                 })} >
-                    Delete
+                    Xóa
                 </button>
             </>
         )
@@ -78,7 +81,7 @@ const ProductItem = ({product, handleCheck}) => {
             </h5>
 
             <div className="row justify-content-between mx-0">
-                <h6 className="text-danger">${product.price}</h6>
+                <h6 className="text-danger">{product.price} ₫</h6>
                 {
                     product.inStock > 0
                     ? <h6 className="text-danger">In Stock: {product.inStock}</h6>

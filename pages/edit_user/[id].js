@@ -51,7 +51,7 @@ const EditUser = () => {
     return (
         <div className="edit_user my-3" style={{marginLeft:'10%', marginRight:'10%', marginTop:'20px'}}>
             <Head>
-                <title>Edit User</title>
+                <title>Phân quyền</title>
             </Head>
 
             <div>
@@ -61,8 +61,10 @@ const EditUser = () => {
             </div>
            
             <div className="col-md-4 mx-auto my-4">
-                <h2 className="text-uppercase text-secondary" style={{textAlign:'center'}}><b>Edit User</b></h2>
+                <h2 className="text-uppercase text-secondary" style={{textAlign:'center'}}><b>Phân quyền</b></h2>
+                <br/>
                 <hr/>
+                <br/>
                 <div className="form-label-group">
                     <input type="text"  id="name" defaultValue={editUser.ten} disabled  className="form-control" placeholder="Name"/>
                     <label htmlFor="inputEmail">Name</label>
@@ -78,11 +80,13 @@ const EditUser = () => {
                     style={{width: '20px', height: '20px'}} onChange={handleCheck} />
 
                     <label htmlFor="isAdmin" style={{transform: 'translate(4px, -3px)'}}>
-                        isAdmin
+                        Nhân viên
                     </label>
                 </div>
 
-                <button className="btn btn-dark" onClick={handleSubmit}>Update</button>
+                <center>
+                    <button className="btn btn-dark" onClick={handleSubmit}>Cập nhật</button>
+                </center>
 
             </div>
 

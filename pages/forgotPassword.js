@@ -31,7 +31,7 @@ const forgotPassword = () => {
     return (
         <div className='signin'>
         <Head>
-            <title>Forgot Password</title>
+            <title>Quên mật khẩu</title>
         </Head>
         <div className='body'>
         <div className="container">
@@ -39,17 +39,19 @@ const forgotPassword = () => {
             <div className="col-sm-9 col-md-7 col-lg-5 mx-auto">
                 <div className="card card-signin my-5">
                 <div className="card-body">
-                    <h5 className="card-title text-center">Forgot Password</h5>
+                    <h5 className="card-title text-center"><b>QUÊN MẬT KHẨU</b></h5>
+                    
                     <form className="form-signin" onSubmit={handleSubmit}>
+                    
                     <div className="form-label-group">
                         <input type="email" id="inputEmail" name="email" value={email} onChange={handleChangeInput} className="form-control" placeholder="Email address" autoFocus/>
                         <label htmlFor="inputEmail">Email address</label>
                     </div>
 
-                    <button className="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Send Email</button>
+                    <button className="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Gửi Email</button>
                     <hr className="my-4"/>
-                    <p>You have an account? <Link href="/signin"><a style={{color: '#6969ec'}}>Sign In</a></Link></p> 
-                    <p>You don't have an account? <Link href="/register"><a style={{color: 'crimson'}}>Register Now</a></Link></p>                  
+                    <p>Bạn đã có tài khoản? <Link href="/signin"><a style={{color: '#6969ec'}}>Đăng nhập</a></Link></p> 
+                    <p>Bạn chưa có tài khoản? <Link href="/register"><a style={{color: 'crimson'}}>Đăng ký ngay</a></Link></p>                  
                     </form>
                 </div>
                 </div>

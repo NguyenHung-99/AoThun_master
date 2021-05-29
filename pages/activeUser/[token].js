@@ -32,7 +32,7 @@ const activeUser = (props) => {
     return (
         <div className='signin'>
             <Head>
-                <title>Active User</title>
+                <title>Active Tài khoản</title>
             </Head>
             <div className='body'>
             <div className="container">
@@ -40,15 +40,15 @@ const activeUser = (props) => {
                 <div className="col-sm-9 col-md-7 col-lg-5 mx-auto">
                     <div className="card card-signin my-5">
                     <div className="card-body">
-                        <h5 className="card-title text-center">Active User</h5>
+                        <h5 className="card-title text-center">Active Tài khoản</h5>
                         <form className="form-signin" onSubmit={handleSubmit}>
                         <center><span>Vui lòng nhấn <b>ACTIVE</b> để active tài khoản của bạn.</span></center>
                         <br/>
                         <button className="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Active</button>
                         <br/>
-                        <center><Link href="/"><a style={{color: 'crimson'}}>Go Home</a></Link></center>
+                        <center><Link href="/"><a style={{color: 'crimson'}}>Quay lại trang chủ</a></Link></center>
                         <hr className="my-4"/>
-                        <p>Resend Active Code? <Link href="#"><a style={{color: 'crimson'}} onClick={handleResendCode}>Resend Code</a></Link></p>                  
+                        <p>Gửi lại Active Link? <Link href="#"><a style={{color: 'crimson'}} onClick={handleResendCode}>Gửi lại Link</a></Link></p>                  
                         
                         </form>
                     </div>

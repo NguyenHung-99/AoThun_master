@@ -191,7 +191,7 @@ const Checkout = () => {
                                                 </td>
                                                 <td className="product-quantity visually-hidden">1</td>
                                                 <td className="product-price">
-                                                    <span className="order-summary-emphasis">${item.price * item.quantity}</span>
+                                                    <span className="order-summary-emphasis">{item.price * item.quantity} ₫</span>
                                                 </td>
                                             </tr>
                                             ))
@@ -236,7 +236,7 @@ const Checkout = () => {
                                             <td className="total-line-name">Tạm tính</td>
                                             <td className="total-line-price">
                                                 <span className="order-summary-emphasis" data-checkout-subtotal-price-target="">
-                                                    {total}₫
+                                                    {total} ₫
                                                 </span>
                                             </td>
                                         </tr>

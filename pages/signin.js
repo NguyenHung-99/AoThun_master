@@ -64,7 +64,7 @@ const Signin = () => {
     return (
         <div className='signin'>
             <Head>
-                <title>Sign In</title>
+                <title>Đăng nhập</title>
             </Head>
             <div className='body'>
             <div className="container">
@@ -72,11 +72,11 @@ const Signin = () => {
                 <div className="col-sm-9 col-md-7 col-lg-5 mx-auto">
                     <div className="card card-signin my-5">
                     <div className="card-body">
-                        <h5 className="card-title text-center">Sign In</h5>
+                        <h5 className="card-title text-center">Đăng nhập</h5>
                         <form className="form-signin" onSubmit={handleSubmit}>
                         <div className="form-label-group">
                             <input type="email" id="inputEmail" name="email" value={email} onChange={handleChangeInput} className="form-control" placeholder="Email address" autoFocus/>
-                            <label htmlFor="inputEmail">Email address</label>
+                            <label htmlFor="inputEmail">Email</label>
                         </div>
 
                         <div className="form-label-group auth_page ">
@@ -84,18 +84,18 @@ const Signin = () => {
                             <small onClick={() => setTypePass(!typePass)}>
                             {typePass ? 'Hide' : 'Show'}
                         </small>
-                            <label htmlFor="inputPassword">Password</label>
+                            <label htmlFor="inputPassword">Mật khẩu</label>
                         </div>
 
                         <div className="custom-control custom-checkbox mb-3">
                             <input type="checkbox" className="custom-control-input" id="customCheck1"/>
                             <label className="custom-control-label" htmlFor="customCheck1">Remember password</label>
                         </div>
-                        <button className="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Sign in</button>
+                        <button className="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Đăng nhập</button>
                         <br/>
-                        <center><Link href="/forgotPassword"><a style={{color: 'crimson'}}>Forgot your password?</a></Link></center>
+                        <center><Link href="/forgotPassword"><a style={{color: 'crimson'}}>Quên mật khẩu?</a></Link></center>
                         <hr className="my-4"/>
-                        <p>You don't have an account? <Link href="/register"><a style={{color: 'crimson'}}>Register Now</a></Link></p>                  
+                        <p>Bạn chưa có tài khoản? <Link href="/register"><a style={{color: 'crimson'}}>Đăng ký ngay</a></Link></p>                  
                         </form>
                     </div>
                     </div>

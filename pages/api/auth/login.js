@@ -23,11 +23,11 @@ const login = async (req, res) => {
         const {email, password} = req.body
         
         const user = await Users.findOne({ email })
-        if(!user) return res.status(400).json({err: 'This user does not exists.'})
+        if(!user) return res.status(400).json({err: 'Tài khoản không tồn tại.'})
         const account = await Accounts.findById(user.account)
         const address = await Addresss.findById(user.diaChi)
         const isMatch = await bcrypt.compare(password, account.password);
-        if(!isMatch) return res.status(400).json({err: 'Incorrect password.'})
+        if(!isMatch) return res.status(400).json({err: 'Bạn đã nhập sai mật khẩu.'})
         if(account.trangThai === false) {
             return res.status(400).json({
                 notActive: true,
@@ -38,7 +38,7 @@ const login = async (req, res) => {
         const access_token = createAccessToken({id: user._id});
         const refresh_token = createRefreshToken({id: user._id});
         res.json({
-            msg: "Login Success!",
+            msg: "Đăng nhập thành công.",
             refresh_token,
             access_token,
             user:{

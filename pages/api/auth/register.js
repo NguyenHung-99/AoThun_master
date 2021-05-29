@@ -27,7 +27,7 @@ const register = async (req, res) => {
         const errMsg = valid(name , sdt, email, ngaySinh, gioiTinh, password, cf_password);
         if(errMsg) return res.status(400).json({err: errMsg})
         const user = await Users.findOne({ email })
-        if(user) return res.status(400).json({err: 'This email already exists.'})
+        if(user) return res.status(400).json({err: 'Email này đã tồn tại.'})
 
         const passwordHash = await bcrypt.hash(password, 12)
         

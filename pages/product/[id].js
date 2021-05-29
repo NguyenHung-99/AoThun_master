@@ -32,7 +32,7 @@ const DetailProduct = (props) =>{
         <div className="container single-product"style={{maxWidth:"1500px"}}>
         <div className="row detail_page" >
             <Head>
-                <title>Detail Product</title>
+                <title>{product.title}</title>
             </Head>
 
             <div className="col">
@@ -52,7 +52,7 @@ const DetailProduct = (props) =>{
 
             <div className="col">
                 <h4 className="text-uppercase">{product.title}</h4>
-                <h4 className="text-danger">${product.price}</h4>
+                <h4 className="text-danger">{product.price} ₫</h4>
 
                 <div className="row mx-0 d-flex justify-content-between">
                     {
@@ -66,19 +66,19 @@ const DetailProduct = (props) =>{
                 <div className="size-container">
                 
                     <div className="form-check-product">
-                    <a className="form-check-S " style={sizeSelection === 'S' ? {backgroundColor: 'grey',borderRadius:'40px', color:'white'}: {borderRadius:'40px'}} onClick={()=>{
+                    <a className="form-check-S " style={sizeSelection === 'S' ? {backgroundColor: 'sandybrown',borderRadius:'40px', color:'white'}: {borderRadius:'40px'}} onClick={()=>{
                         setSizeSelection('S')
                     }}>
                     {/* <input type="radio" className="form-check-input" id="materialGroupExample1" name="groupOfMaterialRadios" value='S' checked={sizeSelection === 'S'} onChange={handleSize}/> */}
                         <label className="form-check-label  text-uppercase-dark" htmlFor="materialGroupExample1" > S</label>
                     </a>
-                    <a className="form-check-S" style={sizeSelection === 'M' ? {backgroundColor: 'grey',borderRadius:'40px', color:'white'}: {borderRadius:'40px'}} onClick={()=>{
+                    <a className="form-check-S" style={sizeSelection === 'M' ? {backgroundColor: 'sandybrown',borderRadius:'40px', color:'white'}: {borderRadius:'40px'}} onClick={()=>{
                         setSizeSelection('M')
                     }}>
                     {/* <input type="radio" className="form-check-input" id="materialGroupExample2" name="groupOfMaterialRadios" value='M' checked={sizeSelection === 'M'} onChange={handleSize}/> */}
                         <label className="form-check-label small text-uppercase " htmlFor="materialGroupExample2"> M</label>
                     </a>
-                    <a className="form-check-S" style={sizeSelection === 'L' ? {backgroundColor: 'grey',borderRadius:'40px', color:'white'}: {borderRadius:'40px'}} onClick={()=>{
+                    <a className="form-check-S" style={sizeSelection === 'L' ? {backgroundColor: 'sandybrown',borderRadius:'40px', color:'white'}: {borderRadius:'40px'}} onClick={()=>{
                         setSizeSelection('L')
                     }}>
                     {/* <input type="radio" className="form-check-input" id="materialGroupExample3" name="groupOfMaterialRadios" value='L' checked={sizeSelection === 'L'} onChange={handleSize}/> */}
@@ -98,7 +98,7 @@ const DetailProduct = (props) =>{
                
                 <button type="button" className="btn btn-dark d-block my-3 px-5"
                 onClick={() => dispatch(addToCart(product, cart, sizeSelection))} >
-                    Buy
+                    Thêm vào giỏ hàng
                 </button>
                   
                  
@@ -121,14 +121,14 @@ const DetailProduct = (props) =>{
                                         <div className="slide-img">
                                             <img src={ite.images[0].url}></img>
                                             <div className="overlay">
-                                                <a className="buy_btn" href={`${ite._id}`}>View</a>      
+                                                <a className="buy_btn" href={`${ite._id}`}>Xem</a>      
                                             </div>
                                         </div>
                                         <div className="detail-box">
                                             <div className="type">
                                                 <a>{ite.title}</a>
                                             </div>
-                                            <a className="price"> {ite.price}đ</a>
+                                            <a className="price"> {ite.price}₫</a>
                                         </div>
                                     </div>
                        

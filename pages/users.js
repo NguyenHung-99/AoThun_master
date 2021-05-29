@@ -52,7 +52,7 @@ const Users = (props) => {
     return (
         <div style={{marginLeft:'10%', marginRight:'10%', marginTop: '20px', marginBottom: '20px'}}>
             <Head>
-                <title>Users</title>
+                <title>Quản lý người dùng</title>
             </Head>
             <h1 style={{textAlign:'center'}}><b>USERS</b></h1>
             <br/>
@@ -60,7 +60,7 @@ const Users = (props) => {
             <form autoComplete="off" className="mt-2 col-md-8 px-0">
                 <div className="form-label-group">
                     <input type="text" id="txtSearch" className="form-control" value={search.toLowerCase()} onChange={e => setSearch(e.target.value)} placeholder="Search" autoFocus/>
-                    <label htmlFor="txtSearch">Search</label>
+                    <label htmlFor="txtSearch">Tìm kiếm</label>
                 </div>
                
                 
@@ -88,12 +88,12 @@ const Users = (props) => {
             <table className="table w-100">
                 <thead>
                     <tr>
-                        <th></th>
+                        <th>STT</th>
                         <th>ID</th>
                         <th>Avatar</th>
-                        <th>Name</th>
+                        <th>Tên</th>
                         <th>Email</th>
-                        <th>Admin</th>
+                        <th>Nhân viên</th>
                         <th>Action</th>
                     </tr>
                 </thead>

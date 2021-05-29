@@ -47,19 +47,19 @@ const sendEmail_ResetPassword = async (req,res) => {
             if(err){
                 res.status(200).json({
                     status: 'fail',
-                    message: 'Gửi email xác thực thất bại !'
+                    message: 'Gửi email xác thực thất bại!.'
                 })
             }
             
             else
                 res.json({
                     status: 'success',
-                    message: `Email đã được gửi đến ${user.email}`
+                    message: `Email đã được gửi đến ${user.email}.`
                 })
         })
 
     }else{
-        res.json({err: 'Không có email này'})
+        res.json({err: 'Không có email này.'})
     }
       
   }catch(err){

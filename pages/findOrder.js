@@ -124,7 +124,7 @@ const findOrder = () => {
     return (
         <div className='signin'>
         <Head>
-            <title>Find Order</title>
+            <title>Tra cứu đơn hàng</title>
         </Head>
         <div className='body'>
         <div className="container">
@@ -132,14 +132,14 @@ const findOrder = () => {
             <div className="col-sm-9 col-md-7 col-lg-5 mx-auto">
                 <div className="card card-signin my-5">
                 <div className="card-body">
-                    <h5 className="card-title text-center">Find Order</h5>
+                    <h5 className="card-title text-center">Tra cứu đơn hàng</h5>
                     <form className="form-signin" onSubmit={handleSubmit}>
                     <div className="form-label-group">
                         <input type="text" id="inputOrderID" name="orderID" value={orderID} onChange={handleChangeInput} className="form-control" placeholder="Email address" autoFocus/>
-                        <label htmlFor="inputOrderID">Your order ID</label>
+                        <label htmlFor="inputOrderID">Mã đơn hàng của bạn</label>
                     </div>
 
-                    <button className="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Find</button>
+                    <button className="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Tra cứu</button>
                                     
                     </form>
                 </div>

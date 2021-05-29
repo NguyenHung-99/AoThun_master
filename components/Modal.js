@@ -70,11 +70,11 @@ const Modal = () => {
                     </button>
                 </div>
                 <div className="modal-body">
-                    Do you want to delete this item?
+                    Bạn có chắc muốn xóa {modal.length !== 0 && modal[0].title}?
                 </div>
                 <div className="modal-footer">
-                    <button type="button" className="btn btn-secondary" data-dismiss="modal" onClick={handleSubmit}>Yes</button>
-                    <button type="button" className="btn btn-primary" data-dismiss="modal">Cancel</button>
+                    <button type="button" className="btn btn-secondary" data-dismiss="modal" onClick={handleSubmit}>Đồng ý</button>
+                    <button type="button" className="btn btn-primary" data-dismiss="modal">Hủy bỏ</button>
                 </div>
                 </div>
             </div>

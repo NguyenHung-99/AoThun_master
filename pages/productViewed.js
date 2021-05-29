@@ -32,7 +32,7 @@ const productViewed = () => {
         <div className="home_page" style={{marginLeft:'10%', marginRight:'10%'}}>
 
         <Head>
-            <title>Products Viewed</title>
+            <title>Sản phẩm đã xem</title>
         </Head>
 
         <div className="products">

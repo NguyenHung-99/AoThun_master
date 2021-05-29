@@ -66,7 +66,7 @@ const Home = (props) => {
     <div className="home_page" style={{marginLeft:'10%', marginRight:'10%'}}>
 
       <Head>
-        <title>New Arrivals</title>
+        <title>Sản phẩm mới</title>
       </Head>
       <Filter state={state} />
       {
@@ -76,7 +76,7 @@ const Home = (props) => {
             style={{width: '25px', height: '25px', transform: 'translateY(8px)'}} />
 
           <button className="btn btn-danger ml-2" data-toggle="modal" data-target="#exampleModal" onClick={handleDeleteAll}>
-            DELETE ALL
+            Xóa tất cả
           </button>
         </div>
       }
@@ -84,7 +84,7 @@ const Home = (props) => {
       <div className="products">
         {
           products.length === 0
-          ? <h2>No Product</h2>
+          ? <h2>Chưa có sản phẩm</h2>
           :
           products.map(product =>(
           <ProductItem key={product._id} product={product} handleCheck={handleCheck} />

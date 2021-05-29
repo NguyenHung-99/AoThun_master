@@ -25,15 +25,15 @@ const OrderDetail = ({orderDetail, state, dispatch}) => {
             <div key={order._id} style={{margin: '20px auto'}} className="row justify-content-around">
 
                 <div className="text-uppercase my-3" style={{maxWidth: '600px'}}>
-                    <h1 className="text-break"><b>Order {order._id}</b></h1>
+                    <h1 className="text-break"><b>Đơn hàng {order._id}</b></h1>
                     <hr/>
                     <div className="mt-4 text-secondary">
                         <h2 style={{textAlign:'center'}}><b>Shipping</b></h2>
                         <br/>
-                        <p><b>Name:</b> {order.user.ten}</p>
+                        <p><b>Tên:</b> {order.user.ten}</p>
                         <p><b>Email:</b> {order.user.email}</p>
-                        <p><b>Address:</b> {order.address}</p>
-                        <p><b>Mobile:</b> {order.mobile}</p>
+                        <p><b>Địa chỉ:</b> {order.address}</p>
+                        <p><b>Số điện thoại:</b> {order.mobile}</p>
                         <br/>
                         <div className={`alert ${order.delivered === 'Đã giao hàng' ? 'alert-success' : 'alert-danger'}
                         d-flex justify-content-between align-items-center`} role="alert">
@@ -77,7 +77,7 @@ const OrderDetail = ({orderDetail, state, dispatch}) => {
                         <h2 style={{textAlign:'center'}}><b>Payment</b></h2>
                         <br/>
                         {
-                            order.method && <h6><b>Method:</b> <em>{order.method}</em></h6>
+                            order.method && <h6><b>Phương thức:</b> <em>{order.method}</em></h6>
                         }
                         
                         {

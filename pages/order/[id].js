@@ -22,7 +22,7 @@ const DetailOrder = () => {
     return (
         <div className="my-3">
         <Head>
-            <title>Detail Orders</title>
+            <title>Chi tiết đơn hàng</title>
         </Head>
 
         <div style={{marginLeft:'15%'}}>

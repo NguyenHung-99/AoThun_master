@@ -59,36 +59,36 @@ const Register = () => {
     return (
         <div className="page-wrapper font-poppins" style={{backgroundColor:'whitesmoke'}}>
             <Head>
-                <title>Register</title>
+                <title>Đăng ký</title>
             </Head>
                 <div className="wrapper wrapper--w680">
                     <div className="card card-4">
                         <div className="card-body">
                             <center>
-                                <h2 className="title">Registration Form</h2>
+                                <h2 className="title">ĐĂNG KÝ</h2>
                             </center>
                             
                             <form  onSubmit={handleSubmit}>
                                 <div className="row row-space">
                                     <div className="col">
                                         <div className="input-group">
-                                            <label className="label">Name</label>
-                                            <input  className="input--style-4"  type="text" id="inputUserame" name="name" value={name} onChange={handleChangeInput}  placeholder="Username"  autoFocus/>
+                                            <label className="label">Tên</label>
+                                            <input  className="input--style-4"  type="text" id="inputUserame" name="name" value={name} onChange={handleChangeInput}  placeholder="Tên"  autoFocus/>
                                         </div>
                                     </div>
                                     <div className="col">
                                         <div className="input-group">
-                                            <label className="label">Phone</label>
+                                            <label className="label">Số điện thoại</label>
                                             <input className="input--style-4" type="tel" id="phone" name="sdt" value={sdt} 
                                             onChange={handleChangeInput} 
-                                            placeholder="Phone"/>
+                                            placeholder="Số điện thoại"/>
                                         </div>
                                     </div>
                                 </div>
                                 <div className="row row-space">
                                     <div className="col">
                                         <div className="input-group">
-                                            <label className="label">Birthday</label>
+                                            <label className="label">Sinh nhật</label>
                                             <div className="input-group-icon">
                                                 <DatePicker className="input--style-4 js-datepicker" name='ngaySinh'  
                                                 selected={dob} 
@@ -98,7 +98,7 @@ const Register = () => {
                                                 maxDate={new Date()} 
                                                 showYearDropdown
                                                 scrollableMonthYearDropdown
-                                                placeholderText="Your Birthday"
+                                                placeholderText="Ngày sinh nhật"
                                                  ></DatePicker>
                                             </div>  
                                            
@@ -106,16 +106,18 @@ const Register = () => {
                                     </div>
                                     <div className="col">
                                         <div className="input-group">
-                                            <label className="label">Gender</label>
+                                            <label className="label">Giới tính</label>
                                             <div className="p-t-10">
-                                                <label className="radio-container m-r-45">Male
+                                                <label className="radio-container m-r-45">Nam giới
                                                     <input  type="radio" defaultChecked="defaultChecked" name="gioiTinh" value="true" onChange={handleChangeInput}/>
                                                     <span className="checkmark"></span>
                                                 </label>
-                                                <label className="radio-container">Female
+                                               
+                                                <label className="radio-container">Nữ giới
                                                     <input  type="radio" name="gioiTinh" value="false" onChange={handleChangeInput}/>
                                                     <span className="checkmark"></span>
                                                 </label>
+                                                
                                             </div>
                                         </div>
                                     </div>
@@ -133,14 +135,14 @@ const Register = () => {
                                     <div className="row row-space">
                                         <div className="col">
                                             <div className="input-group">
-                                                <label className="label">Password</label>
-                                                <input className="input--style-4" type="password" id="inputPassword" name="password" value={password} onChange={handleChangeInput}  placeholder="Password"/>
+                                                <label className="label">Mật khẩu</label>
+                                                <input className="input--style-4" type="password" id="inputPassword" name="password" value={password} onChange={handleChangeInput}  placeholder="Mật khẩu"/>
                                             </div>
                                         </div>
                                         <div className="col">
                                         <div className="input-group">
-                                            <label className="label">Confirm Password</label>
-                                            <input className="input--style-4" type="password" id="inputConfirmPassword" name="cf_password" value={cf_password} onChange={handleChangeInput}  placeholder="Confirm Password"/>
+                                            <label className="label">Nhập lại mật khẩu</label>
+                                            <input className="input--style-4" type="password" id="inputConfirmPassword" name="cf_password" value={cf_password} onChange={handleChangeInput}  placeholder="Nhập lại mật khẩu"/>
                                         </div>
                                     </div>
                                 </div>
@@ -153,11 +155,11 @@ const Register = () => {
                                         <span></span>
                                         <span></span>
                                         <span></span>
-                                        Register
+                                        Đăng ký
                                     </button>
                                 </center>
                                 <hr className="my-4"/>
-                                <p>Already have an account? <Link href="/signin"><a style={{color: 'crimson'}}>Login Now</a></Link></p>
+                                <p>Bạn đã có tài khoản? <Link href="/signin"><a style={{color: 'crimson'}}>Đăng nhập ngay</a></Link></p>
                                 </div>
                             </form>
                         </div>

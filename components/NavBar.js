@@ -24,23 +24,23 @@ function NavBar(){
         localStorage.removeItem('firstLogin')
         //refresh auth
         dispath({type: 'AUTH', payload: {}})
-        dispath({type: 'NOTIFY', payload: {success: 'Logged out'}})
+        dispath({type: 'NOTIFY', payload: {success: 'Đăng xuất thành công.'}})
         return router.push('/')
     }
     const adminRouter = () => {
         return(
             <>
             <Link href="/users">
-                <a className="dropdown-item">Users</a>
+                <a className="dropdown-item">Quản lý người dùng</a>
             </Link>
             <Link href="/create">
-                <a className="dropdown-item">Products</a>
+                <a className="dropdown-item">Thêm sản phẩm mới</a>
             </Link>
             <Link href="/categories">
-                <a className="dropdown-item">Categories</a>
+                <a className="dropdown-item">Quản lý loại sản phẩm</a>
             </Link>
             <Link href="/adminDashBoard">
-                <a className="dropdown-item">Dash Board</a>
+                <a className="dropdown-item">DashBoard</a>
             </Link>
             </>
         )
@@ -57,16 +57,16 @@ return (
             </a>
             <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                 <Link href="/profile">
-                    <a className="dropdown-item">Profile</a>
+                    <a className="dropdown-item">Thông tin cá nhân</a>
                 </Link>
                 <Link href="/productViewed">
-                    <a className="dropdown-item">Products Viewed</a>
+                    <a className="dropdown-item">Sản phẩm đã xem</a>
                 </Link>
                 {
                     auth.user.role === 'admin' && adminRouter()
                 }
                 <div className="dropdown-divider"></div>
-                <button className="dropdown-item" onClick={handleLogout}>Logout</button>
+                <button className="dropdown-item" onClick={handleLogout}>Đăng xuất</button>
 
             </div>
         </li>

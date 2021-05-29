@@ -49,7 +49,7 @@ const Categories = () => {
     return (
         <div className="col-md-6 mx-auto my-3" style={{marginLeft: '10%', marginRight:'10%'}}>
             <Head>
-                <title>Categories</title>
+                <title>Quản lý loại sản phẩm</title>
             </Head>
 
          
@@ -61,9 +61,10 @@ const Categories = () => {
                 <input type="text" className="form-control" placeholder="Add a new category" value={categoryDescription} onChange={e => setCategoryDescription(e.target.value)}/>
                 <label htmlFor="inputEmail">Mô Tả</label>
             </div>
-            <div className="input-group mb-3">
-            <button className="btn btn-lg btn-primary btn-block text-uppercase" type="submit" onClick={createCategory}>{id ? "Update" : "Create"}</button>
-                
+            <div className="mb-3">
+                <center>
+                    <button className="btn btn-lg btn-primary" style={{borderRadius:'30px'}} type="submit" onClick={createCategory}>{id ? "Cập nhật" : "Tạo mới"}</button>
+                </center>    
             </div>
 
             {

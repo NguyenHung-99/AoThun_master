@@ -17,7 +17,7 @@ const CartItem = ({item, dispatch, cart}) => {
                     </Link>
                 </h5>
                 
-                <h6 className="text-danger">${item.quantity * item.price}</h6>
+                <h6 className="text-danger">{item.quantity * item.price} ₫</h6>
                 
                 {
                     item.size.filter(it => it.Size === item.sizeSelection)[0].InStock_Size > 0
