@@ -108,10 +108,10 @@ const DetailProduct = (props) =>{
                     <h3>Mô tả chi tiết <i className="fa fa-indent" aria-hidden></i></h3>
                     <p>{product.description}</p>
                     </div>
-            <hr style={{backgroundColor:'gray'}}></hr>
+            <hr style={{backgroundColor:'gray'}}></hr><br/>
             <div className="small_container">
             <div className="title-product-feature">
-                    <h3>Feature Product</h3>
+                    <h3>SẢN PHẨM TƯƠNG TỰ</h3>
                     </div>
                       <div className="row">
                           {

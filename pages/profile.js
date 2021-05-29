@@ -186,6 +186,16 @@ const Profile = () => {
                     <div className="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
                         <div className="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
                         <h2 style={{textAlign:'center'}} className="text-uppercase">Đơn hàng</h2>
+                        {
+                            orders.length === 0 
+                            &&  <div className="card-body cart">
+                                    <div className="col-sm-12 empty-cart-cls text-center"> 
+                                        <h3><strong>BẠN CHƯA CÓ ĐƠN HÀNG NÀO</strong></h3>
+                                        <br/>
+                                        <a href="/collection" className="btn btn-primary cart-btn-transform m-3" data-abc="true">Tiếp tục mua sắm</a>
+                                    </div>
+                                </div>
+                        }
                         <div className="my-3 table-responsive">
                         <table className="table-bordered table-hover w-100 text-uppercase"
                         style={{minWidth: '600px', cursor: 'pointer'}}>
@@ -200,6 +210,7 @@ const Profile = () => {
                             </thead>
 
                             <tbody>
+                                
                                 {
                                     orders.map(order => (
                                         <tr key={order._id}>

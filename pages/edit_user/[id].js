@@ -37,8 +37,8 @@ const EditUser = () => {
                 if(res.err) return dispatch({type: 'NOTIFY', payload: {error: res.err}})
                
                 dispatch({type: 'ADD_USERS', payload: [] })
-                return dispatch({type: 'NOTIFY', payload: {success: res.msg}})
-
+                dispatch({type: 'NOTIFY', payload: {success: res.msg}})
+                return router.push('/users')
             })
         }
         
