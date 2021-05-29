@@ -29,7 +29,7 @@ const sendLinkActive = async (req, res) => {
                 pass: process.env.SEND_MAIL_PASSWORD
             }
         });
-        const token = jwt.sign({newUser} ,process.env.JWT_RESET_PASS, {expiresIn: '15m'});
+        const token = jwt.sign({newUser} ,process.env.JWT_ACTIVE_USER, {expiresIn: '15m'});
         
         const emailData = {
             to: newUser.email,

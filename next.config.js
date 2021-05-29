@@ -9,6 +9,7 @@ module.exports = {
         "CLOUD_API": "https://api.cloudinary.com/v1_1/nguyenhungdev/image/upload",
         "PAYPAL_CLIENT_ID": 'AcCLjrr9VUsRtqNUmZYJeRnxc22AsuUrVK23NTrYne7kE-t-STWwuW31lzZTW1hvqmN9B7FIwj2IBnub',
         "JWT_RESET_PASS": 'hungrau2471999ResetPass',
+        "JWT_ACTIVE_USER": 'htstore2021activeuser',
         'SEND_MAIL_USER': 'hungrau.store@gmail.com',
         'SEND_MAIL_PASSWORD': 'Hungraustore99',
         

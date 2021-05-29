@@ -20,7 +20,7 @@ const resendLinkActiveUser = async (req, res) => {
     try {
         const token = req.body.token
      
-        const decoded = jwt.verify(token, process.env.JWT_RESET_PASS)
+        const decoded = jwt.verify(token, process.env.JWT_ACTIVE_USER)
         
         const newUser = await Users.findOne({"email" : decoded.newUser.email})
         
@@ -31,7 +31,7 @@ const resendLinkActiveUser = async (req, res) => {
                 pass: process.env.SEND_MAIL_PASSWORD
             }
         });
-        const newtoken = jwt.sign({newUser} ,process.env.JWT_RESET_PASS, {expiresIn: '15m'});
+        const newtoken = jwt.sign({newUser} ,process.env.JWT_ACTIVE_USER, {expiresIn: '15m'});
         
         const emailData = {
             to: newUser.email,

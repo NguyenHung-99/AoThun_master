@@ -18,7 +18,7 @@ const activeUser = async (req, res) => {
     try {
         const token = req.body.token
      
-        const decoded = jwt.verify(token, process.env.JWT_RESET_PASS)
+        const decoded = jwt.verify(token, process.env.JWT_ACTIVE_USER)
         
         if(!decoded) return res.status(400).json({err: 'Token hết hạn'})
         const user = await Users.findOne({"email" : decoded.newUser.email})
