@@ -62,6 +62,9 @@ return (
                 <Link href="/productViewed">
                     <a className="dropdown-item">Sản phẩm đã xem</a>
                 </Link>
+                <Link href="/orderManager">
+                    <a className="dropdown-item">Quản lý đơn hàng</a>
+                </Link>
                 {
                     auth.user.role === 'admin' && adminRouter()
                 }

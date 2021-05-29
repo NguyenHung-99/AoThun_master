@@ -17,9 +17,9 @@ const getUser = async (email) => {
 
 const Profile = () => {
     const initialState = {avata: '', name: '', sdt: '', ngayTao: Date.now(), ngaySinh: Date.now(), gioiTinh: true, 
-    role: 'user',trangThai: true, password: '', cf_password: '', diachi: '', quanhuyen: '', phuongxa: '', tinhtp: ''};
+    role: 'user',trangThai: true, old_password: '', password: '', cf_password: '', diachi: '', quanhuyen: '', phuongxa: '', tinhtp: ''};
     const [data, setData] = useState(initialState)
-    const {avata, name, sdt, gioiTinh, role, ngayTao, ngaySinh, trangThai, password, cf_password, diachi, phuongxa, quanhuyen, tinhtp} = data
+    const {avata, name, sdt, gioiTinh, role, ngayTao, ngaySinh, trangThai, old_password, password, cf_password, diachi, phuongxa, quanhuyen, tinhtp} = data
 
 
     const [state, dispatch] = useContext(DataContext)
@@ -102,11 +102,14 @@ const Profile = () => {
      }
      const handleChangePassword = e => {
          e.preventDefault()
+         if(old_password.length < 6){
+            return dispatch({ type: 'NOTIFY', payload: {error: 'Mật khẩu cũ phải có ít nhất 6 kí tự!.'} })
+         }
          if(password.length < 6){
-            return dispatch({ type: 'NOTIFY', payload: {error: 'Mật khẩu có ít nhất 6 kí tự!.'} })
+            return dispatch({ type: 'NOTIFY', payload: {error: 'Mật khẩu mới phải có ít nhất 6 kí tự!.'} })
          }
          if(password !== cf_password){
-            return dispatch({ type: 'NOTIFY', payload: {error: 'Mật khẩu không khớp vui lòng nhập lại!'} })  
+            return dispatch({ type: 'NOTIFY', payload: {error: 'Mật khẩu mới không khớp vui lòng nhập lại!'} })  
          }
          updatePassword()
      }
@@ -114,7 +117,7 @@ const Profile = () => {
             
      const updatePassword = () => {
         dispatch({ type: 'NOTIFY', payload: {loading: true} })
-        patchData('user/resetPassword', {password}, auth.token)
+        patchData('user/resetPassword', {password, old_password}, auth.token)
         .then(res => {
             if(res.err) return dispatch({ type: 'NOTIFY', payload: {error: res.err} })
             return dispatch({ type: 'NOTIFY', payload: {success: res.msg} })
@@ -362,7 +365,11 @@ const Profile = () => {
                             <div style={{marginRight:'20%',marginLeft:'20%'}}>
                             <h2 style={{textAlign:'center'}}>ĐỔI MẬT KHẨU</h2>
                             <br/>
-                                <div className="form-label-group">
+                                        <div className="form-label-group">
+                                            <input type="password" id="inputOldPassword" name="old_password" value={old_password} onChange={handleChangeInput} className="form-control" placeholder="Password" />
+                                            <label htmlFor="inputOldPassword">Mật khẩu cũ</label>
+                                        </div>
+                                        <div className="form-label-group">
                                             <input type="password" id="inputPassword" name="password" value={password} onChange={handleChangeInput} className="form-control" placeholder="Password" />
                                             <label htmlFor="inputPassword">Mật khẩu mới</label>
                                         </div>
