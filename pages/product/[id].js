@@ -1,6 +1,6 @@
 import {useState, useEffect, useRef, useContext} from 'react'
 import Head from 'next/head'
-import {getData} from '../../utils/fetchData'
+import {getData, putData} from '../../utils/fetchData'
 import {DataContext} from '../../store/GlobalState'
 import {addToCart} from '../../store/Actions'
 
@@ -9,7 +9,7 @@ const DetailProduct = (props) =>{
     const [tab, setTab] = useState(0)
 
     const [state, dispatch] = useContext(DataContext)
-    const {cart} = state
+    const {auth, cart} = state
 
     const [sizeSelection, setSizeSelection] = useState('S')
 
@@ -120,7 +120,11 @@ const DetailProduct = (props) =>{
                                     <div className="box">
                                         <div className="slide-img">
                                             <img src={ite.images[0].url}></img>
-                                            <div className="overlay">
+                                            <div className="overlay" onClick={async()=> {
+                                                if(auth.user){
+                                                    let res = await putData(`product`, {idProduct: ite._id}, auth.token)
+                                                }
+                                            }}>
                                                 <a className="buy_btn" href={`${ite._id}`}>Xem</a>      
                                             </div>
                                         </div>
