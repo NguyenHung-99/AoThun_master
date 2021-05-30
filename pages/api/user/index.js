@@ -74,7 +74,7 @@ const uploadInfor = async(req, res) => {
         const account = await Accounts.findById(newUser.account)
 
         res.json({
-            msg: 'Update Profile success!',
+            msg: 'Cập nhật thông tin cá nhân thành công.',
             user: {
                 name,
                 avata,

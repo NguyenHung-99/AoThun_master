@@ -73,6 +73,8 @@ const createProduct = () => {
         if(onEdit){
             res = await putData(`product/${id}`, {...product,inStock: count, images: [...imgOldURL, ...media]}, auth.token)
             if(res.err) return dispatch({type: 'NOTIFY', payload: {error: res.err}})
+            dispatch({type: 'NOTIFY', payload: {success: res.msg}})
+            return router.push('/collection')
         }else{
             res = await postData('product', {...product,inStock: count, images: [...imgOldURL, ...media]}, auth.token)
             if(res.err) return dispatch({type: 'NOTIFY', payload: {error: res.err}})

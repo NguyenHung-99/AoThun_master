@@ -42,7 +42,7 @@ const updateCategory = async (req, res) => {
 
         const newCategory = await Categories.findOneAndUpdate({_id: id}, {categoryName,categoryDescription})
         res.json({
-            msg: "Success! Update a new category",
+            msg: "Cập nhật loại sản phẩm thành công",
             category: {...newCategory, categoryName, categoryDescription}
             
         })

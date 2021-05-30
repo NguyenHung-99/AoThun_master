@@ -43,7 +43,7 @@ const updateProduct = async (req, res) => {
           title: title.toLowerCase(), price, inStock, size, description, content, category, images
       })
 
-      res.json({msg: 'Success! Updated a product'})
+      res.json({msg: 'Cập nhật sản phẩm thành công'})
   } catch (err) {
       return res.status(500).json({err: err.message})
   }

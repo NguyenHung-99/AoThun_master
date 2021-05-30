@@ -22,7 +22,7 @@ const updateAddress = async (req, res) => {
         const users = await Users.findById({_id: result.id})
         const address = await Addresss.findOneAndUpdate({_id: users.diaChi}, {diaChi: diachi, phuongXa: phuongxa, quanHuyen: quanhuyen, tinhThanhPho: tinhtp})
 
-        res.json({ msg: "Update Address Success!"})
+        res.json({ msg: "Cập nhật địa chỉ thành công"})
         
     } catch (err) {
         return res.status(500).json({err: err.message})

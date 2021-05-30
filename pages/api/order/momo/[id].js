@@ -18,14 +18,13 @@ const paymentOrder_withMoMo = async(req, res) => {
         if(result.role === 'user'){
             const {id} = req.query
             const { paymentId } = req.body
-           console.log('vo dduwojc api r')
     
             await Orders.findOneAndUpdate({_id: id}, {
                 paid: true, dateOfPayment: new Date().toISOString(), paymentId,
                 method: 'MoMo'
             })
     
-            res.json({msg: 'Payment success!'})
+            res.json({msg: 'Thanh toán thành công!'})
         }
         
     } catch (err) {

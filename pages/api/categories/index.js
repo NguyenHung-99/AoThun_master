@@ -43,7 +43,7 @@ const createCategory = async(req, res) => {
 
         await newCategory.save()
         res.json({
-            msg: 'Success! Created a new category.',
+            msg: 'Tạo loại sản phẩm thành công',
             newCategory
         })
 

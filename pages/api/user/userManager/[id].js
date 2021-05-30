@@ -32,7 +32,7 @@ const DeleteUser = async(req, res) => {
         await Users.findByIdAndDelete(id)
 
         
-        res.json({msg: 'Deleted Success!'})
+        res.json({msg: 'Xóa tài khoản thành công'})
         
     } catch (error) {
         return res.status(500).json({err: error.message})
@@ -51,7 +51,7 @@ const updateRole = async(req, res) => {
         const users = await Users.findById(id)
       
         await Accounts.findOneAndUpdate({_id: users.account},{phanQuyen: role})
-        res.json({msg: 'Update Success!'})
+        res.json({msg: 'Phân quyền thành công.'})
         
     } catch (error) {
         return res.status(500).json({err: error.message})
