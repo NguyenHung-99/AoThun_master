@@ -4,7 +4,7 @@ import {useState, useContext} from 'react'
 import {DataContext} from '../store/GlobalState'
 import {getData } from '../utils/fetchData';
 import {useRouter} from 'next/router'
-
+import moment from 'moment';
 
 const findOrder = () => {
     const initialState = { orderID: ''};
@@ -60,7 +60,7 @@ const findOrder = () => {
                             d-flex justify-content-between align-items-center`} role="alert">
                                 
                                 {
-                                    resultOrder.delivered === 'Đã giao hàng' ? `Deliverd on ${resultOrder.updatedAt}` : resultOrder.delivered
+                                    resultOrder.delivered === 'Đã giao hàng' ? `Đã giao hàng vào ${moment(resultOrder.updatedAt).format('DD/MM/yyyy')}` : resultOrder.delivered
                                 }
                                 
                             </div>
@@ -78,7 +78,7 @@ const findOrder = () => {
                             <div className={`alert ${resultOrder.paid ? 'alert-success' : 'alert-danger'}
                             d-flex justify-content-between align-items-center`} role="alert">
                                 {
-                                    resultOrder.paid ? `Paid on ${resultOrder.dateOfPayment}` : 'Not Paid'
+                                    resultOrder.paid ? `Thanh toán vào ${moment(resultOrder.dateOfPayment).format('DD/MM/yyyy')}` : 'Chưa thanh toán'
                                 }
                                 
                             </div>

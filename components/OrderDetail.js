@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { patchData } from '../utils/fetchData'
 import { updateItem } from '../store/Actions'
+import moment from 'moment';
 
 const OrderDetail = ({orderDetail, state, dispatch}) => {
     const {auth, orders} = state
@@ -38,7 +39,7 @@ const OrderDetail = ({orderDetail, state, dispatch}) => {
                         <div className={`alert ${order.delivered === 'Đã giao hàng' ? 'alert-success' : 'alert-danger'}
                         d-flex justify-content-between align-items-center`} role="alert">
                             {
-                                order.delivered === 'Đã giao hàng' ? `Deliverd on ${order.updatedAt}` : order.delivered
+                                order.delivered === 'Đã giao hàng' ? `Đã giao hàng vào ${moment(order.updatedAt).format('DD/MM/yyyy')}` : order.delivered
                             }
 
                             {
@@ -87,7 +88,7 @@ const OrderDetail = ({orderDetail, state, dispatch}) => {
                         <div className={`alert ${order.paid ? 'alert-success' : 'alert-danger'}
                         d-flex justify-content-between align-items-center`} role="alert">
                             {
-                                order.paid ? `Paid on ${order.dateOfPayment}` : 'Not Paid'
+                                order.paid ? `Thanh toán vào ${moment(order.updatedAt).format('DD/MM/yyyy')}` : 'Chưa thanh toán'
                             }
                             
                         </div>

@@ -11,7 +11,7 @@ const Toast = ({msg, handleShow, bgColor}) => {
     return(
         <div>
             {
-                showSentMessage && 
+                // showSentMessage && 
                 <div className={`toast show position-fixed text-light ${bgColor}`}
                     style={{ bottom: '5px', right: '5px', zIndex: 9999, minWidth: '280px' }}>
 

@@ -60,7 +60,7 @@ export const deleteItem = (data, id, type) => {
     return ({ type, payload: newData})
 }
 export const Notified = () =>{
-    return ({ type: 'NOTIFY', payload: {success: 'Product added'} }) 
+    return ({ type: 'NOTIFY', payload: {success: 'Thêm sản phẩm thành công'} }) 
 }
 export const updateItem = (data, id, post, type) => {
     const newData = data.map(item => (item._id === id ? post : item))
