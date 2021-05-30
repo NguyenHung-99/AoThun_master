@@ -54,6 +54,8 @@ const createProduct = () => {
             return dispatch({type: 'NOTIFY', payload: {error: 'Tài khoản không hợp lệ!'}})
         if(!title || !price || size.length === 0 || !description || !content || category === 'all' || images.length === 0)
             return dispatch({type: 'NOTIFY', payload: {error: 'Vui lòng nhập đủ thông tin.'}})
+        if(price < 100000)
+            return dispatch({type: 'NOTIFY', payload: {error: 'Giá sản phẩm phải >= 100000₫.'}})
         dispatch({type: 'NOTIFY', payload: {loading: true}})
         let media = []
         //chưa có url
@@ -165,20 +167,20 @@ const createProduct = () => {
                     <div className="row">
                         
                         <div className="col-sm-4">
-                            <label htmlFor="price">S</label>
+                            <center><label htmlFor="price">S</label></center>
                             <input type="number" name="InStock_SizeS" style={{border:'groove'}} value={InStock_SizeS}
                             placeholder="InStock" className="d-block w-100 p-2"
                             onChange={e => setInStock_SizeS(e.target.value)}/>
                         </div>
 
                         <div className="col-sm-4">
-                            <label htmlFor="price">M</label>
+                            <center><label htmlFor="price">M</label></center>
                             <input type="number" name="InStock_SizeM" style={{border:'groove'}} value={InStock_SizeM}
                             placeholder="InStock" className="d-block w-100 p-2"
                             onChange={e => setInStock_SizeM(e.target.value)} />
                         </div>
                         <div className="col-sm-4">
-                            <label htmlFor="price">L</label>
+                            <center><label htmlFor="price">L</label></center>
                             <input type="number" name="InStock_SizeL" style={{border:'groove'}} value={InStock_SizeL}
                             placeholder="inStock" className="d-block w-100 p-2"
                             onChange={e => setInStock_SizeL(e.target.value)} />

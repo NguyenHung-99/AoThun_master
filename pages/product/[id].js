@@ -111,7 +111,7 @@ const DetailProduct = (props) =>{
             <hr style={{backgroundColor:'gray'}}></hr><br/>
             <div className="small_container">
             <div className="title-product-feature">
-                    <h3>SẢN PHẨM TƯƠNG TỰ</h3>
+                    <h3>SẢN PHẨM LIÊN QUAN</h3>
                     </div>
                       <div className="row">
                           {
