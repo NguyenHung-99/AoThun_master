@@ -32,8 +32,7 @@ const ThongKe = () => {
         const search = 'all'
 
         const res = await getData(`product?category=${category}&title=${search}`)
-        setTotalProduct(res.result)
-
+        setTotalProduct(res.amount)
     }, []);
 
 

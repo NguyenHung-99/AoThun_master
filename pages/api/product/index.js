@@ -61,9 +61,11 @@ const getProducts = async (req,res) => {
     const features = new APIfeatures(Products.find().populate("category"), req.query).filtering().sorting().paginating()
   
       const products = await features.query
+      const amountProducts = await Products.find().populate("category")
       res.json({
         status: 'success',
         result: products.length,
+        amount: amountProducts.length,
         products
       })
   }catch(err){
