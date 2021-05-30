@@ -26,7 +26,7 @@ const userSchema = new mongoose.Schema({
     },
     anhDaiDien: {
         type: String,
-        default: 'https://res.cloudinary.com/nguyenhungdev/image/upload/v1617853007/aothun_media/avatar_cugq40_xstasu.png',
+        default: 'https://res.cloudinary.com/nguyenhungdev/image/upload/v1616749790/aothun_media/avatar_cugq40_pwkti8.png',
     },
     ngaySinh: {
         type: Date,
