@@ -5,6 +5,7 @@ import { DataContext } from '../store/GlobalState'
 import {useRouter} from 'next/router'
 import { updateItem } from '../store/Actions'
 import PaypalBtn from '../components/paypalBtn'
+import Head from 'next/head'
 
 const Checkout = () => {
 
@@ -138,7 +139,9 @@ const Checkout = () => {
   return (
 
     <div >
-
+        <Head>
+            <title>Đặt hàng</title>
+        </Head>
 
     
     <div className="banner">

@@ -117,11 +117,15 @@ export async function getServerSideProps({query}) {
   const res = await getData(
     `product?limit=${page * 8}&category=${category}&sort=${sort}&title=${search}`
   )
-  
+  var resultProduct = res.products.filter(item => {
+    if(item.sold > 0){
+        return item
+    }
+  })
     return {
       props: {
-        products: res.products,
-        result: res.result
+        products: resultProduct,
+        result: resultProduct.length
       }, // will be passed to the page component as props
     }
 }

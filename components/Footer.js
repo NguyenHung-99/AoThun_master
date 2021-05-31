@@ -21,7 +21,7 @@ return (
                     <li><a href="#">Quận 10 - 561 Sư Vạn Hạnh, Phường 13</a></li>
                     <li><a href="#">Quận Tân Bình - 136 Nguyễn Hồng Đào, Phường 14.</a></li>
                     <li><a href="#">Quận 1 - 26 Lý Tự Trọng, Phường Bến Nghé.</a></li>
-                    
+                    <li><a href="#">Quận Tân Phú - 132 Nguyễn Sơn, Phường Phú Thọ Hòa.</a></li>
             
                 </ul>
             </div>
@@ -33,8 +33,12 @@ return (
                     <li><a href="/about">Giới thiệu</a></li>
                     <li><a href="/contact">Liên hệ</a></li>
                     <li><a href="/bestSeller">Sản phẩm bán chạy nhất</a></li>
+                    <li><a href="/size-chart">Size Chart</a></li>
                     <li><a href="/findOrder">Tìm đơn hàng</a></li>
-                   
+                    <li><a href="/huong-dan-mua-hang">Hướng dẫn mua hàng</a></li>
+                    <li><a href="/chinh-sach-bao-mat">Chính sách bảo mật</a></li>
+                    <li><a href="/giao-hang-va-van-chuyen">Giao hàng và vận chuyển</a></li>
+                    <li><a href="/chinh-sach-doi-tra">Chính sách đổi trả</a></li>
                 </ul>
             </div>
         </div>
