@@ -12,6 +12,8 @@ module.exports = {
         "JWT_ACTIVE_USER": 'htstore2021activeuser',
         'SEND_MAIL_USER': 'hungrau.store@gmail.com',
         'SEND_MAIL_PASSWORD': 'Hungraustore99',
+        'ACCESS_KEY_MOMO': "XtT50bBrZdD9PzJY",
+        'SECRET_KEY_MOMO': "e28GfxRnJ1EZeHYIuORqBfpu4QRt8hUW"
         
     }
 }

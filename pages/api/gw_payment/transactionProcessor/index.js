@@ -18,11 +18,11 @@ export default async (req, res) => {
 
     const  ThemDonHang_MOMO = (req,res) => {
         var partnerCode = "MOMO83IR20210509";
-        var accessKey = "XtT50bBrZdD9PzJY";
-        var serectkey = "e28GfxRnJ1EZeHYIuORqBfpu4QRt8hUW";
+        var accessKey = process.env.ACCESS_KEY_MOMO;
+        var serectkey = process.env.SECRET_KEY_MOMO;
         var orderInfo = `HT_Store : Thanh toán hóa đơn ${req.body.orderInfo}`;
-        var returnUrl = `http://localhost:3000/order/${req.body.orderInfo}`;
-        var notifyurl = `http://localhost:3000/order/momo/${req.body.orderInfo}`;
+        var returnUrl = `${process.env.BASE_URL}/order/${req.body.orderInfo}`;
+        var notifyurl = `${process.env.BASE_URL}/order/momo/${req.body.orderInfo}`;
         
         var amount = req.body.amount;
         var orderId = uuid.v1();;
