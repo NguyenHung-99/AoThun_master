@@ -135,7 +135,7 @@ const OrderChart = () => {
                 labels: res.dataDate,
                 datasets: [
                     {
-                        label: 'Doanh Thu',
+                        label: 'Đơn hàng',
                         data: res.dataSoDonHang,
                         backgroundColor: 'rgba(75,192,192,0.6)',
                         borderWidth: 4

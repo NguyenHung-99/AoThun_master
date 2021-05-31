@@ -135,7 +135,7 @@ const ProductChart = () => {
                 labels: res.dataDate,
                 datasets: [
                     {
-                        label: 'Doanh Thu',
+                        label: 'Sản phẩm',
                         data: res.dataProduct,
                         backgroundColor: 'rgba(75,192,192,0.6)',
                         borderWidth: 4

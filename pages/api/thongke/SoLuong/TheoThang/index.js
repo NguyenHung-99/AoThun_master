@@ -66,11 +66,11 @@ const getDataOrder_Month = async (req, res) => {
             data: arrOrderDetail,
             dataDate: arrDateResult,
             dataDoanhThu: arrProduct,
-            message: 'Tính số đơn hàng tuần này thành công'
+            message: 'Tính số đơn hàng tháng này thành công'
         });
         
     } catch (err) {
-        return res.status(500).json({err: 'Lấy data số đơn hàng tuần này thất bại'})
+        return res.status(500).json({err: 'Lấy data số đơn hàng tháng này thất bại'})
     }
 }
 
