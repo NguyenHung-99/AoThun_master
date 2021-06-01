@@ -33,12 +33,12 @@ export const DataProvider = ({children}) => {
     }, []);
 
     useEffect(() => {
-        const __cart_by_dev_hung = JSON.parse(localStorage.getItem('__cart_by_dev_hung'))
-        if(__cart_by_dev_hung) dispatch({type: 'ADD_CART', payload: __cart_by_dev_hung})
+        const __cart_by_ht_store = JSON.parse(localStorage.getItem('__cart_by_ht_store'))
+        if(__cart_by_ht_store) dispatch({type: 'ADD_CART', payload: __cart_by_ht_store})
     },[])
 
     useEffect(() => {
-        localStorage.setItem('__cart_by_dev_hung',JSON.stringify(cart))
+        localStorage.setItem('__cart_by_ht_store',JSON.stringify(cart))
     },[cart])
 
     useEffect(() => {

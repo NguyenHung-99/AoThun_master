@@ -17,12 +17,13 @@ export default async (req, res) => {
 
 
     const  ThemDonHang_MOMO = (req,res) => {
+        const {name, email, sdt, diachi, phuongxa, quanhuyen, tinhtp, total} = req.body
         var partnerCode = "MOMO83IR20210509";
         var accessKey = process.env.ACCESS_KEY_MOMO;
         var serectkey = process.env.SECRET_KEY_MOMO;
-        var orderInfo = `HT_Store : Thanh toán hóa đơn ${req.body.orderInfo}`;
-        var returnUrl = `${process.env.BASE_URL}/order/${req.body.orderInfo}`;
-        var notifyurl = `${process.env.BASE_URL}/order/momo/${req.body.orderInfo}`;
+        var orderInfo = `HT_Store : Thanh toán hóa đơn`;
+        var returnUrl = `${process.env.BASE_URL}/resultOrder?name=${name}&email=${email}&sdt=${sdt}&diachi=${diachi}&phuongxa=${phuongxa}&quanhuyen=${quanhuyen}&tinhtp=${tinhtp}&total=${total}`;
+        var notifyurl = `${process.env.BASE_URL}/resultOrder?name=${name}&email=${email}&sdt=${sdt}&diachi=${diachi}&phuongxa=${phuongxa}&quanhuyen=${quanhuyen}&tinhtp=${tinhtp}&total=${total}`;
         
         var amount = req.body.amount;
         var orderId = uuid.v1();;
@@ -69,7 +70,7 @@ export default async (req, res) => {
             ress.on('end', () => {
                 
                 
-                postData(`order/momo/${req.body.orderInfo}`,{paymentId: orderId}, req.body.auth.token);
+                //postData(`order/momo/${req.body.orderInfo}`,{paymentId: orderId}, req.body.auth.token);
                 
                 res.status(200).json({
                     status: 'success',

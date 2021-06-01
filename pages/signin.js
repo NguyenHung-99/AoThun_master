@@ -22,10 +22,26 @@ const Signin = () => {
         const {name, value} = e.target
         setUserData({...userData, [name]:value})
     }
-    
+    function validateEmail(email) {
+        const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(email);
+    }
+   const validInputData = (email, password) => {
+    if(!email)
+    return 'Email không được để trống!.'
+    if(!password)
+    return 'Password không được để trống!.'
+    if(!validateEmail(email))
+    return 'Địa chỉ Email không hợp lệ!.'
+    if(password.length < 6)
+    return 'Mật khẩu có ít nhất 6 kí tự!.'
+
+   }
     const handleSubmit = async e =>{
         //ko load lai trang
         e.preventDefault()
+        const errMsg = validInputData(email,password)
+        if(errMsg) return dispatch({ type: 'NOTIFY', payload: {error: errMsg} })
         dispatch({ type: 'NOTIFY', payload: {loading: true} })
 
         const res = await postData('auth/login', userData)

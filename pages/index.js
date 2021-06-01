@@ -1,7 +1,10 @@
-
+import Head from 'next/head'
 const store = () =>{
 return (
     <div className="">
+      <Head>
+        <title>Trang Chủ - HT Store</title>
+      </Head>
       <div id="carouselExampleIndicators" className="carousel slide" data-ride="carousel">
         <ol className="carousel-indicators">
           <li data-target="#carouselExampleIndicators" data-slide-to="0" className="active"></li>

@@ -1,25 +1,26 @@
 import connectDB from '../../../../utils/connectDB'
 import Orders from '../../../../models/orderModel'
 import auth from '../../../../middleware/auth'
+import Products from '../../../../models/productModel'
 import Addresss from '../../../../models/addressModel'
 import Users from '../../../../models/userModel'
-import Products from '../../../../models/productModel'
-
 var nodemailer = require('nodemailer');
 var smtpTransport = require('nodemailer-smtp-transport');
 
 connectDB()
 
-export default async(req,res) => {
-    switch(req.method){
-        case "POST":
-            await paymentPaypalOrder(req, res)
+export default async (req, res) => {
+    switch (req.method) {
+        case 'POST':
+            await createOrderWithMomo(req, res)
             break;
+        
     }
 }
-const paymentPaypalOrder = async(req, res) => {
+
+
+const createOrderWithMomo = async (req, res) => {
     try {
-       
         const result = await auth(req, res)
         const {
             name,
@@ -59,7 +60,7 @@ const paymentPaypalOrder = async(req, res) => {
             cart,
             total,
             paid: true, dateOfPayment: new Date().toISOString(), paymentId,
-                method: 'Paypal'
+            method: 'Momo'
 
         })
         
