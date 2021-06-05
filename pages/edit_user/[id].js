@@ -47,7 +47,7 @@ const EditUser = () => {
         setCheckAdmin(!checkAdmin)
         setNum(num + 1)
     }
-    if(!auth.user) return null
+    if(!auth.user || auth.user.root !== true) return null
     return (
         <div className="edit_user my-3" style={{marginLeft:'10%', marginRight:'10%', marginTop:'20px'}}>
             <Head>

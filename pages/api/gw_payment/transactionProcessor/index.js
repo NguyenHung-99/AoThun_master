@@ -69,9 +69,6 @@ export default async (req, res) => {
             });
             ress.on('end', () => {
                 
-                
-                //postData(`order/momo/${req.body.orderInfo}`,{paymentId: orderId}, req.body.auth.token);
-                
                 res.status(200).json({
                     status: 'success',
                     data: result.toString().substring(216, 520)

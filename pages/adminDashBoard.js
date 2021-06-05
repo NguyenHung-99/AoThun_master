@@ -150,62 +150,42 @@ const dashBoard = () => {
               </a>
               
             </li>
+            <li>
+              <a href='/users' >
+                <i className="fa fa-tachometer-alt"></i>
+                <span >Quản lý người dùng</span>
+              </a>
+              
+            </li>
             <li className="sidebar-dropdown">
               <a href="#">
                 <i className="fa fa-shopping-cart"></i>
-                <span>E-commerce</span>
+                <span>Cửa hàng</span>
                 <span className="badge badge-pill badge-danger">3</span>
               </a>
               <div className="sidebar-submenu">
                 <ul>
                   <li>
-                    <a href="/create">Products
+                    <a href="/create">Thêm sản phẩm
   
                     </a>
                   </li>
                   <li>
-                    <a href="/categories">Categories
+                    <a href="/categories">Quản lý loại sản phẩm
   
                     </a>
                   </li>
                   <li>
-                    <a href="#">Orders</a>
+                    <a href="/orderManager">Quản lý đơn hàng</a>
                   </li>
-                  <li>
-                    <a href="#">Credit cart</a>
-                  </li>
-                </ul>
-              </div>
-            </li>
-            <li className="sidebar-dropdown">
-              <a href="#">
-                <i className="far fa-gem"></i>
-                <span>Components</span>
-              </a>
-              <div className="sidebar-submenu">
-                <ul>
-                  <li>
-                    <a href="#">General</a>
-                  </li>
-                  <li>
-                    <a href="#">Panels</a>
-                  </li>
-                  <li>
-                    <a href="#">Tables</a>
-                  </li>
-                  <li>
-                    <a href="#">Icons</a>
-                  </li>
-                  <li>
-                    <a href="#">Forms</a>
-                  </li>
+                 
                 </ul>
               </div>
             </li>
             <li className="sidebar-dropdown">
               <a href="#">
                 <i className="fa fa-chart-line"></i>
-                <span>Charts</span>
+                <span>Thống kê</span>
               </a>
               <div className="sidebar-submenu">
                 <ul>
@@ -244,7 +224,7 @@ const dashBoard = () => {
             <li>
               <a onClick={handleBestSeller}>
                 <i className="fa fa-book"></i>
-                <span>Best Seller</span>
+                <span>Bán chạy nhất</span>
                 <span className="badge badge-pill badge-primary">Seller</span>
               </a>
             </li>
