@@ -59,7 +59,7 @@ return (
                         <br></br>
 
                         <p>
-                            <img src="https://res.cloudinary.com/nguyenhungdev/image/upload/v1620806101/aothun_media/mzypvjz0lvfe4x5jpubc.jpg"
+                            <img src="https://res.cloudinary.com/nguyenhungdev/image/upload/v1622689326/aothun_media/yq2hyh3voxf7vak0ubu5.jpg"
                                 data-mce-src="https://res.cloudinary.com/nguyenhungdev/image/upload/v1620805596/aothun_media/ukosrhccjmyizsfvnrxe.png"
                                 style={{display:'block', marginLeft:'auto', marginRight:'auto'}}
                                 data-mce-style="display: block; margin-left: auto; margin-right: auto;" />
