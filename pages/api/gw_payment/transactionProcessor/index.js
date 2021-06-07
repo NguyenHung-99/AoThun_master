@@ -1,10 +1,6 @@
-import { postData } from '../../../../utils/fetchData';
-
 const uuid = require('uuid');
 const crypto = require('crypto');
 const https = require('https');
-
-
 
 export default async (req, res) => {
     switch(req.method){

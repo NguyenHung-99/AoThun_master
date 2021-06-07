@@ -88,7 +88,7 @@ const OrderDetail = ({orderDetail, state, dispatch}) => {
                         <div className={`alert ${order.paid ? 'alert-success' : 'alert-danger'}
                         d-flex justify-content-between align-items-center`} role="alert">
                             {
-                                order.paid ? `Thanh toán vào ${moment(order.updatedAt).format('DD/MM/yyyy')}` : 'Chưa thanh toán'
+                                order.paid ? `Thanh toán vào ${moment(order.dateOfPayment).format('DD/MM/yyyy')}` : 'Chưa thanh toán'
                             }
                             
                         </div>
