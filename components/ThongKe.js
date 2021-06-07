@@ -45,8 +45,8 @@ const ThongKe = () => {
 							<p>
 								<i className="far fa-chart-bar"></i>
 							</p>
-							<h3>Income</h3>
-							<span>${totalSale}</span>
+							<h3>Doanh thu</h3>
+							<span>{totalSale} ₫</span>
 						</div>
 					</div>
 					<div className="col-xs-12 col-sm-6 col-md-6 col-lg-3">
@@ -54,7 +54,7 @@ const ThongKe = () => {
 							<p>
 								<i className="fas fa-shopping-cart"></i>
 							</p>
-							<h3>Orders</h3>
+							<h3>Đơn hàng</h3>
 							<span>{orders.length} (Đơn)</span>
 						</div>
 					</div>
@@ -63,7 +63,7 @@ const ThongKe = () => {
 							<p>
 								<i className="fas fa-users"></i>
 							</p>
-							<h3>Customer</h3>
+							<h3>Người dùng</h3>
 							<span>{users.length} (Thành viên)</span>
 						</div>
 					</div>
@@ -72,7 +72,7 @@ const ThongKe = () => {
 							<p>
 								<i className="fas fa-bug"></i>
 							</p>
-							<h3>Products</h3>
+							<h3>Sản phẩm</h3>
 							<span>{totalProduct} (Sản Phẩm)</span>
 						</div>
 					</div>
@@ -88,7 +88,7 @@ const ThongKe = () => {
 					<div className=" card-nav">
 							<div >
 								
-								<h3>Stats</h3>
+								<h3>Đơn hàng</h3>
 							</div>
 							<div>
 								<Link href="/profile">
@@ -163,7 +163,7 @@ const ThongKe = () => {
                   
                 
 						<div className=" card-nav">
-							<div className=""><h3>Customers</h3></div>
+							<div className=""><h3>Người dùng</h3></div>
 							<div className="">
 								<Link href="/users">
 								<button >See All       
@@ -220,13 +220,7 @@ const ThongKe = () => {
 									Chart
 								</h3>
 							</div>
-							<div className="col-7 col-md-7 col-xs-7 ">
-								<select  className="form-select w-25" aria-label="Default select example">
-								<option className="" value="1">2019</option>
-									<option value="2">2020</option>
-									<option value="3">2021</option>
-								</select>
-							</div>
+							
 						</div>
 					</div>
 							<SalesChart></SalesChart>

@@ -110,7 +110,7 @@ const OrderDetail = ({orderDetail, state, dispatch}) => {
                                         </h5>
 
                                         <span className="text-info m-0">
-                                            {item.quantity} x ${item.price} = ${item.price * item.quantity}
+                                            {item.quantity} x {item.price}₫ = {item.price * item.quantity}₫
                                         </span>
 
                                     </div>

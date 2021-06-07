@@ -83,8 +83,8 @@ const DetailOrderMonth = () => {
                         <div className="counter-header bg-danger">
                             <div className="row">
                                 <div className="col-md-6">
-                                      <span style={{fontSize:'25px'}}>{totalSaleOfMonth}</span>
-                                    <h3>$ Income</h3>
+                                      <span style={{fontSize:'25px'}}>{totalSaleOfMonth} ₫</span>
+                                    <h3>Doanh thu</h3>
 							      
                                 </div>
 
@@ -103,7 +103,7 @@ const DetailOrderMonth = () => {
                              <div className="row">
                                 <div className="col-md-6">
                                     <span style={{fontSize:'25px'}}>{arrCountOrder[0]}</span>
-                                     <h3>Orders  (Đơn)</h3>
+                                     <h3>Đơn hàng (Đơn)</h3>
 							
 							      
                                 </div>
@@ -145,13 +145,13 @@ const DetailOrderMonth = () => {
 					<table> 
                         <tr className="row" >
                                 <th className="col-md-1">#</th>
-                            <th className="col-md-2">order ID</th>
-                            <th className="col-md-3">Customer</th>
-                            <th className="col-md-2">Date</th>
-                            <th className="col-md-1">Date Order</th>
-                            <th className="col-md-1">Date Payment</th>
-									<th className="col-md-1">Delivery</th>
-									<th className="col-md-1">Paid</th>
+                            <th className="col-md-2">Mã đơn hàng</th>
+                            <th className="col-md-3">Khách hàng</th>
+                            <th className="col-md-2">Tổng tiền</th>
+                            <th className="col-md-1">Ngày order</th>
+                            <th className="col-md-1">Ngày thanh toán</th>
+									<th className="col-md-1">Giao hàng</th>
+									<th className="col-md-1">Thanh toán</th>
 								</tr>
 								</table>
                         </div>
@@ -177,7 +177,7 @@ const DetailOrderMonth = () => {
                                                 
                                             </td>
                                              <td  className="col-md-2">
-                                                  {order.total}
+                                                  {order.total} ₫
                                             </td>
                                             <td  className="col-md-1">
                                                 {new Date(order.createdAt).toLocaleDateString()}
