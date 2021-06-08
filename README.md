@@ -14,7 +14,7 @@
 
 ## Author: NguyenHung-99, TruongOT
 
-## Youtube tutorials: https://www.youtube.com/watch?v=UsEN7LGefhA&list=PLs4co9a6NhMzf-5tIWfpzDCgdMyg-CceX
+## Youtube tutorials: https://www.youtube.com/watch?v=edKfYz0qACM
 
 ## Install dependencies 
 ### `npm install`
