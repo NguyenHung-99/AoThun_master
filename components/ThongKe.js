@@ -145,11 +145,11 @@ const ThongKe = () => {
 					<table>
 						<thead>
 							<tr className="row">
-								<th className="col-3">order ID</th>
-								<th className="col-3">Customer</th>
-                                <th className="col-2">Date</th>
-								<th className="col-2">Delivery</th>
-								<th className="col-2">Paid</th>
+								<th className="col-3">Mã đơn hàng</th>
+								<th className="col-3">Khách hàng</th>
+                                <th className="col-2">Ngày mua</th>
+								<th className="col-2">Giao hàng</th>
+								<th className="col-2">Thanh toán</th>
 							</tr>
 						</thead>
 					

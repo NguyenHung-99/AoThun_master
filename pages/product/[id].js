@@ -57,11 +57,11 @@ const DetailProduct = (props) =>{
                 <div className="row mx-0 d-flex justify-content-between">
                     {
                         product.inStock > 0
-                        ? <h6 className="text-danger">In Stock: {product.inStock}</h6>
-                        : <h6 className="text-danger">Out Stock</h6>
+                        ? <h6 className="text-danger">Kho: {product.inStock}</h6>
+                        : <h6 className="text-danger">Hết hàng</h6>
                     }
 
-                    <h6 className="text-danger">Sold: {product.sold}</h6>
+                    <h6 className="text-danger">Đã bán: {product.sold}</h6>
                 </div>
                 <div className="size-container">
                 

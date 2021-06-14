@@ -102,7 +102,7 @@ const dashBoard = () => {
     <nav id="sidebar" className="sidebar-wrapper">
       <div className="sidebar-content">
         <div className="sidebar-brand">
-          <a href="#">pro sidebar</a>
+          <a href="#">ht store</a>
           <div id="close-sidebar">
             <i className="fas fa-times"></i>
           </div>
@@ -126,7 +126,7 @@ const dashBoard = () => {
         <div className="sidebar-search">
           <div>
             <div className="input-group">
-              <input type="text" className="form-control search-menu" placeholder="Search..."/>
+              <input type="text" className="form-control search-menu" placeholder="Tìm kiếm..."/>
               <div className="input-group-append">
                 <span className="input-group-text">
                   <i className="fa fa-search" aria-hidden="true"></i>
@@ -139,7 +139,7 @@ const dashBoard = () => {
         <div className="sidebar-menu">
           <ul>
             <li className="header-menu">
-              <span>General</span>
+              <span>Chung</span>
             </li>
             
             <li>
@@ -205,7 +205,7 @@ const dashBoard = () => {
             <li className="sidebar-dropdown">
               <a href="#">
                 <i className="fa fa-globe"></i>
-                <span>Maps</span>
+                <span>Bản đồ</span>
               </a>
               <div className="sidebar-submenu">
                 <ul>
@@ -219,7 +219,7 @@ const dashBoard = () => {
               </div>
             </li>
             <li className="header-menu">
-              <span>Extra</span>
+              <span>Thêm</span>
             </li>
             <li>
               <a onClick={handleBestSeller}>
@@ -231,15 +231,10 @@ const dashBoard = () => {
             <li>
               <a href="#">
                 <i className="fa fa-calendar"></i>
-                <span>Calendar</span>
+                <span>Lịch</span>
               </a>
             </li>
-            <li>
-              <a href="#">
-                <i className="fa fa-folder"></i>
-                <span>Examples</span>
-              </a>
-            </li>
+            
           </ul>
         </div>
        

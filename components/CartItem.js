@@ -21,8 +21,8 @@ const CartItem = ({item, dispatch, cart}) => {
                 
                 {
                     item.size.filter(it => it.Size === item.sizeSelection)[0].InStock_Size > 0
-                    ? <p className="mb-1 text-danger">Size In Stock: {item.size.filter(it => it.Size === item.sizeSelection)[0].InStock_Size}</p>
-                    : <p className="mb-1 text-danger">Out Stock</p>
+                    ? <p className="mb-1 text-danger">Kho: {item.size.filter(it => it.Size === item.sizeSelection)[0].InStock_Size}</p>
+                    : <p className="mb-1 text-danger">Hết hàng</p>
                 }
             
             </td>

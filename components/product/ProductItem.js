@@ -84,8 +84,8 @@ const ProductItem = ({product, handleCheck}) => {
                 <h6 className="text-danger">{product.price} ₫</h6>
                 {
                     product.inStock > 0
-                    ? <h6 className="text-danger">In Stock: {product.inStock}</h6>
-                    : <h6 className="text-danger">Out Stock</h6>
+                    ? <h6 className="text-danger">Kho: {product.inStock}</h6>
+                    : <h6 className="text-danger">Hết hàng</h6>
                 }
             </div>
 

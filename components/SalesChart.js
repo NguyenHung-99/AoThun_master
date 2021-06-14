@@ -63,7 +63,7 @@ const SalesChart = () =>{
                             labels: reportLabels,
                             datasets:[
                                 {
-                                    label: 'Sales',
+                                    label: 'Doanh thu',
                                     data:total,
                                     backgroundColor: 'rgba(255,99,133,0.6)',
                                     labels:{

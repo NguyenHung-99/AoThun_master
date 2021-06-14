@@ -194,10 +194,10 @@ const DoanhThuChart = () => {
                 <Radio.Group value={optionValueTime} onChange={(e) => {
                     setOptionValueTime(e.target.value);
                 }}>
-                    <Radio.Button value={0}>Tuần này</Radio.Button>
-                    <Radio.Button value={1}>Tháng này</Radio.Button>
-                    <Radio.Button value={2}>3 tháng gần nhất</Radio.Button>
-                    <Radio.Button value={3}>6 tháng gần nhất</Radio.Button>
+                    <Radio.Button value={0} style={{paddingRight:20}}>Tuần này</Radio.Button>
+                    <Radio.Button value={1} style={{paddingRight:20}}>Tháng này</Radio.Button>
+                    <Radio.Button value={2} style={{paddingRight:20}}>3 tháng gần nhất</Radio.Button>
+                    <Radio.Button value={3} style={{paddingRight:20}}>6 tháng gần nhất</Radio.Button>
                 </Radio.Group>
 
                 <br></br><br></br>
