@@ -1,5 +1,6 @@
 import connectDB from '../../../../utils/connectDB'
 import Orders from '../../../../models/orderModel'
+import Products from '../../../../models/productModel'
 import auth from '../../../../middleware/auth'
 
 connectDB()
@@ -15,7 +16,7 @@ const deliveredOrderd = async(req, res) => {
     try {
         const result = await auth(req, res)
         
-        if(result.role !== 'admin') return res.status(400).json({err: 'Tài khoản không hợp lệ.'})
+        //if(result.role !== 'admin') return res.status(400).json({err: 'Tài khoản không hợp lệ.'})
 
         const {id} = req.query
         const {delivere} = req.body
@@ -24,7 +25,14 @@ const deliveredOrderd = async(req, res) => {
         const order = await Orders.findOne({_id: id})
         if(order.paid){
             await Orders.findOneAndUpdate({_id: id}, {delivered: delivere})
-    
+            if(delivere === 'Hủy đơn hàng: Giao hàng không thành công vì đúng địa chỉ không có người nhận hàng' ||
+            delivere === 'Hủy đơn hàng: Giao hàng không thành công vì sai địa chỉ nhận hàng' ||
+            delivere === 'Đã hủy đơn hàng'){
+                order.cart.filter(item => {
+                   
+                    return updateSold(item._id, item.quantity, item.sizeSelection)
+                })
+            }
             res.json({
                 msg: 'Cập nhật trạng thái đơn hàng thành công.',
                 result: {
@@ -52,7 +60,14 @@ const deliveredOrderd = async(req, res) => {
                 })
             }else{
                 await Orders.findOneAndUpdate({_id: id}, {delivered: delivere})
-        
+                if(delivere === 'Hủy đơn hàng: Giao hàng không thành công vì đúng địa chỉ không có người nhận hàng' ||
+                delivere === 'Hủy đơn hàng: Giao hàng không thành công vì sai địa chỉ nhận hàng' ||
+                delivere === 'Đã hủy đơn hàng'){
+                    order.cart.filter(item => {
+                       
+                        return updateSold(item._id, item.quantity, item.sizeSelection)
+                    })
+                }
                 res.json({
                     msg: 'Cập nhật trạng thái đơn hàng thành công.',
                     result: {
@@ -68,4 +83,31 @@ const deliveredOrderd = async(req, res) => {
     } catch (err) {
         return res.status(500).json({err: err.message})
     }
+}
+const updateSold = async (id, quantity, sizeSelection) => {
+    const product = await Products.findById({_id: id})
+    const sizeSelect = product.size.filter(itemSize => itemSize.Size === sizeSelection)
+    sizeSelect[0].InStock_Size = sizeSelect[0].InStock_Size + quantity
+    sizeSelect[0].sold = sizeSelect[0].sold - quantity
+    await Products.findOneAndUpdate({
+        _id: id
+    }, {
+        $inc: {
+            inStock: +quantity,
+            sold: -quantity
+        }
+    });
+    await Products.findOneAndUpdate({
+        _id: id
+    }, {
+        $set: {
+            "size.$[el].InStock_Size": sizeSelect[0].InStock_Size,
+            "size.$[el].sold": sizeSelect[0].sold
+        }
+    }, {
+        arrayFilters: [{
+            "el.Size": sizeSelection
+        }]
+    })
+
 }

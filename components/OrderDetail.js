@@ -41,7 +41,34 @@ const OrderDetail = ({orderDetail, state, dispatch}) => {
                             {
                                 order.delivered === 'Đã giao hàng' ? `Đã giao hàng vào ${moment(order.updatedAt).format('DD/MM/yyyy')}` : order.delivered
                             }
-
+                            {
+                                order.delivered === 'Đã hoàn tiền' && ` vào ${moment(order.updatedAt).format('DD/MM/yyyy')}`
+                            }
+                            {
+                                order.delivered === 'Đã hủy đơn hàng. Đã hoàn tiền' && ` vào ${moment(order.updatedAt).format('DD/MM/yyyy')}`
+                            }
+                            {/* user */}
+                            {
+                                auth.user.role === 'user' && order.delivered === 'Chờ xác nhận' &&
+                                <button className="btn btn-dark text-uppercase"
+                                onClick={(e) => {
+                                    const delivere = e.target.value
+                                    handleDelivered(order, delivere)
+                                }} value="Đã hủy đơn hàng">
+                                    Hủy đơn hàng
+                                </button>
+                            }
+                            {
+                                auth.user.role === 'user' && order.delivered === 'Chờ lấy hàng' &&
+                                <button className="btn btn-dark text-uppercase"
+                                onClick={(e) => {
+                                    const delivere = e.target.value
+                                    handleDelivered(order, delivere)
+                                }} value="Đã hủy đơn hàng">
+                                    Hủy đơn hàng
+                                </button>
+                            }
+                            {/* admin */}
                             {
                                 auth.user.role === 'admin' && order.delivered === 'Chờ xác nhận' &&
                                 <button className="btn btn-dark text-uppercase"
@@ -63,17 +90,75 @@ const OrderDetail = ({orderDetail, state, dispatch}) => {
                                 </button>
                             }
                             {
+                                auth.user.role === 'admin' && order.paid && order.delivered === 'Hủy đơn hàng: Giao hàng không thành công vì đúng địa chỉ không có người nhận hàng' &&
+                                
+                                <button className="btn btn-dark text-uppercase"
+                                onClick={(e) => {
+                                    const delivere = e.target.value
+                                    handleDelivered(order, delivere)
+                                }} value="Đã hoàn tiền">
+                                    Hoàn tiền
+                                </button>    
+                            }   
+                            {
+                                auth.user.role === 'admin' && order.paid && order.delivered === 'Hủy đơn hàng: Giao hàng không thành công vì sai địa chỉ nhận hàng' &&
+                                
+                                <button className="btn btn-dark text-uppercase"
+                                onClick={(e) => {
+                                    const delivere = e.target.value
+                                    handleDelivered(order, delivere)
+                                }} value="Đã hoàn tiền">
+                                    Hoàn tiền
+                                </button>    
+                            } 
+                            {
                                 auth.user.role === 'admin' && order.delivered === 'Đang giao hàng' &&
+                                
                                 <button className="btn btn-dark text-uppercase"
                                 onClick={(e) => {
                                     const delivere = e.target.value
                                     handleDelivered(order, delivere)
                                 }} value="Đã giao hàng">
                                     Đã giao hàng
-                                </button>
+                                </button>    
                             }                                                       
-                            
+                            {
+                                auth.user.role === 'admin' && order.paid && order.delivered === 'Đã hủy đơn hàng' &&
+                                
+                                <button className="btn btn-dark text-uppercase"
+                                onClick={(e) => {
+                                    const delivere = e.target.value
+                                    handleDelivered(order, delivere)
+                                }} value="Đã hủy đơn hàng. Đã hoàn tiền">
+                                    Hoàn tiền
+                                </button>    
+                            } 
                         </div>
+                        {
+                                auth.user.role === 'admin' && order.delivered === 'Đang giao hàng' &&
+                                <div>
+                                    
+                                    <center><b>Giao hàng không thành công</b></center>
+                                    <br/>
+                                    <button className="btn btn-dark text-uppercase"
+                                    onClick={(e) => {
+                                        const delivere = e.target.value
+                                        handleDelivered(order, delivere)
+                                    }} value="Hủy đơn hàng: Giao hàng không thành công vì đúng địa chỉ không có người nhận hàng">
+                                       Không có người nhận hàng
+                                    </button>
+                                    
+                                    <button className="btn btn-dark text-uppercase" style={{float:'right'}}
+                                    onClick={(e) => {
+                                        const delivere = e.target.value
+                                        handleDelivered(order, delivere)
+                                    }} value="Hủy đơn hàng: Giao hàng không thành công vì sai địa chỉ nhận hàng">
+                                        Sai địa chỉ nhận hàng
+                                    </button>
+                                </div>
+                                
+                            }
+                            <br/>
                         <hr/>
                         <h2 style={{textAlign:'center'}}><b>Payment</b></h2>
                         <br/>

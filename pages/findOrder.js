@@ -62,6 +62,12 @@ const findOrder = () => {
                                 {
                                     resultOrder.delivered === 'Đã giao hàng' ? `Đã giao hàng vào ${moment(resultOrder.updatedAt).format('DD/MM/yyyy')}` : resultOrder.delivered
                                 }
+                                {
+                                    resultOrder.delivered === 'Đã hoàn tiền' && ` vào ${moment(resultOrder.updatedAt).format('DD/MM/yyyy')}`
+                                }
+                                {
+                                    resultOrder.delivered === 'Đã hủy đơn hàng. Đã hoàn tiền' && ` vào ${moment(resultOrder.updatedAt).format('DD/MM/yyyy')}`
+                                }
                                 
                             </div>
                             <hr/>
